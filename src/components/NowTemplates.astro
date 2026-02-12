@@ -4,7 +4,6 @@ const nowTemplates = [
     id: 'founder',
     title: 'Founder',
     description: 'MVP milestones, user calls, revenue',
-    color: 'emerald',
     content: `# NOW.md - Founder Example
 
 > This shows how NOW.md evolves over time. The magic is in the LOG section.
@@ -34,7 +33,7 @@ const nowTemplates = [
 |--------|-------|
 | MRR | $450 |
 | Customers | 6 |
-| Trial → Paid | 40% |
+| Trial > Paid | 40% |
 
 ---
 
@@ -50,28 +49,12 @@ const nowTemplates = [
 ### Month 2, Feb 20
 - **Shipped ugly, got feedback.** First paid customer came from Twitter DM after seeing WIP screenshot.
 - Quote: "I almost didn't post it because the UI was embarrassing."
-- Note: Embarrassment is not a valid reason to delay.
-
-### Month 2, Feb 8
-- Avoided 3 user calls this week. Rescheduled twice, ghosted once.
-- **Pattern:** When anxious about product, I hide in code instead of talking to users.
-- Agent asked: "What are you afraid they'll say?" Answer: That it's not useful.
-
-### Week 3, Jan 25
-- Finally did first user call. She said the core feature is useful but the onboarding is confusing.
-- Built onboarding fix in 2 hours. Should have called sooner.
-- Quote: "I've been building what I imagine, not what they need."
-
-### Week 1, Jan 10
-- Started. MVP is 60% done. Keep adding features instead of shipping.
-- **Bug identified:** Perfectionism disguised as "quality." Agent called it out.
-- Set public deadline: launch in 2 weeks no matter what.`
+- Note: Embarrassment is not a valid reason to delay.`
   },
   {
     id: 'developer',
     title: 'Developer',
     description: 'Job search, portfolio, learning path',
-    color: 'blue',
     content: `# NOW.md - Developer Example
 
 > This shows how NOW.md evolves over time. The magic is in the LOG section.
@@ -119,28 +102,12 @@ const nowTemplates = [
 ### Month 2, Feb 22
 - **Shipped portfolio project #2.** Actually solved my own problem (expense tracker).
 - Got 12 stars on GitHub. Small but real validation.
-- Quote: "This is the first thing I built that I actually use."
-
-### Month 2, Feb 10
-- **Pattern breaking:** Caught myself starting a new tutorial instead of finishing the project.
-- Agent asked: "Is this learning or procrastination?" It was procrastination.
-- Rule: No new tutorials until current project ships.
-
-### Week 3, Jan 28
-- Still in tutorial hell. Watched 8 hours of React videos, built nothing.
-- **Agent observation:** "You've learned this concept 3 times. The gap isn't knowledge, it's doing."
-- Committed to shipping something ugly by Sunday.
-
-### Week 1, Jan 12
-- Set goal: career change in 6 months.
-- Overwhelmed by everything I "need" to learn.
-- Agent helped narrow: JavaScript + React only for now. Depth over breadth.`
+- Quote: "This is the first thing I built that I actually use."`
   },
   {
     id: 'creator',
     title: 'Creator',
     description: 'Content consistency, audience growth',
-    color: 'purple',
     content: `# NOW.md - Creator Example
 
 > This shows how NOW.md evolves over time. The magic is in the LOG section.
@@ -186,33 +153,12 @@ const nowTemplates = [
 ### Month 3, Mar 15
 - **8 weeks consistent.** Longest streak ever. Something clicked.
 - Audience engagement up 3x. People replying, sharing, DMing.
-- Quote: "I stopped trying to be perfect and started trying to be useful."
-
-### Month 2, Feb 25
-- Batch filming is a game changer. Shot 4 videos in one day.
-- Energy was high, quality was consistent, week is now stress-free.
-- **Pattern:** Creating and editing in same session = burnout. Separate them.
-
-### Month 2, Feb 12
-- Missed posting for 5 days. Spiral started: "I already broke the streak, why bother."
-- Agent: "Streaks are tools, not prisons. Post today."
-- Posted something small. Felt better immediately.
-
-### Week 3, Jan 30
-- Spent 6 hours editing a 5-minute video. Perfectionism.
-- **Agent observation:** "Your best-performing video was filmed on your phone in one take."
-- Insight: Audience cares about value, not production quality.
-
-### Week 1, Jan 14
-- Starting fresh. Goal: post 3x/week for 3 months.
-- Previous attempts died at week 2-3. Pattern: perfectionism → burnout → quit.
-- Agent suggestion: Set a "good enough" bar before creating. Stick to it.`
+- Quote: "I stopped trying to be perfect and started trying to be useful."`
   },
   {
     id: 'student',
     title: 'Student',
     description: 'Learning path, first projects, job prep',
-    color: 'orange',
     content: `# NOW.md - Student Example
 
 > This shows how NOW.md evolves over time. The magic is in the LOG section.
@@ -262,33 +208,18 @@ const nowTemplates = [
 ### Month 2, Feb 28
 - **Breakthrough:** Stopped watching tutorials, started building.
 - Got stuck on a bug for 2 hours. Solved it. Learned more than 10 tutorials.
-- Quote: "The confusion IS the learning. Tutorials hide it."
-
-### Month 2, Feb 15
-- Feeling behind. Saw someone on Twitter who learned React in "2 weeks."
-- Agent: "Comparison is theft. You're not them. Focus on your pace."
-- Muted tech Twitter for a week. Helping.
-
-### Week 3, Jan 28
-- Analysis paralysis: Should I learn Python or JavaScript? React or Vue?
-- **Agent cut through:** "Pick JavaScript + React. Decide in 10 seconds. Go."
-- I picked. Relief. Now I can focus.
-
-### Week 1, Jan 15
-- Starting career change journey. Scared but excited.
-- Goal: job in 6 months. Feels impossible.
-- Agent: "6 months is 180 days. What can you do today?" Today I set up VS Code.`
+- Quote: "The confusion IS the learning. Tutorials hide it."`
   }
 ];
 ---
 
-<section id="now-templates" class="py-24 px-6 bg-gradient-to-b from-zinc-50 to-zinc-100 dark:from-zinc-950 dark:to-zinc-900 relative overflow-hidden">
-  <div class="absolute bottom-16 left-8 w-24 h-1 bg-zinc-300 dark:bg-zinc-700 rounded-full transform -rotate-3"></div>
+<section id="now-templates" class="py-24 px-6 bg-zinc-950 relative overflow-hidden">
+  <div class="absolute bottom-16 left-8 w-24 h-1 bg-zinc-800 rounded-full transform -rotate-3"></div>
   
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-12">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4">NOW.md Evolution</h2>
-      <p class="text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">NOW.md Evolution</h2>
+      <p class="text-zinc-400 max-w-xl mx-auto">
         The secret sauce. See how the memory log captures patterns and quotes over time.
       </p>
     </div>
@@ -297,23 +228,23 @@ const nowTemplates = [
       {nowTemplates.map(t => (
         <button 
           data-now={t.id}
-          class="now-btn p-5 rounded-xl border-2 border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 hover:border-zinc-900 dark:hover:border-white hover:shadow-lg transition-all text-left"
+          class="now-btn p-5 rounded-xl border-2 border-zinc-800 bg-zinc-900 hover:border-white hover:shadow-lg transition-all text-left"
         >
-          <h3 class="font-semibold mb-1">{t.title}</h3>
-          <p class="text-sm text-zinc-600 dark:text-zinc-400">{t.description}</p>
+          <h3 class="font-semibold mb-1 text-white">{t.title}</h3>
+          <p class="text-sm text-zinc-500">{t.description}</p>
         </button>
       ))}
     </div>
 
     <div id="now-viewer" class="hidden">
-      <div class="bg-zinc-50 dark:bg-zinc-800 rounded-2xl border border-zinc-200 dark:border-zinc-700 overflow-hidden shadow-lg">
-        <div class="flex items-center justify-between p-4 border-b border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-900">
-          <span id="now-title" class="font-semibold"></span>
-          <button id="copy-now" class="px-4 py-2 rounded-lg bg-zinc-900 dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-100 text-white dark:text-zinc-900 text-sm font-medium transition-colors">
+      <div class="bg-zinc-900 rounded-2xl border border-zinc-800 overflow-hidden shadow-lg">
+        <div class="flex items-center justify-between p-4 border-b border-zinc-800">
+          <span id="now-title" class="font-semibold text-white"></span>
+          <button id="copy-now" class="px-4 py-2 rounded-lg bg-white hover:bg-zinc-200 text-zinc-900 text-sm font-medium transition-colors">
             Copy to clipboard
           </button>
         </div>
-        <pre id="now-content" class="p-6 overflow-x-auto text-sm font-mono text-zinc-700 dark:text-zinc-300 max-h-[500px] overflow-y-auto bg-zinc-50/50 dark:bg-zinc-900/50"></pre>
+        <pre id="now-content" class="p-6 overflow-x-auto text-sm font-mono text-zinc-400 max-h-[500px] overflow-y-auto"></pre>
       </div>
     </div>
   </div>
@@ -334,8 +265,8 @@ const nowTemplates = [
       const template = nowTemplates.find(t => t.id === id);
       if (!template) return;
 
-      buttons.forEach(b => b.classList.remove('ring-2', 'ring-zinc-900', 'dark:ring-white'));
-      btn.classList.add('ring-2', 'ring-zinc-900', 'dark:ring-white');
+      buttons.forEach(b => b.classList.remove('ring-2', 'ring-white'));
+      btn.classList.add('ring-2', 'ring-white');
 
       viewer.classList.remove('hidden');
       titleEl.textContent = template.title + ' - NOW.md Evolution';

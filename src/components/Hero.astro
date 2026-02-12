@@ -1,5 +1,4 @@
 ---
-// Fetch star count at build time
 async function getStars() {
   try {
     const res = await fetch('https://api.github.com/repos/lout33/ai-life-assistant', {
@@ -19,7 +18,6 @@ async function getStars() {
 const stars = await getStars();
 ---
 
-<!-- SVG Filter for ink effect -->
 <svg class="hidden" aria-hidden="true">
   <defs>
     <filter id="ink-filter">
@@ -30,15 +28,13 @@ const stars = await getStars();
 </svg>
 
 <section class="relative min-h-screen flex items-center overflow-hidden">
-  <!-- Split background -->
+  <!-- Split background - darker -->
   <div class="absolute inset-0 flex">
-    <!-- Human side (off-white) -->
-    <div class="w-1/2 bg-zinc-100"></div>
-    <!-- Agent side (black) -->
-    <div class="w-1/2 bg-zinc-950"></div>
+    <div class="w-1/2 bg-zinc-900"></div>
+    <div class="w-1/2 bg-black"></div>
   </div>
   
-  <!-- Ink brush divider - the yin-yang boundary -->
+  <!-- Ink brush divider -->
   <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
     <svg class="h-full w-24 md:w-32" viewBox="0 0 100 800" preserveAspectRatio="none" fill="none">
       <path 
@@ -47,20 +43,19 @@ const stars = await getStars();
            C15 320, 85 400, 50 480 
            C15 560, 75 640, 45 720 
            C25 760, 60 780, 50 800" 
-        stroke="#18181b" 
+        stroke="#3f3f46" 
         stroke-width="12" 
         stroke-linecap="round"
         fill="none"
         class="drop-shadow-lg"
       />
-      <!-- Lighter stroke for depth -->
       <path 
         d="M50 0 
            C25 80, 75 160, 45 240 
            C15 320, 85 400, 50 480 
            C15 560, 75 640, 45 720 
            C25 760, 60 780, 50 800" 
-        stroke="#3f3f46" 
+        stroke="#52525b" 
         stroke-width="4" 
         stroke-linecap="round"
         fill="none"
@@ -69,19 +64,19 @@ const stars = await getStars();
     </svg>
   </div>
   
-  <!-- Brush accent decorations -->
-  <div class="absolute top-32 left-8 w-16 h-1 bg-zinc-300 rounded-full transform -rotate-12 opacity-40"></div>
-  <div class="absolute top-40 left-12 w-8 h-0.5 bg-zinc-400 rounded-full transform -rotate-6 opacity-30"></div>
-  <div class="absolute bottom-32 right-8 w-16 h-1 bg-zinc-600 rounded-full transform rotate-12 opacity-40"></div>
-  <div class="absolute bottom-40 right-12 w-8 h-0.5 bg-zinc-500 rounded-full transform rotate-6 opacity-30"></div>
+  <!-- Brush accents -->
+  <div class="absolute top-32 left-8 w-16 h-1 bg-zinc-700 rounded-full transform -rotate-12 opacity-40"></div>
+  <div class="absolute top-40 left-12 w-8 h-0.5 bg-zinc-600 rounded-full transform -rotate-6 opacity-30"></div>
+  <div class="absolute bottom-32 right-8 w-16 h-1 bg-zinc-700 rounded-full transform rotate-12 opacity-40"></div>
+  <div class="absolute bottom-40 right-12 w-8 h-0.5 bg-zinc-600 rounded-full transform rotate-6 opacity-30"></div>
   
   <!-- Content -->
   <div class="relative z-10 w-full max-w-6xl mx-auto px-6 pt-24">
     <div class="grid md:grid-cols-2 gap-8 md:gap-16 items-center min-h-[80vh]">
-      <!-- Human side content -->
-      <div class="text-zinc-900 md:pr-8 lg:pr-16">
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-100 text-zinc-600 text-sm font-medium mb-8 border border-zinc-200">
-          <span class="w-1.5 h-1.5 rounded-full bg-zinc-900"></span>
+      <!-- Human side -->
+      <div class="text-zinc-100 md:pr-8 lg:pr-16">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-800 text-zinc-400 text-sm font-medium mb-8 border border-zinc-700">
+          <span class="w-1.5 h-1.5 rounded-full bg-zinc-400"></span>
           {stars}+ stars
         </div>
         
@@ -89,18 +84,18 @@ const stars = await getStars();
           AI that knows
         </h1>
         
-        <p class="text-lg text-zinc-600 mb-8 leading-relaxed max-w-md">
+        <p class="text-lg text-zinc-400 mb-8 leading-relaxed max-w-md">
           You bring the context. Your goals, patterns, psychology. The human side of the symbiosis.
         </p>
         
-        <a href="#get-started" class="inline-flex px-6 py-3 rounded-lg bg-zinc-900 text-white font-medium hover:bg-zinc-800 transition-colors">
+        <a href="#get-started" class="inline-flex px-6 py-3 rounded-lg bg-white text-zinc-900 font-medium hover:bg-zinc-200 transition-colors">
           Get Started
         </a>
       </div>
       
-      <!-- Agent side content -->
+      <!-- Agent side -->
       <div class="text-white md:pl-8 lg:pl-16">
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-800 text-zinc-400 text-sm font-medium mb-8 border border-zinc-700">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900 text-zinc-500 text-sm font-medium mb-8 border border-zinc-800">
           <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
           symbiotic
         </div>
@@ -109,11 +104,11 @@ const stars = await getStars();
           you
         </h1>
         
-        <p class="text-lg text-zinc-400 mb-8 leading-relaxed max-w-md">
+        <p class="text-lg text-zinc-500 mb-8 leading-relaxed max-w-md">
           The agent remembers, challenges, executes. Memory that compounds. Patterns that emerge.
         </p>
         
-        <a href="https://github.com/lout33/ai-life-assistant" target="_blank" rel="noopener" class="inline-flex px-6 py-3 rounded-lg bg-zinc-100 text-zinc-900 font-medium hover:bg-zinc-200 transition-colors">
+        <a href="https://github.com/lout33/ai-life-assistant" target="_blank" rel="noopener" class="inline-flex px-6 py-3 rounded-lg bg-zinc-800 text-white font-medium hover:bg-zinc-700 transition-colors border border-zinc-700">
           View on GitHub
         </a>
       </div>
@@ -122,8 +117,8 @@ const stars = await getStars();
   
   <!-- Scroll indicator -->
   <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-    <span class="text-xs tracking-widest uppercase text-zinc-500">Scroll</span>
-    <svg class="w-5 h-5 animate-bounce text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <span class="text-xs tracking-widest uppercase text-zinc-600">Scroll</span>
+    <svg class="w-5 h-5 animate-bounce text-zinc-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
     </svg>
   </div>

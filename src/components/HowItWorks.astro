@@ -35,13 +35,11 @@ const files = [
 ];
 ---
 
-<section class="py-24 px-6 bg-zinc-50 dark:bg-zinc-950 relative overflow-hidden">
-  <div class="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-zinc-950 dark:from-zinc-900 to-transparent opacity-5"></div>
-  
+<section class="py-24 px-6 bg-zinc-950 relative overflow-hidden">
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4">The 4-File System</h2>
-      <p class="text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">The 4-File System</h2>
+      <p class="text-zinc-400 max-w-xl mx-auto">
         Four files run your entire life integration with AI. Separation of concerns.
       </p>
     </div>
@@ -50,34 +48,26 @@ const files = [
       {files.map((file) => (
         <div class={`p-5 rounded-2xl border transition-all hover:shadow-lg ${
           file.side === 'human' 
-            ? 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600' 
+            ? 'bg-zinc-800 border-zinc-700 hover:border-zinc-600' 
             : file.side === 'agent'
-            ? 'bg-zinc-900 dark:bg-zinc-100 border-zinc-800 dark:border-zinc-200 text-white dark:text-zinc-900 hover:border-zinc-700 dark:hover:border-zinc-300'
-            : 'bg-gradient-to-br from-zinc-900 to-zinc-800 dark:from-zinc-100 dark:to-zinc-200 border-zinc-700 dark:border-zinc-300 text-white dark:text-zinc-900 hover:border-zinc-600 dark:hover:border-zinc-400'
+            ? 'bg-zinc-900 border-zinc-800 hover:border-zinc-700'
+            : 'bg-gradient-to-br from-zinc-900 to-black border-zinc-800 hover:border-zinc-700'
         }`}>
           <div class="flex items-center gap-3 mb-4">
-            <div class={`w-10 h-10 rounded-lg flex items-center justify-center font-mono text-xs font-bold ${
-              file.side === 'human'
-                ? 'bg-zinc-100 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-300'
-                : 'bg-zinc-800 dark:bg-zinc-200 text-zinc-300 dark:text-zinc-700'
-            }`}>
+            <div class="w-10 h-10 rounded-lg flex items-center justify-center font-mono text-xs font-bold bg-zinc-800 text-zinc-400">
               MD
             </div>
             <div>
-              <h3 class="font-semibold text-sm">{file.name}</h3>
-              <p class={`text-xs ${file.side === 'human' ? 'text-zinc-500 dark:text-zinc-400' : 'text-zinc-500 dark:text-zinc-500'}`}>{file.stability}</p>
+              <h3 class="font-semibold text-sm text-white">{file.name}</h3>
+              <p class="text-xs text-zinc-500">{file.stability}</p>
             </div>
           </div>
-          <p class={`text-sm mb-4 ${file.side === 'human' ? 'text-zinc-600 dark:text-zinc-400' : 'text-zinc-400 dark:text-zinc-600'}`}>
+          <p class="text-sm mb-4 text-zinc-400">
             {file.description}
           </p>
-          <div class={`font-mono text-xs rounded-lg p-3 ${
-            file.side === 'human'
-              ? 'bg-zinc-50 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400'
-              : 'bg-zinc-950 dark:bg-zinc-50 text-zinc-400 dark:text-zinc-600'
-          }`}>
+          <div class="font-mono text-xs rounded-lg p-3 bg-black text-zinc-500">
             {file.code.map((line, i) => (
-              <div class={i === 0 ? (file.side === 'human' ? 'text-zinc-400 dark:text-zinc-500' : 'text-zinc-600 dark:text-zinc-400') : ''}>{line}</div>
+              <div class={i === 0 ? 'text-zinc-600' : ''}>{line}</div>
             ))}
           </div>
         </div>
