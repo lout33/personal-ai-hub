@@ -1,0 +1,340 @@
+---
+const templates = [
+  {
+    id: 'founder',
+    title: 'Founder',
+    description: 'Solo founder, indie hacker, bootstrapper',
+    color: 'emerald',
+    content: `# USER.md - Founder Profile
+
+## Identity
+- **Name:** Alex Chen
+- **Age:** 29
+- **Location:** Austin, TX (CST)
+- **Type:** ENTJ
+
+## Mission
+
+> "Build something people want, get to ramen profitability, then decide what's next."
+
+1. Ship MVP and get 10 paying customers
+2. Hit $5K MRR before runway runs out
+3. Build in public, document the journey
+
+## Stack
+
+Next.js | Supabase | Stripe | Vercel
+
+## Psychology
+
+**Drivers:** Fear of going back to corporate, proving I can do this alone, freedom
+
+**Bugs:**
+1. Building features instead of talking to users
+2. Perfectionism disguised as "quality"
+3. Avoiding sales calls - hiding behind code
+4. Scope creep - adding "just one more thing" before launch
+
+**What works:**
+- Public deadlines (tweet it, can't back out)
+- User calls before building anything
+- Ship ugly, iterate fast
+- Morning deep work, afternoon calls/admin
+
+**What doesn't work:**
+- Working in isolation for weeks
+- Waiting until it's "ready"
+- Comparing to funded startups
+
+---
+
+## Decision Test
+
+- Does this get me closer to 10 paying customers?
+- Am I building or avoiding?
+- Would I mass delete this code if users don't want it?
+
+## Work Blocks
+
+| Block | Time | Best For |
+|-------|------|----------|
+| Peak | 6am-10am | Building, deep work |
+| Flow | 10am-2pm | User calls, content |
+| Recovery | 2pm-6pm | Admin, planning |`
+  },
+  {
+    id: 'developer',
+    title: 'Developer',
+    description: 'Developer job hunting or building side projects',
+    color: 'blue',
+    content: `# USER.md - Developer Profile
+
+## Identity
+- **Name:** Jordan Park
+- **Age:** 27
+- **Location:** Seattle, WA (PST)
+- **Type:** INTP
+
+## Mission
+
+> "Level up technically, land a senior role at a company I respect, keep building on the side."
+
+1. Get a senior developer role at a top tech company
+2. Ship 2 side projects that solve my own problems
+3. Contribute to open source I actually use
+
+## Stack
+
+TypeScript | React | Node.js | PostgreSQL | Docker
+
+## Psychology
+
+**Drivers:** Technical mastery, respect from peers, building things that work
+
+**Bugs:**
+1. Tutorial hell - learning without shipping
+2. Over-engineering side projects (enterprise patterns for todo apps)
+3. Imposter syndrome - feeling "not ready" for senior roles
+4. Abandoning projects at 80% done
+
+**What works:**
+- Public commits (GitHub streak accountability)
+- Ship first, refactor later
+- Pair programming / code review
+- Learning by building, not watching
+
+**What doesn't work:**
+- Endless courses without projects
+- Waiting to "know enough" before applying
+- Working alone without feedback
+
+---
+
+## Decision Test
+
+- Does this project solve a real problem I have?
+- Am I learning or procrastinating?
+- Would I use this if someone else built it?
+
+## Work Blocks
+
+| Block | Time | Best For |
+|-------|------|----------|
+| Peak | 8pm-12am | Side projects, deep focus |
+| Flow | Lunch break | Learning, reading |
+| Recovery | Weekends | Open source, exploration |`
+  },
+  {
+    id: 'creator',
+    title: 'Creator',
+    description: 'Content creator, YouTuber, writer',
+    color: 'purple',
+    content: `# USER.md - Creator Profile
+
+## Identity
+- **Name:** Maya Rodriguez
+- **Age:** 31
+- **Location:** Miami, FL (EST)
+- **Type:** ENFP
+
+## Mission
+
+> "Build an audience by sharing what I learn. Turn expertise into income without selling out."
+
+1. Post consistently - 3x/week minimum
+2. Grow to 10K followers on main platform
+3. Launch first paid product (course/ebook/community)
+
+## Stack
+
+YouTube | Twitter/X | Notion | Descript | Canva
+
+## Psychology
+
+**Drivers:** Impact, creative expression, freedom from 9-5, being seen
+
+**Bugs:**
+1. Perfectionism - spending 10 hours on a 5-minute video
+2. Comparison - paralyzed by what others are doing
+3. Inconsistency - bursts of content then silence
+4. Avoiding monetization - feels "icky" to sell
+
+**What works:**
+- Batch creation (film 4 videos in one day)
+- Publishing schedule locked in calendar
+- Engaging with community daily (15 min max)
+- "Good enough" > perfect
+
+**What doesn't work:**
+- Editing while creating
+- Checking analytics obsessively
+- Waiting for inspiration
+- Copying others' style instead of finding own voice
+
+---
+
+## Decision Test
+
+- Does this serve my audience or just my ego?
+- Would I make this if no one watched?
+- Is this sustainable long-term?
+
+## Work Blocks
+
+| Block | Time | Best For |
+|-------|------|----------|
+| Peak | 9am-12pm | Creating, filming, writing |
+| Flow | 2pm-5pm | Editing, scheduling |
+| Recovery | Evening | Engaging, consuming content |`
+  },
+  {
+    id: 'student',
+    title: 'Student',
+    description: 'Student or career changer learning new skills',
+    color: 'orange',
+    content: `# USER.md - Student Profile
+
+## Identity
+- **Name:** Sam Taylor
+- **Age:** 24
+- **Location:** Chicago, IL (CST)
+- **Type:** ISFJ
+
+## Mission
+
+> "Career change into tech. Learn by building, not just studying. Get hired within 6 months."
+
+1. Complete portfolio with 3 real projects
+2. Land first developer job (junior is fine)
+3. Build network in tech community
+
+## Stack
+
+Learning: Python | JavaScript | React | SQL
+
+## Psychology
+
+**Drivers:** Better career, proving I can change, financial stability
+
+**Bugs:**
+1. Tutorial addiction - watching instead of doing
+2. Analysis paralysis - which language/framework to learn
+3. Feeling behind - comparing to CS grads
+4. Not shipping - afraid to show imperfect work
+
+**What works:**
+- Project-based learning (build first, learn concepts as needed)
+- Study groups / accountability partners
+- Sharing progress publicly (even if small)
+- Time-boxing study sessions (2 hours max, then build)
+
+**What doesn't work:**
+- Trying to learn everything at once
+- Waiting to "finish learning" before building
+- Isolated studying without community
+- Ignoring networking until job search
+
+---
+
+## Decision Test
+
+- Does this get me closer to a portfolio project?
+- Am I studying or procrastinating?
+- Can I explain what I learned to someone else?
+
+## Work Blocks
+
+| Block | Time | Best For |
+|-------|------|----------|
+| Peak | Morning | Learning new concepts |
+| Flow | Afternoon | Building projects |
+| Recovery | Evening | Community, networking |`
+  }
+];
+
+const colorMap: Record<string, string> = {
+  emerald: 'border-emerald-500 bg-emerald-500/5',
+  blue: 'border-blue-500 bg-blue-500/5',
+  purple: 'border-purple-500 bg-purple-500/5',
+  orange: 'border-orange-500 bg-orange-500/5',
+};
+
+const btnColorMap: Record<string, string> = {
+  emerald: 'bg-emerald-500 hover:bg-emerald-600',
+  blue: 'bg-blue-500 hover:bg-blue-600',
+  purple: 'bg-purple-500 hover:bg-purple-600',
+  orange: 'bg-orange-500 hover:bg-orange-600',
+};
+---
+
+<section id="templates" class="py-20 px-6 bg-zinc-100 dark:bg-zinc-900/50">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold mb-4">Templates</h2>
+      <p class="text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">
+        Starting points for your USER.md. Pick one, customize it, make it yours.
+      </p>
+    </div>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      {templates.map(t => (
+        <button 
+          data-template={t.id}
+          class={`template-btn p-4 rounded-xl border-2 border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 hover:border-zinc-400 dark:hover:border-zinc-500 transition-all text-left`}
+        >
+          <h3 class="font-semibold mb-1">{t.title}</h3>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400">{t.description}</p>
+        </button>
+      ))}
+    </div>
+
+    <div id="template-viewer" class="hidden">
+      <div class="bg-white dark:bg-zinc-950 rounded-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden">
+        <div class="flex items-center justify-between p-4 border-b border-zinc-200 dark:border-zinc-800">
+          <span id="template-title" class="font-semibold"></span>
+          <button id="copy-template" class="px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-medium transition-colors">
+            Copy to clipboard
+          </button>
+        </div>
+        <pre id="template-content" class="p-6 overflow-x-auto text-sm font-mono text-zinc-700 dark:text-zinc-300 max-h-96 overflow-y-auto"></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ templates }}>
+  const buttons = document.querySelectorAll('.template-btn');
+  const viewer = document.getElementById('template-viewer');
+  const titleEl = document.getElementById('template-title');
+  const contentEl = document.getElementById('template-content');
+  const copyBtn = document.getElementById('copy-template');
+  
+  let currentContent = '';
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-template');
+      const template = templates.find(t => t.id === id);
+      if (!template) return;
+
+      // Update active state
+      buttons.forEach(b => b.classList.remove('ring-2', 'ring-emerald-500'));
+      btn.classList.add('ring-2', 'ring-emerald-500');
+
+      // Show viewer
+      viewer.classList.remove('hidden');
+      titleEl.textContent = template.title + ' Template';
+      contentEl.textContent = template.content;
+      currentContent = template.content;
+
+      // Scroll to viewer
+      viewer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  });
+
+  copyBtn?.addEventListener('click', async () => {
+    await navigator.clipboard.writeText(currentContent);
+    copyBtn.textContent = 'Copied!';
+    setTimeout(() => copyBtn.textContent = 'Copy to clipboard', 2000);
+  });
+</script>
