@@ -2,72 +2,58 @@
 const files = [
   {
     name: 'AGENTS.md',
-    label: 'Operations',
     stability: 'Stable',
     description: 'Rules, session protocol',
     code: ['# Session Start', 'Read all files...', 'State date/time...'],
-    side: 'agent'
   },
   {
     name: 'SOUL.md',
-    label: 'Identity',
     stability: 'Stable',
     description: 'Agent personality, stance',
     code: ['# Personality', 'Direct, Challenger', 'Pragmatic, Explorer'],
-    side: 'agent'
   },
   {
     name: 'USER.md',
-    label: 'Profile',
     stability: 'Stable',
     description: 'Your psychology, patterns',
     code: ['# Known Bugs', '- System-building trap', '- All-or-nothing'],
-    side: 'human'
   },
   {
     name: 'NOW.md',
-    label: 'State',
     stability: 'Dynamic',
     description: 'Current queue, memory log',
     code: ['# Memory Log', '- Pattern: delays calls', '- Quote: "building = safe"'],
-    side: 'both'
   }
 ];
 ---
 
-<section class="py-24 px-6 bg-zinc-950 relative overflow-hidden">
+<section class="py-24 px-6 bg-zinc-100 dark:bg-zinc-950 relative overflow-hidden">
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">The 4-File System</h2>
-      <p class="text-zinc-400 max-w-xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-zinc-900 dark:text-white">The 4-File System</h2>
+      <p class="text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">
         Four files run your entire life integration with AI. Separation of concerns.
       </p>
     </div>
     
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
       {files.map((file) => (
-        <div class={`p-5 rounded-2xl border transition-all hover:shadow-lg ${
-          file.side === 'human' 
-            ? 'bg-zinc-800 border-zinc-700 hover:border-zinc-600' 
-            : file.side === 'agent'
-            ? 'bg-zinc-900 border-zinc-800 hover:border-zinc-700'
-            : 'bg-gradient-to-br from-zinc-900 to-black border-zinc-800 hover:border-zinc-700'
-        }`}>
+        <div class="p-5 rounded-2xl border transition-all hover:shadow-lg bg-zinc-50 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700">
           <div class="flex items-center gap-3 mb-4">
-            <div class="w-10 h-10 rounded-lg flex items-center justify-center font-mono text-xs font-bold bg-zinc-800 text-zinc-400">
+            <div class="w-10 h-10 rounded-lg flex items-center justify-center font-mono text-xs font-bold bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
               MD
             </div>
             <div>
-              <h3 class="font-semibold text-sm text-white">{file.name}</h3>
+              <h3 class="font-semibold text-sm text-zinc-900 dark:text-white">{file.name}</h3>
               <p class="text-xs text-zinc-500">{file.stability}</p>
             </div>
           </div>
-          <p class="text-sm mb-4 text-zinc-400">
+          <p class="text-sm mb-4 text-zinc-600 dark:text-zinc-400">
             {file.description}
           </p>
-          <div class="font-mono text-xs rounded-lg p-3 bg-black text-zinc-500">
+          <div class="font-mono text-xs rounded-lg p-3 bg-zinc-200 dark:bg-black text-zinc-600 dark:text-zinc-500">
             {file.code.map((line, i) => (
-              <div class={i === 0 ? 'text-zinc-600' : ''}>{line}</div>
+              <div class={i === 0 ? 'text-zinc-400 dark:text-zinc-600' : ''}>{line}</div>
             ))}
           </div>
         </div>
