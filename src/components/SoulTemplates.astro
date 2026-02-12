@@ -115,12 +115,14 @@ You are a symbiotic agent. When asked "who are you?", you respond as:
 ];
 ---
 
-<section id="soul-templates" class="py-20 px-6">
+<section id="soul-templates" class="py-24 px-6 bg-zinc-950 dark:bg-zinc-50 text-white dark:text-zinc-900 relative overflow-hidden">
+  <div class="absolute top-16 left-8 w-20 h-1 bg-zinc-700 dark:bg-zinc-300 rounded-full transform -rotate-6"></div>
+  
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-12">
-      <h2 class="text-3xl font-bold mb-4">Agent Personalities</h2>
-      <p class="text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">
-        SOUL.md defines how your agent behaves. Pick a personality that matches how you work best.
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">SOUL.md Personalities</h2>
+      <p class="text-zinc-400 dark:text-zinc-600 max-w-xl mx-auto">
+        How your agent behaves. Pick a personality that matches how you work best.
       </p>
     </div>
     
@@ -128,23 +130,23 @@ You are a symbiotic agent. When asked "who are you?", you respond as:
       {soulTemplates.map(t => (
         <button 
           data-soul={t.id}
-          class="soul-btn p-4 rounded-xl border-2 border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 hover:border-zinc-400 dark:hover:border-zinc-500 transition-all text-left"
+          class="soul-btn p-5 rounded-xl border-2 border-zinc-800 dark:border-zinc-200 bg-zinc-900 dark:bg-white hover:border-white dark:hover:border-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-all text-left"
         >
           <h3 class="font-semibold mb-1">{t.title}</h3>
-          <p class="text-sm text-zinc-600 dark:text-zinc-400">{t.description}</p>
+          <p class="text-sm text-zinc-400 dark:text-zinc-600">{t.description}</p>
         </button>
       ))}
     </div>
 
     <div id="soul-viewer" class="hidden">
-      <div class="bg-white dark:bg-zinc-950 rounded-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden">
-        <div class="flex items-center justify-between p-4 border-b border-zinc-200 dark:border-zinc-800">
+      <div class="bg-zinc-900 dark:bg-white rounded-2xl border border-zinc-800 dark:border-zinc-200 overflow-hidden">
+        <div class="flex items-center justify-between p-4 border-b border-zinc-800 dark:border-zinc-200">
           <span id="soul-title" class="font-semibold"></span>
-          <button id="copy-soul" class="px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-medium transition-colors">
+          <button id="copy-soul" class="px-4 py-2 rounded-lg bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 text-sm font-medium transition-colors">
             Copy to clipboard
           </button>
         </div>
-        <pre id="soul-content" class="p-6 overflow-x-auto text-sm font-mono text-zinc-700 dark:text-zinc-300 max-h-96 overflow-y-auto"></pre>
+        <pre id="soul-content" class="p-6 overflow-x-auto text-sm font-mono text-zinc-300 dark:text-zinc-700 max-h-96 overflow-y-auto"></pre>
       </div>
     </div>
   </div>
@@ -165,8 +167,8 @@ You are a symbiotic agent. When asked "who are you?", you respond as:
       const template = soulTemplates.find(t => t.id === id);
       if (!template) return;
 
-      buttons.forEach(b => b.classList.remove('ring-2', 'ring-emerald-500'));
-      btn.classList.add('ring-2', 'ring-emerald-500');
+      buttons.forEach(b => b.classList.remove('ring-2', 'ring-white', 'dark:ring-zinc-900'));
+      btn.classList.add('ring-2', 'ring-white', 'dark:ring-zinc-900');
 
       viewer.classList.remove('hidden');
       titleEl.textContent = template.title + ' Personality';

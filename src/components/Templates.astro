@@ -251,28 +251,16 @@ Learning: Python | JavaScript | React | SQL
 | Recovery | Evening | Community, networking |`
   }
 ];
-
-const colorMap: Record<string, string> = {
-  emerald: 'border-emerald-500 bg-emerald-500/5',
-  blue: 'border-blue-500 bg-blue-500/5',
-  purple: 'border-purple-500 bg-purple-500/5',
-  orange: 'border-orange-500 bg-orange-500/5',
-};
-
-const btnColorMap: Record<string, string> = {
-  emerald: 'bg-emerald-500 hover:bg-emerald-600',
-  blue: 'bg-blue-500 hover:bg-blue-600',
-  purple: 'bg-purple-500 hover:bg-purple-600',
-  orange: 'bg-orange-500 hover:bg-orange-600',
-};
 ---
 
-<section id="templates" class="py-20 px-6 bg-zinc-100 dark:bg-zinc-900/50">
+<section id="templates" class="py-24 px-6 bg-zinc-50 dark:bg-zinc-900 relative overflow-hidden">
+  <div class="absolute top-12 right-12 w-16 h-1 bg-zinc-200 dark:bg-zinc-700 rounded-full transform rotate-12"></div>
+  
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-12">
-      <h2 class="text-3xl font-bold mb-4">Templates</h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">USER.md Templates</h2>
       <p class="text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">
-        Starting points for your USER.md. Pick one, customize it, make it yours.
+        Starting points for your profile. Pick one, customize it, make it yours.
       </p>
     </div>
     
@@ -280,7 +268,7 @@ const btnColorMap: Record<string, string> = {
       {templates.map(t => (
         <button 
           data-template={t.id}
-          class={`template-btn p-4 rounded-xl border-2 border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 hover:border-zinc-400 dark:hover:border-zinc-500 transition-all text-left`}
+          class="template-btn p-5 rounded-xl border-2 border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 hover:border-zinc-900 dark:hover:border-white hover:shadow-lg transition-all text-left"
         >
           <h3 class="font-semibold mb-1">{t.title}</h3>
           <p class="text-sm text-zinc-600 dark:text-zinc-400">{t.description}</p>
@@ -289,14 +277,14 @@ const btnColorMap: Record<string, string> = {
     </div>
 
     <div id="template-viewer" class="hidden">
-      <div class="bg-white dark:bg-zinc-950 rounded-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden">
-        <div class="flex items-center justify-between p-4 border-b border-zinc-200 dark:border-zinc-800">
+      <div class="bg-white dark:bg-zinc-800 rounded-2xl border border-zinc-200 dark:border-zinc-700 overflow-hidden shadow-lg">
+        <div class="flex items-center justify-between p-4 border-b border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-900">
           <span id="template-title" class="font-semibold"></span>
-          <button id="copy-template" class="px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-medium transition-colors">
+          <button id="copy-template" class="px-4 py-2 rounded-lg bg-zinc-900 dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-100 text-white dark:text-zinc-900 text-sm font-medium transition-colors">
             Copy to clipboard
           </button>
         </div>
-        <pre id="template-content" class="p-6 overflow-x-auto text-sm font-mono text-zinc-700 dark:text-zinc-300 max-h-96 overflow-y-auto"></pre>
+        <pre id="template-content" class="p-6 overflow-x-auto text-sm font-mono text-zinc-700 dark:text-zinc-300 max-h-96 overflow-y-auto bg-zinc-50/50 dark:bg-zinc-900/50"></pre>
       </div>
     </div>
   </div>
@@ -317,17 +305,16 @@ const btnColorMap: Record<string, string> = {
       const template = templates.find(t => t.id === id);
       if (!template) return;
 
-      // Update active state
-      buttons.forEach(b => b.classList.remove('ring-2', 'ring-emerald-500'));
-      btn.classList.add('ring-2', 'ring-emerald-500');
+      buttons.forEach(b => {
+        b.classList.remove('ring-2', 'ring-zinc-900', 'dark:ring-white');
+      });
+      btn.classList.add('ring-2', 'ring-zinc-900', 'dark:ring-white');
 
-      // Show viewer
       viewer.classList.remove('hidden');
       titleEl.textContent = template.title + ' Template';
       contentEl.textContent = template.content;
       currentContent = template.content;
 
-      // Scroll to viewer
       viewer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     });
   });

@@ -1,6 +1,11 @@
 ---
 const conversation = [
   {
+    type: 'notification',
+    content: '/check-day triggered',
+    time: '2:47 PM'
+  },
+  {
     type: 'system',
     content: 'Agent reads AGENTS.md, SOUL.md, USER.md, NOW.md...'
   },
@@ -65,24 +70,52 @@ const conversation = [
 ];
 ---
 
-<section id="demo" class="py-20 px-6">
+<section id="demo" class="py-20 px-6 relative">
+  <!-- Telegram notification popup -->
+  <div id="telegram-notification" class="fixed top-4 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-500">
+    <div class="bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl border border-zinc-200 dark:border-zinc-700 p-4 max-w-sm">
+      <div class="flex items-start gap-3">
+        <div class="w-10 h-10 rounded-full bg-[#0088cc] flex items-center justify-center flex-shrink-0">
+          <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+          </svg>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2">
+            <span class="font-semibold text-sm">Symbiotic Agent</span>
+            <span id="notif-time" class="text-xs text-zinc-500">2:47 PM</span>
+          </div>
+          <p id="notif-content" class="text-sm text-zinc-600 dark:text-zinc-400 mt-0.5 truncate">/check-day triggered</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="max-w-4xl mx-auto">
     <div class="text-center mb-12">
       <h2 class="text-3xl font-bold mb-4">See It In Action</h2>
       <p class="text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">
-        A real conversation. The agent knows your patterns, calls them out, and updates memory in real-time.
+        Scheduled check-in via Telegram. The agent knows your patterns, calls them out, updates memory.
       </p>
     </div>
 
     <div class="bg-zinc-950 rounded-2xl overflow-hidden border border-zinc-800">
       <!-- Chat header -->
-      <div class="flex items-center gap-3 px-4 py-3 border-b border-zinc-800">
-        <div class="flex gap-1.5">
-          <div class="w-3 h-3 rounded-full bg-red-500"></div>
-          <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-          <div class="w-3 h-3 rounded-full bg-green-500"></div>
+      <div class="flex items-center justify-between px-4 py-3 border-b border-zinc-800">
+        <div class="flex items-center gap-3">
+          <div class="flex gap-1.5">
+            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+          </div>
+          <span class="text-sm text-zinc-400 font-mono">symbiotic-agent</span>
         </div>
-        <span class="text-sm text-zinc-400 font-mono">symbiotic-agent</span>
+        <div class="flex items-center gap-2 text-xs text-zinc-500">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+          </svg>
+          <span>via Telegram</span>
+        </div>
       </div>
 
       <!-- Chat messages -->
@@ -93,7 +126,7 @@ const conversation = [
       <!-- Controls -->
       <div class="px-4 py-3 border-t border-zinc-800 flex items-center justify-between">
         <div class="text-sm text-zinc-500">
-          <span id="step-indicator">Step 1 of {conversation.length}</span>
+          <span id="step-indicator">Click Next to start</span>
         </div>
         <div class="flex gap-2">
           <button id="restart-btn" class="px-3 py-1.5 rounded-lg text-sm text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors">
@@ -106,9 +139,20 @@ const conversation = [
       </div>
     </div>
 
-    <p class="text-center text-sm text-zinc-500 mt-4">
-      Click "Next" to step through the conversation
-    </p>
+    <div class="flex items-center justify-center gap-6 mt-6 text-sm text-zinc-500">
+      <div class="flex items-center gap-2">
+        <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+        <span>Scheduled via cron</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="w-2 h-2 rounded-full bg-blue-500"></div>
+        <span>Telegram delivery</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="w-2 h-2 rounded-full bg-purple-500"></div>
+        <span>Memory updates</span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -117,10 +161,32 @@ const conversation = [
   const nextBtn = document.getElementById('next-btn');
   const restartBtn = document.getElementById('restart-btn');
   const stepIndicator = document.getElementById('step-indicator');
+  const notification = document.getElementById('telegram-notification');
+  const notifContent = document.getElementById('notif-content');
+  const notifTime = document.getElementById('notif-time');
   
   let currentStep = 0;
 
+  function showNotification(content, time) {
+    notifContent.textContent = content;
+    notifTime.textContent = time;
+    notification.classList.remove('translate-x-full', 'opacity-0');
+    notification.classList.add('translate-x-0', 'opacity-100');
+    
+    // Auto-hide after 3 seconds
+    setTimeout(() => {
+      notification.classList.add('translate-x-full', 'opacity-0');
+      notification.classList.remove('translate-x-0', 'opacity-100');
+    }, 3000);
+  }
+
   function createMessage(msg) {
+    // Handle notification type
+    if (msg.type === 'notification') {
+      showNotification(msg.content, msg.time);
+      return;
+    }
+
     const div = document.createElement('div');
     
     if (msg.type === 'system') {
@@ -172,7 +238,11 @@ const conversation = [
   }
 
   function updateIndicator() {
-    stepIndicator.textContent = `Step ${currentStep} of ${conversation.length}`;
+    if (currentStep === 0) {
+      stepIndicator.textContent = 'Click Next to start';
+    } else {
+      stepIndicator.textContent = `Step ${currentStep} of ${conversation.length}`;
+    }
     
     if (currentStep >= conversation.length) {
       nextBtn.textContent = 'Done';
@@ -196,11 +266,14 @@ const conversation = [
     nextBtn.disabled = false;
     nextBtn.className = 'px-4 py-1.5 rounded-lg text-sm bg-emerald-500 hover:bg-emerald-600 text-white font-medium transition-colors';
     updateIndicator();
+    // Hide notification if visible
+    notification.classList.add('translate-x-full', 'opacity-0');
+    notification.classList.remove('translate-x-0', 'opacity-100');
   }
 
   nextBtn.addEventListener('click', showNext);
   restartBtn.addEventListener('click', restart);
 
-  // Show first message on load
+  // Initial state
   updateIndicator();
 </script>

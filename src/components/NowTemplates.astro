@@ -282,12 +282,15 @@ const nowTemplates = [
 ];
 ---
 
-<section id="now-templates" class="py-20 px-6 bg-zinc-100 dark:bg-zinc-900/50">
+<section id="now-templates" class="py-24 px-6 bg-gradient-to-b from-white to-zinc-100 relative overflow-hidden">
+  <!-- Brush accent -->
+  <div class="absolute bottom-16 left-8 w-24 h-1 bg-zinc-300 rounded-full transform -rotate-3"></div>
+  
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-12">
-      <h2 class="text-3xl font-bold mb-4">Memory Log Examples</h2>
-      <p class="text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">
-        NOW.md is the secret sauce. See how the memory log evolves over time, capturing patterns and quotes.
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">NOW.md Evolution</h2>
+      <p class="text-zinc-600 max-w-xl mx-auto">
+        The secret sauce. See how the memory log captures patterns and quotes over time.
       </p>
     </div>
     
@@ -295,23 +298,23 @@ const nowTemplates = [
       {nowTemplates.map(t => (
         <button 
           data-now={t.id}
-          class="now-btn p-4 rounded-xl border-2 border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 hover:border-zinc-400 dark:hover:border-zinc-500 transition-all text-left"
+          class="now-btn p-5 rounded-xl border-2 border-zinc-200 bg-white hover:border-zinc-900 hover:shadow-lg transition-all text-left"
         >
           <h3 class="font-semibold mb-1">{t.title}</h3>
-          <p class="text-sm text-zinc-600 dark:text-zinc-400">{t.description}</p>
+          <p class="text-sm text-zinc-600">{t.description}</p>
         </button>
       ))}
     </div>
 
     <div id="now-viewer" class="hidden">
-      <div class="bg-white dark:bg-zinc-950 rounded-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden">
-        <div class="flex items-center justify-between p-4 border-b border-zinc-200 dark:border-zinc-800">
+      <div class="bg-white rounded-2xl border border-zinc-200 overflow-hidden shadow-lg">
+        <div class="flex items-center justify-between p-4 border-b border-zinc-200 bg-zinc-50">
           <span id="now-title" class="font-semibold"></span>
-          <button id="copy-now" class="px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-medium transition-colors">
+          <button id="copy-now" class="px-4 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-white text-sm font-medium transition-colors">
             Copy to clipboard
           </button>
         </div>
-        <pre id="now-content" class="p-6 overflow-x-auto text-sm font-mono text-zinc-700 dark:text-zinc-300 max-h-[500px] overflow-y-auto"></pre>
+        <pre id="now-content" class="p-6 overflow-x-auto text-sm font-mono text-zinc-700 max-h-[500px] overflow-y-auto bg-zinc-50/50"></pre>
       </div>
     </div>
   </div>
@@ -332,8 +335,8 @@ const nowTemplates = [
       const template = nowTemplates.find(t => t.id === id);
       if (!template) return;
 
-      buttons.forEach(b => b.classList.remove('ring-2', 'ring-emerald-500'));
-      btn.classList.add('ring-2', 'ring-emerald-500');
+      buttons.forEach(b => b.classList.remove('ring-2', 'ring-zinc-900'));
+      btn.classList.add('ring-2', 'ring-zinc-900');
 
       viewer.classList.remove('hidden');
       titleEl.textContent = template.title + ' - NOW.md Evolution';

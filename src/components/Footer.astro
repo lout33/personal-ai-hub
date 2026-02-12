@@ -11,18 +11,17 @@ const links = {
 };
 ---
 
-<footer class="py-16 px-6 bg-white border-t border-zinc-200 relative overflow-hidden">
-  <!-- Brush accent -->
-  <div class="absolute bottom-8 left-8 w-32 h-1 bg-zinc-200 rounded-full transform -rotate-3"></div>
+<footer class="py-16 px-6 bg-white dark:bg-zinc-950 border-t border-zinc-200 dark:border-zinc-800 relative overflow-hidden">
+  <div class="absolute bottom-8 left-8 w-32 h-1 bg-zinc-200 dark:bg-zinc-800 rounded-full transform -rotate-3"></div>
   
   <div class="max-w-6xl mx-auto">
     <div class="grid md:grid-cols-4 gap-8 mb-12">
       <div class="md:col-span-2">
         <div class="flex items-center gap-2 font-semibold text-lg mb-4">
-          <span class="w-5 h-5 rounded-full bg-gradient-to-br from-zinc-900 to-zinc-600"></span>
+          <span class="w-5 h-5 rounded-full bg-gradient-to-br from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400"></span>
           <span>symbiotic</span>
         </div>
-        <p class="text-zinc-600 text-sm max-w-md">
+        <p class="text-zinc-600 dark:text-zinc-400 text-sm max-w-md">
           AI that knows you. Templates, skills, and setups for building symbiotic AI agents.
         </p>
       </div>
@@ -32,7 +31,7 @@ const links = {
         <ul class="space-y-2">
           {links.project.map(link => (
             <li>
-              <a href={link.href} target="_blank" rel="noopener" class="text-sm text-zinc-600 hover:text-zinc-900 transition-colors">
+              <a href={link.href} target="_blank" rel="noopener" class="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
                 {link.label}
               </a>
             </li>
@@ -45,7 +44,7 @@ const links = {
         <ul class="space-y-2">
           {links.community.map(link => (
             <li>
-              <a href={link.href} target="_blank" rel="noopener" class="text-sm text-zinc-600 hover:text-zinc-900 transition-colors">
+              <a href={link.href} target="_blank" rel="noopener" class="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
                 {link.label}
               </a>
             </li>
@@ -54,9 +53,9 @@ const links = {
       </div>
     </div>
     
-    <div class="pt-8 border-t border-zinc-200 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <div class="pt-8 border-t border-zinc-200 dark:border-zinc-800 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
       <p class="text-sm text-zinc-500">
-        Built by <a href="https://x.com/lout33_lout332" target="_blank" rel="noopener" class="hover:text-zinc-900 transition-colors">@lout33</a>
+        Built by <a href="https://x.com/lout33_lout332" target="_blank" rel="noopener" class="hover:text-zinc-900 dark:hover:text-white transition-colors">@lout33</a>
       </p>
       <p class="text-sm text-zinc-500 italic">
         "The solution isn't a better system. It's doing the uncomfortable thing you're avoiding."
