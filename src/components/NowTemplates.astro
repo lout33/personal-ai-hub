@@ -282,7 +282,7 @@ const nowTemplates = [
 ];
 ---
 
-<section id="now-templates" class="py-24 px-6 bg-gradient-to-b from-white to-zinc-100 dark:from-zinc-950 dark:to-zinc-900 relative overflow-hidden">
+<section id="now-templates" class="py-24 px-6 bg-gradient-to-b from-zinc-50 to-zinc-100 dark:from-zinc-950 dark:to-zinc-900 relative overflow-hidden">
   <div class="absolute bottom-16 left-8 w-24 h-1 bg-zinc-300 dark:bg-zinc-700 rounded-full transform -rotate-3"></div>
   
   <div class="max-w-6xl mx-auto">
@@ -297,7 +297,7 @@ const nowTemplates = [
       {nowTemplates.map(t => (
         <button 
           data-now={t.id}
-          class="now-btn p-5 rounded-xl border-2 border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 hover:border-zinc-900 dark:hover:border-white hover:shadow-lg transition-all text-left"
+          class="now-btn p-5 rounded-xl border-2 border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 hover:border-zinc-900 dark:hover:border-white hover:shadow-lg transition-all text-left"
         >
           <h3 class="font-semibold mb-1">{t.title}</h3>
           <p class="text-sm text-zinc-600 dark:text-zinc-400">{t.description}</p>
@@ -306,7 +306,7 @@ const nowTemplates = [
     </div>
 
     <div id="now-viewer" class="hidden">
-      <div class="bg-white dark:bg-zinc-800 rounded-2xl border border-zinc-200 dark:border-zinc-700 overflow-hidden shadow-lg">
+      <div class="bg-zinc-50 dark:bg-zinc-800 rounded-2xl border border-zinc-200 dark:border-zinc-700 overflow-hidden shadow-lg">
         <div class="flex items-center justify-between p-4 border-b border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-900">
           <span id="now-title" class="font-semibold"></span>
           <button id="copy-now" class="px-4 py-2 rounded-lg bg-zinc-900 dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-100 text-white dark:text-zinc-900 text-sm font-medium transition-colors">

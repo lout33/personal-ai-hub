@@ -35,7 +35,7 @@ const files = [
 ];
 ---
 
-<section class="py-24 px-6 bg-white dark:bg-zinc-950 relative overflow-hidden">
+<section class="py-24 px-6 bg-zinc-50 dark:bg-zinc-950 relative overflow-hidden">
   <div class="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-zinc-950 dark:from-zinc-900 to-transparent opacity-5"></div>
   
   <div class="max-w-6xl mx-auto">
@@ -50,7 +50,7 @@ const files = [
       {files.map((file) => (
         <div class={`p-5 rounded-2xl border transition-all hover:shadow-lg ${
           file.side === 'human' 
-            ? 'bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600' 
+            ? 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600' 
             : file.side === 'agent'
             ? 'bg-zinc-900 dark:bg-zinc-100 border-zinc-800 dark:border-zinc-200 text-white dark:text-zinc-900 hover:border-zinc-700 dark:hover:border-zinc-300'
             : 'bg-gradient-to-br from-zinc-900 to-zinc-800 dark:from-zinc-100 dark:to-zinc-200 border-zinc-700 dark:border-zinc-300 text-white dark:text-zinc-900 hover:border-zinc-600 dark:hover:border-zinc-400'

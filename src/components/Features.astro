@@ -18,7 +18,7 @@ const features = [
 ];
 ---
 
-<section id="features" class="py-24 px-6 bg-zinc-50 dark:bg-zinc-900 relative overflow-hidden">
+<section id="features" class="py-24 px-6 bg-zinc-100 dark:bg-zinc-900 relative overflow-hidden">
   <div class="absolute top-12 left-8 w-20 h-1 bg-zinc-200 dark:bg-zinc-700 rounded-full transform -rotate-6"></div>
   <div class="absolute bottom-12 right-8 w-24 h-1 bg-zinc-200 dark:bg-zinc-700 rounded-full transform rotate-6"></div>
   
@@ -34,10 +34,10 @@ const features = [
       {features.map((feature, i) => (
         <div class={`p-8 rounded-2xl border transition-all hover:shadow-lg ${
           feature.side === 'human' 
-            ? 'bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600' 
+            ? 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600' 
             : feature.side === 'agent'
             ? 'bg-zinc-900 dark:bg-white border-zinc-800 dark:border-zinc-200 text-white dark:text-zinc-900 hover:border-zinc-700 dark:hover:border-zinc-300'
-            : 'bg-gradient-to-br from-white to-zinc-100 dark:from-zinc-800 dark:to-zinc-900 border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600'
+            : 'bg-gradient-to-br from-zinc-50 to-zinc-100 dark:from-zinc-800 dark:to-zinc-900 border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600'
         }`}>
           <div class={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 ${
             feature.side === 'human'
