@@ -6,11 +6,11 @@ interface Props {
   description?: string;
 }
 
-const { title, description = "The hub for personal AI integration. Templates, skills, commands, and setups for symbiotic AI agents." } = Astro.props;
+const { title, description = "The hub for personal AI integration. Templates, skills, and setups for symbiotic AI agents." } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
@@ -18,13 +18,11 @@ const { title, description = "The hub for personal AI integration. Templates, sk
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <script is:inline>
-      const theme = localStorage.getItem('theme') || 
-        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      document.documentElement.classList.toggle('dark', theme === 'dark');
-    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   </head>
-  <body class="bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 min-h-screen antialiased">
+  <body class="bg-white text-zinc-900 min-h-screen antialiased font-sans">
     <slot />
   </body>
 </html>

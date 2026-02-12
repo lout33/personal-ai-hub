@@ -1,38 +1,38 @@
 ---
 const links = {
   project: [
-    { label: 'GitHub', href: 'https://github.com/lout33/claude_life_assistant' },
-    { label: 'Documentation', href: 'https://github.com/lout33/claude_life_assistant#readme' },
-    { label: 'Submit Setup', href: 'https://github.com/lout33/claude_life_assistant/issues' },
+    { label: 'GitHub', href: 'https://github.com/lout33/ai-life-assistant' },
+    { label: 'Documentation', href: 'https://github.com/lout33/ai-life-assistant#readme' },
   ],
   community: [
     { label: 'Twitter', href: 'https://x.com/lout33_lout332' },
     { label: 'YouTube', href: 'https://www.youtube.com/watch?v=oBURNsNVU3Y' },
-    { label: 'Substack', href: 'https://substack.com/home/post/p-187469909' },
   ]
 };
 ---
 
-<footer class="border-t border-zinc-200 dark:border-zinc-800 py-12 px-6">
+<footer class="py-16 px-6 bg-white border-t border-zinc-200 relative overflow-hidden">
+  <!-- Brush accent -->
+  <div class="absolute bottom-8 left-8 w-32 h-1 bg-zinc-200 rounded-full transform -rotate-3"></div>
+  
   <div class="max-w-6xl mx-auto">
     <div class="grid md:grid-cols-4 gap-8 mb-12">
       <div class="md:col-span-2">
         <div class="flex items-center gap-2 font-semibold text-lg mb-4">
-          <span class="text-emerald-500">◆</span>
-          <span>Personal AI Hub</span>
+          <span class="w-5 h-5 rounded-full bg-gradient-to-br from-zinc-900 to-zinc-600"></span>
+          <span>symbiotic</span>
         </div>
-        <p class="text-zinc-600 dark:text-zinc-400 text-sm max-w-md">
-          The hub for personal AI integration. Templates, skills, commands, and setups 
-          for building symbiotic AI agents.
+        <p class="text-zinc-600 text-sm max-w-md">
+          AI that knows you. Templates, skills, and setups for building symbiotic AI agents.
         </p>
       </div>
       
       <div>
-        <h4 class="font-semibold mb-4">Project</h4>
+        <h4 class="font-semibold mb-4 text-sm uppercase tracking-wider text-zinc-400">Project</h4>
         <ul class="space-y-2">
           {links.project.map(link => (
             <li>
-              <a href={link.href} target="_blank" rel="noopener" class="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+              <a href={link.href} target="_blank" rel="noopener" class="text-sm text-zinc-600 hover:text-zinc-900 transition-colors">
                 {link.label}
               </a>
             </li>
@@ -41,11 +41,11 @@ const links = {
       </div>
       
       <div>
-        <h4 class="font-semibold mb-4">Community</h4>
+        <h4 class="font-semibold mb-4 text-sm uppercase tracking-wider text-zinc-400">Community</h4>
         <ul class="space-y-2">
           {links.community.map(link => (
             <li>
-              <a href={link.href} target="_blank" rel="noopener" class="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+              <a href={link.href} target="_blank" rel="noopener" class="text-sm text-zinc-600 hover:text-zinc-900 transition-colors">
                 {link.label}
               </a>
             </li>
@@ -54,11 +54,11 @@ const links = {
       </div>
     </div>
     
-    <div class="pt-8 border-t border-zinc-200 dark:border-zinc-800 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <div class="pt-8 border-t border-zinc-200 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
       <p class="text-sm text-zinc-500">
-        Built by <a href="https://x.com/lout33_lout332" target="_blank" rel="noopener" class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">@lout33</a>
+        Built by <a href="https://x.com/lout33_lout332" target="_blank" rel="noopener" class="hover:text-zinc-900 transition-colors">@lout33</a>
       </p>
-      <p class="text-sm text-zinc-500">
+      <p class="text-sm text-zinc-500 italic">
         "The solution isn't a better system. It's doing the uncomfortable thing you're avoiding."
       </p>
     </div>

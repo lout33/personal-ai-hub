@@ -11,6 +11,88 @@
   }
   
   ::selection {
-    @apply bg-emerald-500/30;
+    background: rgba(0, 0, 0, 0.2);
+  }
+  
+  .dark ::selection {
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
+
+@layer components {
+  /* Ink brush stroke divider */
+  .ink-divider {
+    position: relative;
+    height: 80px;
+    overflow: hidden;
+  }
+  
+  .ink-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -5%;
+    right: -5%;
+    height: 4px;
+    background: currentColor;
+    transform: translateY(-50%);
+    filter: url(#ink-filter);
+  }
+  
+  /* Ink wash card effect */
+  .ink-wash {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .ink-wash::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at 20% 20%, rgba(0,0,0,0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(0,0,0,0.02) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  
+  .dark .ink-wash::before {
+    background: radial-gradient(ellipse at 20% 20%, rgba(255,255,255,0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(255,255,255,0.02) 0%, transparent 50%);
+  }
+  
+  /* Brush accent corners */
+  .brush-accent {
+    position: relative;
+  }
+  
+  .brush-accent::before,
+  .brush-accent::after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 3px;
+    background: currentColor;
+    opacity: 0.15;
+    border-radius: 2px;
+  }
+  
+  .brush-accent::before {
+    top: 0;
+    left: 0;
+    transform: rotate(-5deg);
+  }
+  
+  .brush-accent::after {
+    bottom: 0;
+    right: 0;
+    transform: rotate(-5deg);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
   }
 }

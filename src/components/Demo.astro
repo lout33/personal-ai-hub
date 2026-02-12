@@ -1,0 +1,206 @@
+---
+const conversation = [
+  {
+    type: 'system',
+    content: 'Agent reads AGENTS.md, SOUL.md, USER.md, NOW.md...'
+  },
+  {
+    type: 'agent',
+    content: "It's 2:47pm. Your MIT today was \"send the proposal to the client.\" How's that going?"
+  },
+  {
+    type: 'user',
+    content: "Yeah I'm working on it. Just fixing some formatting issues first."
+  },
+  {
+    type: 'agent',
+    content: "You've been \"fixing formatting\" for 3 hours. The proposal was done yesterday. What's actually going on?"
+  },
+  {
+    type: 'user',
+    content: "I just want it to look professional before I send it."
+  },
+  {
+    type: 'agent',
+    content: "This is the pattern. Third time this month.\n\nJan 15: Delayed the pitch deck for \"one more revision.\"\nJan 28: Rewrote the email \"to sound better.\"\nNow: Formatting a finished proposal.\n\nYou said it yourself last week: \"I hide behind polish when I'm scared of the response.\"\n\nWhat are you afraid they'll say?"
+  },
+  {
+    type: 'user',
+    content: "...that it's not good enough. That they'll say no."
+  },
+  {
+    type: 'agent',
+    content: "They might. And you'll survive. You've heard no before.\n\nBut right now you're guaranteeing a no by not sending it.\n\nThe proposal is done. Send it in the next 5 minutes, then tell me it's done."
+  },
+  {
+    type: 'user',
+    content: "Ok. Sending now."
+  },
+  {
+    type: 'agent',
+    content: "Good. I'm updating NOW.md."
+  },
+  {
+    type: 'system',
+    content: `NOW.md updated:
+
+# LOG
+### Feb 11
+- **Pattern triggered:** Perfectionism/delay on client proposal. Called it out. Sent within 5 min.
+- Quote: "I hide behind polish when I'm scared of the response."
+- Note: 3rd instance this month. Pattern is fear of rejection disguised as quality.`
+  },
+  {
+    type: 'agent',
+    content: "Done. Proposal sent. How do you feel?"
+  },
+  {
+    type: 'user',
+    content: "Relieved actually. That wasn't so hard."
+  },
+  {
+    type: 'agent',
+    content: "It never is. The resistance is always bigger than the action.\n\nBack to work. What's next?"
+  }
+];
+---
+
+<section id="demo" class="py-20 px-6">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold mb-4">See It In Action</h2>
+      <p class="text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">
+        A real conversation. The agent knows your patterns, calls them out, and updates memory in real-time.
+      </p>
+    </div>
+
+    <div class="bg-zinc-950 rounded-2xl overflow-hidden border border-zinc-800">
+      <!-- Chat header -->
+      <div class="flex items-center gap-3 px-4 py-3 border-b border-zinc-800">
+        <div class="flex gap-1.5">
+          <div class="w-3 h-3 rounded-full bg-red-500"></div>
+          <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+          <div class="w-3 h-3 rounded-full bg-green-500"></div>
+        </div>
+        <span class="text-sm text-zinc-400 font-mono">symbiotic-agent</span>
+      </div>
+
+      <!-- Chat messages -->
+      <div id="chat-container" class="p-4 h-[400px] overflow-y-auto space-y-4">
+        <!-- Messages will be inserted here -->
+      </div>
+
+      <!-- Controls -->
+      <div class="px-4 py-3 border-t border-zinc-800 flex items-center justify-between">
+        <div class="text-sm text-zinc-500">
+          <span id="step-indicator">Step 1 of {conversation.length}</span>
+        </div>
+        <div class="flex gap-2">
+          <button id="restart-btn" class="px-3 py-1.5 rounded-lg text-sm text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors">
+            Restart
+          </button>
+          <button id="next-btn" class="px-4 py-1.5 rounded-lg text-sm bg-emerald-500 hover:bg-emerald-600 text-white font-medium transition-colors">
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <p class="text-center text-sm text-zinc-500 mt-4">
+      Click "Next" to step through the conversation
+    </p>
+  </div>
+</section>
+
+<script define:vars={{ conversation }}>
+  const container = document.getElementById('chat-container');
+  const nextBtn = document.getElementById('next-btn');
+  const restartBtn = document.getElementById('restart-btn');
+  const stepIndicator = document.getElementById('step-indicator');
+  
+  let currentStep = 0;
+
+  function createMessage(msg) {
+    const div = document.createElement('div');
+    
+    if (msg.type === 'system') {
+      div.className = 'flex justify-center';
+      div.innerHTML = `
+        <div class="px-4 py-2 rounded-lg bg-zinc-800/50 border border-zinc-700 max-w-md">
+          <pre class="text-xs text-zinc-400 font-mono whitespace-pre-wrap">${msg.content}</pre>
+        </div>
+      `;
+    } else if (msg.type === 'agent') {
+      div.className = 'flex justify-start';
+      div.innerHTML = `
+        <div class="flex gap-3 max-w-[85%]">
+          <div class="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center flex-shrink-0">
+            <span class="text-xs">AI</span>
+          </div>
+          <div class="px-4 py-2 rounded-2xl rounded-tl-none bg-zinc-800 text-zinc-100">
+            <p class="text-sm whitespace-pre-wrap">${msg.content}</p>
+          </div>
+        </div>
+      `;
+    } else {
+      div.className = 'flex justify-end';
+      div.innerHTML = `
+        <div class="flex gap-3 max-w-[85%]">
+          <div class="px-4 py-2 rounded-2xl rounded-tr-none bg-emerald-600 text-white">
+            <p class="text-sm whitespace-pre-wrap">${msg.content}</p>
+          </div>
+          <div class="w-8 h-8 rounded-full bg-emerald-700 flex items-center justify-center flex-shrink-0">
+            <span class="text-xs">You</span>
+          </div>
+        </div>
+      `;
+    }
+
+    div.style.opacity = '0';
+    div.style.transform = 'translateY(10px)';
+    container.appendChild(div);
+    
+    // Animate in
+    requestAnimationFrame(() => {
+      div.style.transition = 'opacity 0.3s, transform 0.3s';
+      div.style.opacity = '1';
+      div.style.transform = 'translateY(0)';
+    });
+
+    // Scroll to bottom
+    container.scrollTop = container.scrollHeight;
+  }
+
+  function updateIndicator() {
+    stepIndicator.textContent = `Step ${currentStep} of ${conversation.length}`;
+    
+    if (currentStep >= conversation.length) {
+      nextBtn.textContent = 'Done';
+      nextBtn.disabled = true;
+      nextBtn.className = 'px-4 py-1.5 rounded-lg text-sm bg-zinc-700 text-zinc-400 cursor-not-allowed';
+    }
+  }
+
+  function showNext() {
+    if (currentStep < conversation.length) {
+      createMessage(conversation[currentStep]);
+      currentStep++;
+      updateIndicator();
+    }
+  }
+
+  function restart() {
+    container.innerHTML = '';
+    currentStep = 0;
+    nextBtn.textContent = 'Next';
+    nextBtn.disabled = false;
+    nextBtn.className = 'px-4 py-1.5 rounded-lg text-sm bg-emerald-500 hover:bg-emerald-600 text-white font-medium transition-colors';
+    updateIndicator();
+  }
+
+  nextBtn.addEventListener('click', showNext);
+  restartBtn.addEventListener('click', restart);
+
+  // Show first message on load
+  updateIndicator();
+</script>
