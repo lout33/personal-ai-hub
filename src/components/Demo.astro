@@ -42,30 +42,40 @@ const conversation = [
     content: "Ok. Sending now."
   },
   {
+    type: 'notification',
+    content: 'Found: Y Combinator application closes TODAY 8pm',
+    time: '2:52 PM',
+    urgent: true
+  },
+  {
     type: 'agent',
-    content: "Good. I'm updating NOW.md."
+    content: "Wait. I was scanning opportunities from your GOALS.md and found something.\n\nY Combinator W26 batch application closes TODAY at 8pm PT. You mentioned wanting to apply \"someday.\"\n\nYou have 5 hours. Your proposal can wait. This can't.\n\nYour MVP is live. You have traction. Want me to help draft the application?"
+  },
+  {
+    type: 'user',
+    content: "Holy shit. Yes. Let's do it."
+  },
+  {
+    type: 'agent',
+    content: "Good. I'm updating NOW.md and pulling up the YC application questions."
   },
   {
     type: 'system',
     content: `NOW.md updated:
 
+# QUEUE
+- [x] Send proposal (DONE)
+- [ ] YC W26 Application - URGENT - Due 8pm PT today
+
 # LOG
 ### Feb 11
-- **Pattern triggered:** Perfectionism/delay on client proposal. Called it out. Sent within 5 min.
-- Quote: "I hide behind polish when I'm scared of the response."
-- Note: 3rd instance this month. Pattern is fear of rejection disguised as quality.`
+- **Pattern triggered:** Perfectionism/delay. Called out. Proposal sent.
+- **Proactive alert:** Found YC deadline closing today. Pivoted priorities.
+- Quote: "Holy shit. Yes. Let's do it." - This is the energy.`
   },
   {
     type: 'agent',
-    content: "Done. Proposal sent. How do you feel?"
-  },
-  {
-    type: 'user',
-    content: "Relieved actually. That wasn't so hard."
-  },
-  {
-    type: 'agent',
-    content: "It never is. The resistance is always bigger than the action.\n\nBack to work. What's next?"
+    content: "NOW.md updated. Priorities shifted.\n\nLet's write an application that ships. Not a perfect one. A real one.\n\nFirst question: Describe what your company does in 50 characters or less."
   }
 ];
 ---
@@ -95,7 +105,7 @@ const conversation = [
     <div class="text-center mb-12">
       <h2 class="text-3xl font-bold mb-4">See It In Action</h2>
       <p class="text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">
-        Scheduled check-in via Telegram. The agent knows your patterns, calls them out, updates memory.
+        Scheduled check-ins, pattern recognition, and proactive alerts. The agent works alongside you.
       </p>
     </div>
 
@@ -167,23 +177,36 @@ const conversation = [
   
   let currentStep = 0;
 
-  function showNotification(content, time) {
+  function showNotification(content, time, urgent = false) {
     notifContent.textContent = content;
     notifTime.textContent = time;
+    
+    // Update styling for urgent notifications
+    const notifBox = notification.querySelector('div');
+    if (urgent) {
+      notifBox.classList.add('ring-2', 'ring-red-500', 'ring-offset-2');
+      notifContent.classList.add('text-red-600', 'dark:text-red-400', 'font-semibold');
+      notifContent.classList.remove('text-zinc-600', 'dark:text-zinc-400');
+    } else {
+      notifBox.classList.remove('ring-2', 'ring-red-500', 'ring-offset-2');
+      notifContent.classList.remove('text-red-600', 'dark:text-red-400', 'font-semibold');
+      notifContent.classList.add('text-zinc-600', 'dark:text-zinc-400');
+    }
+    
     notification.classList.remove('translate-x-full', 'opacity-0');
     notification.classList.add('translate-x-0', 'opacity-100');
     
-    // Auto-hide after 3 seconds
+    // Auto-hide after 4 seconds (longer for urgent)
     setTimeout(() => {
       notification.classList.add('translate-x-full', 'opacity-0');
       notification.classList.remove('translate-x-0', 'opacity-100');
-    }, 3000);
+    }, urgent ? 5000 : 3000);
   }
 
   function createMessage(msg) {
     // Handle notification type
     if (msg.type === 'notification') {
-      showNotification(msg.content, msg.time);
+      showNotification(msg.content, msg.time, msg.urgent || false);
       return;
     }
 
