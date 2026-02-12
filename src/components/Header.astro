@@ -1,6 +1,5 @@
 ---
 const navLinks = [
-  { href: '/discover', label: 'Discover' },
   { href: '#features', label: 'Features' },
   { href: '#templates', label: 'Templates' },
   { href: '#get-started', label: 'Get Started' },
@@ -23,6 +22,9 @@ const navLinks = [
     </nav>
     
     <div class="flex items-center gap-3">
+      <a href="/discover" class="hidden sm:inline-flex px-4 py-1.5 rounded-lg bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-medium hover:bg-zinc-700 dark:hover:bg-zinc-200 transition-colors">
+        Create Profile
+      </a>
       <button id="theme-toggle" class="p-2 rounded-lg hover:bg-zinc-200 dark:hover:bg-white/10 transition-colors" aria-label="Toggle theme">
         <!-- Sun icon (shown in dark mode) -->
         <svg class="w-5 h-5 text-zinc-400 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
