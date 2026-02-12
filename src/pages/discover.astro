@@ -1,0 +1,948 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Discover - Build Your AI Partner">
+  <div class="min-h-screen flex flex-col bg-zinc-50 dark:bg-zinc-950">
+    <header class="fixed top-0 left-0 right-0 z-40 bg-zinc-50/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800">
+      <div class="max-w-2xl mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="/" class="text-lg font-semibold">Symbiotic</a>
+        <div id="progress-container" class="hidden flex-1 max-w-xs mx-8">
+          <div class="flex items-center gap-3">
+            <div class="flex-1 h-1 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden">
+              <div id="progress-bar" class="h-full bg-emerald-500 transition-all duration-500" style="width: 0%"></div>
+            </div>
+            <span id="step-counter" class="text-sm text-zinc-500 tabular-nums">1/5</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1 flex items-center justify-center px-6 pt-24 pb-10">
+      <div class="w-full max-w-xl">
+        
+        <div id="welcome-screen" class="text-center space-y-8">
+          <div class="space-y-4">
+            <h1 class="text-3xl md:text-4xl font-bold">Discover Your Patterns</h1>
+            <p class="text-lg text-zinc-600 dark:text-zinc-400 max-w-md mx-auto">
+              I'll ask you about real scenarios. Your answers help build an AI partner that actually understands how you work.
+            </p>
+          </div>
+          
+          <div class="bg-zinc-100 dark:bg-zinc-900 rounded-2xl p-6 text-left space-y-4 max-w-md mx-auto">
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <div>
+                <p class="font-medium">5 scenarios, ~5 minutes</p>
+                <p class="text-sm text-zinc-500">Be honest. The more real you are, the better this works.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                </svg>
+              </div>
+              <div>
+                <p class="font-medium">Private</p>
+                <p class="text-sm text-zinc-500">Nothing leaves your browser. Files download at the end.</p>
+              </div>
+            </div>
+          </div>
+          
+          <button id="start-btn" class="px-8 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-xl transition-colors">
+            Start Discovery
+          </button>
+        </div>
+
+        <div id="scenario-screen" class="hidden space-y-6">
+          <div id="scenario-title" class="text-sm font-medium text-emerald-500 uppercase tracking-wide"></div>
+          
+          <div id="question-container" class="space-y-6">
+            <h2 id="scenario-question" class="text-xl md:text-2xl font-semibold leading-relaxed"></h2>
+            
+            <div id="choices-container" class="space-y-3"></div>
+            
+            <div id="text-input-container" class="hidden space-y-3">
+              <textarea 
+                id="text-input" 
+                rows="3"
+                class="w-full px-4 py-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
+                placeholder=""
+              ></textarea>
+              <div class="flex items-center justify-between">
+                <span id="char-count" class="text-sm text-zinc-400"></span>
+                <button id="submit-text" class="px-6 py-2 bg-emerald-500 hover:bg-emerald-600 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 disabled:cursor-not-allowed text-white font-medium rounded-xl transition-colors">
+                  Continue
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div id="insight-container" class="hidden">
+            <div class="bg-zinc-100 dark:bg-zinc-900 rounded-2xl p-6 space-y-4">
+              <div class="flex items-start gap-3">
+                <div class="w-8 h-8 rounded-full bg-amber-500/10 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <p id="insight-text" class="font-medium"></p>
+                  <p id="bridge-text" class="text-sm text-zinc-600 dark:text-zinc-400 mt-2"></p>
+                </div>
+              </div>
+              <button id="continue-btn" class="w-full py-3 bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 font-medium rounded-xl transition-colors">
+                Continue
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div id="name-screen" class="hidden space-y-6">
+          <div class="space-y-4">
+            <h2 class="text-2xl font-bold">One last thing</h2>
+            <p class="text-zinc-600 dark:text-zinc-400">What's your name? (This goes in your USER.md)</p>
+          </div>
+          
+          <input 
+            type="text" 
+            id="name-input"
+            placeholder="Your name"
+            class="w-full px-4 py-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500"
+          />
+          
+          <button id="finish-btn" class="w-full py-3 bg-emerald-500 hover:bg-emerald-600 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 disabled:cursor-not-allowed text-white font-medium rounded-xl transition-colors">
+            See My Results
+          </button>
+        </div>
+
+        <div id="results-screen" class="hidden space-y-8">
+          <div class="text-center space-y-2">
+            <h2 class="text-2xl font-bold">Here's what I learned about you</h2>
+            <p class="text-zinc-600 dark:text-zinc-400">This is what your AI partner will know.</p>
+          </div>
+          
+          <div id="patterns-summary" class="space-y-4"></div>
+          
+          <div class="bg-zinc-100 dark:bg-zinc-900 rounded-2xl p-6 space-y-4">
+            <h3 class="font-semibold">Your Challenge Style</h3>
+            <p id="challenge-style-text" class="text-zinc-600 dark:text-zinc-400"></p>
+            <div class="pt-2">
+              <p class="text-sm text-zinc-500">Your AI will avoid:</p>
+              <p id="shutdown-phrase" class="text-sm font-medium mt-1"></p>
+            </div>
+          </div>
+          
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <h3 class="font-semibold">SOUL.md</h3>
+                <button class="copy-btn text-sm text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300" data-target="soul-preview">Copy</button>
+              </div>
+              <textarea id="soul-preview" class="w-full h-64 p-4 bg-zinc-900 text-zinc-100 rounded-xl font-mono text-xs resize-none focus:outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
+            </div>
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <h3 class="font-semibold">USER.md</h3>
+                <button class="copy-btn text-sm text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300" data-target="user-preview">Copy</button>
+              </div>
+              <textarea id="user-preview" class="w-full h-64 p-4 bg-zinc-900 text-zinc-100 rounded-xl font-mono text-xs resize-none focus:outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
+            </div>
+          </div>
+          
+          <div class="flex flex-col items-center gap-4">
+            <button id="download-btn" class="px-8 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-xl transition-colors flex items-center gap-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+              </svg>
+              Download Both Files
+            </button>
+            <a href="/" class="text-sm text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300">Back to home</a>
+          </div>
+          
+          <div class="bg-emerald-500/10 rounded-2xl p-6 space-y-3">
+            <h3 class="font-semibold text-emerald-700 dark:text-emerald-400">Next Steps</h3>
+            <ol class="space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
+              <li>1. Download and save the files to your project</li>
+              <li>2. Run the install command if you haven't</li>
+              <li>3. Start a conversation and ask: <em>"What name do you prefer?"</em></li>
+            </ol>
+            <code class="block bg-zinc-900 text-emerald-400 p-3 rounded-lg text-xs mt-4 overflow-x-auto">
+              curl -fsSL https://raw.githubusercontent.com/lout33/ai-life-assistant/main/install.sh | bash
+            </code>
+          </div>
+        </div>
+        
+      </div>
+    </main>
+  </div>
+</Layout>
+
+<script>
+  const scenarios = [
+    {
+      id: "stuck_moment",
+      title: "The Stuck Moment",
+      question: "It's 2pm. You planned to finish something important by noon. What are you most likely doing right now?",
+      choices: [
+        {
+          id: "researching",
+          label: "Researching or learning more about it",
+          pattern: "research_loops",
+          followUp: {
+            question: "What specifically are you researching? Be honest.",
+            type: "text",
+            placeholder: "e.g., Looking at how others solved similar problems",
+            minChars: 10
+          }
+        },
+        {
+          id: "other_task",
+          label: "Working on something else that feels urgent",
+          pattern: "avoidance",
+          followUp: {
+            question: "What's that other task? And why does it feel more urgent?",
+            type: "text",
+            placeholder: "Be specific...",
+            minChars: 10
+          }
+        },
+        {
+          id: "break",
+          label: "Taking a break (social media, news, snacks)",
+          pattern: "avoidance",
+          followUp: {
+            question: "How long have you been on this 'break'?",
+            type: "choice",
+            choices: [
+              { id: "15min", label: "Less than 15 minutes" },
+              { id: "30min", label: "15-30 minutes" },
+              { id: "1hr", label: "30 min to 1 hour" },
+              { id: "more", label: "More than an hour", pattern: "avoidance" }
+            ]
+          }
+        },
+        {
+          id: "tweaking",
+          label: "Tweaking or polishing what I already have",
+          pattern: "perfectionism",
+          followUp: {
+            question: "What exactly are you tweaking? Be specific.",
+            type: "text",
+            placeholder: "e.g., Adjusting the colors, Rewriting the intro",
+            minChars: 10
+          }
+        },
+        {
+          id: "working",
+          label: "Still working on it, just slower than expected",
+          followUp: {
+            question: "What's slowing you down?",
+            type: "choice",
+            choices: [
+              { id: "hard", label: "It's harder than I thought" },
+              { id: "unclear", label: "I'm not sure what 'done' looks like", pattern: "analysis_paralysis" },
+              { id: "distracted", label: "Keep getting distracted", pattern: "avoidance" },
+              { id: "perfectionism", label: "Want to get it right", pattern: "perfectionism" }
+            ]
+          }
+        }
+      ],
+      getInsight: function(choiceId) {
+        const insights = {
+          researching: "Research loops. You use learning as productive procrastination.",
+          other_task: "Task switching. You escape to 'urgent' things when the real task is hard.",
+          break: "Break drift. Short breaks expand when the task feels heavy.",
+          tweaking: "Perfectionism. You polish instead of ship when you're unsure.",
+          working: "Good sign you're still engaged, but something's creating friction."
+        };
+        return insights[choiceId] || "";
+      },
+      getBridge: function(choiceId) {
+        const bridges = {
+          researching: "Your AI can notice when you've been 'researching' for hours and ask: 'Do you have enough to start? What's actually unclear?'",
+          other_task: "Your AI can call this out: 'You switched tasks. What's hard about the original one?'",
+          break: "Your AI can check in: 'Break started 45 min ago. Ready to re-engage, or do you need to talk about what's blocking you?'",
+          tweaking: "Your AI can push: 'This was done yesterday. What are you afraid they'll say?'",
+          working: "Your AI can help identify the friction and clear it."
+        };
+        return bridges[choiceId] || "";
+      }
+    },
+    {
+      id: "feedback_moment",
+      title: "The Feedback Moment",
+      question: "Someone gives you critical feedback on your work. What's your gut reaction?",
+      choices: [
+        {
+          id: "defend",
+          label: "Defend or explain why I did it that way",
+          pattern: "defensiveness",
+          followUp: {
+            question: "What do you usually say when defending?",
+            type: "text",
+            placeholder: "e.g., Well, I did it this way because...",
+            minChars: 10
+          }
+        },
+        {
+          id: "agree_bad",
+          label: "Immediately agree and feel bad about myself",
+          pattern: "harsh_self_critic",
+          followUp: {
+            question: "What does your inner voice say in that moment?",
+            type: "text",
+            placeholder: "e.g., I knew this wasn't good enough",
+            minChars: 10
+          }
+        },
+        {
+          id: "quiet",
+          label: "Get quiet and process internally",
+          followUp: {
+            question: "Do you usually come back with a response later, or let it go?",
+            type: "choice",
+            choices: [
+              { id: "comeback", label: "Come back with thoughts later" },
+              { id: "letgo", label: "Usually let it go" },
+              { id: "depends", label: "Depends on who gave the feedback" }
+            ]
+          }
+        },
+        {
+          id: "clarify",
+          label: "Ask clarifying questions",
+          followUp: {
+            question: "What kind of questions do you ask?",
+            type: "text",
+            placeholder: "e.g., Can you give me a specific example?",
+            minChars: 10
+          }
+        },
+        {
+          id: "dismiss",
+          label: "Dismiss it internally but say 'thanks'",
+          pattern: "dismissive",
+          followUp: {
+            question: "What makes you dismiss feedback?",
+            type: "choice",
+            choices: [
+              { id: "source", label: "Don't trust the source" },
+              { id: "wrong", label: "I know they're wrong" },
+              { id: "protection", label: "It's easier than engaging", pattern: "avoidance" }
+            ]
+          }
+        }
+      ],
+      getInsight: function(choiceId) {
+        const insights = {
+          defend: "Defensive reflex. You protect your work before processing the feedback.",
+          agree_bad: "Harsh inner critic. You absorb criticism deeply, sometimes too deeply.",
+          quiet: "Internal processor. You need space before responding.",
+          clarify: "Curious receiver. You want to understand before reacting.",
+          dismiss: "Protective dismissal. Feedback feels threatening."
+        };
+        return insights[choiceId] || "";
+      },
+      getBridge: function(choiceId) {
+        const bridges = {
+          defend: "Your AI will give feedback differently: facts first, then ask what you think, rather than leading with criticism.",
+          agree_bad: "Your AI will balance challenges with recognition. It won't pile on.",
+          quiet: "Your AI can give you space: share observations, then check in later.",
+          clarify: "Your AI can lead with specifics and examples, matching your style.",
+          dismiss: "Your AI will earn trust by being right more often than wrong."
+        };
+        return bridges[choiceId] || "";
+      }
+    },
+    {
+      id: "delayed_task",
+      title: "The Delayed Task",
+      question: "Think of something you've been meaning to do for over a month but haven't. What is it?",
+      choices: [
+        {
+          id: "text_input",
+          label: "_text_",
+          followUp: {
+            question: "What's actually stopping you?",
+            type: "choice",
+            choices: [
+              { id: "start", label: "Not sure where to start", pattern: "analysis_paralysis" },
+              { id: "moment", label: "Waiting for the right moment", pattern: "perfectionism" },
+              { id: "priority", label: "Other things keep taking priority", pattern: "avoidance" },
+              { id: "afraid", label: "Afraid it won't turn out well", pattern: "fear_of_failure" },
+              { id: "want", label: "Honestly, I don't really want to do it" }
+            ]
+          }
+        }
+      ],
+      getInsight: function(choiceId, followUpAnswer) {
+        const insights = {
+          start: "Clarity blocker. The first step feels unclear, so you wait.",
+          moment: "Perfect moment fallacy. The right time rarely comes on its own.",
+          priority: "Priority shuffle. Important but not urgent keeps losing.",
+          afraid: "Fear of outcome. You'd rather not try than try and fail.",
+          want: "Honest clarity. Sometimes the answer is to drop it."
+        };
+        return insights[followUpAnswer || choiceId] || "";
+      },
+      getBridge: function(choiceId) {
+        const bridges = {
+          start: "Your AI can break it down: 'What's the smallest first step you could do in 5 minutes?'",
+          moment: "Your AI can push: 'The right moment is now. What would good enough look like?'",
+          priority: "Your AI can protect this task: 'This has been on your list for 6 weeks. Today?'",
+          afraid: "Your AI can reframe: 'What's the worst realistic outcome? Can you survive that?'",
+          want: "Your AI can help you drop things guilt-free: 'Is this actually important, or just lingering?'"
+        };
+        return bridges[choiceId] || "";
+      }
+    },
+    {
+      id: "energy_moment",
+      title: "The Energy Moment",
+      question: "When do you feel most alive and energized at work?",
+      choices: [
+        {
+          id: "starting",
+          label: "Starting something new",
+          pattern: "starter",
+          followUp: {
+            question: "What's exciting about the start?",
+            type: "text",
+            placeholder: "e.g., The possibilities, no constraints yet",
+            minChars: 10
+          }
+        },
+        {
+          id: "finishing",
+          label: "Finishing and shipping something",
+          pattern: "finisher",
+          followUp: {
+            question: "Describe how shipping feels.",
+            type: "text",
+            placeholder: "e.g., Relief, pride, finally done",
+            minChars: 10
+          }
+        },
+        {
+          id: "solving",
+          label: "Solving a hard problem",
+          pattern: "problem_solver",
+          followUp: {
+            question: "What kind of problems grab you?",
+            type: "text",
+            placeholder: "e.g., Technical puzzles, People problems",
+            minChars: 10
+          }
+        },
+        {
+          id: "helping",
+          label: "Helping someone else succeed",
+          pattern: "helper",
+          followUp: {
+            question: "Who do you most like helping?",
+            type: "text",
+            placeholder: "e.g., Junior devs, Teammates stuck on problems",
+            minChars: 10
+          }
+        },
+        {
+          id: "learning",
+          label: "Learning something new",
+          pattern: "learner",
+          followUp: {
+            question: "What are you learning right now?",
+            type: "text",
+            placeholder: "e.g., Rust, How to manage people",
+            minChars: 10
+          }
+        }
+      ],
+      getInsight: function(choiceId) {
+        const insights = {
+          starting: "Starter energy. You love the blank canvas and possibilities.",
+          finishing: "Finisher energy. You live for the moment it's done and out.",
+          solving: "Problem solver. The puzzle is the reward.",
+          helping: "Helper energy. Impact through others energizes you.",
+          learning: "Learner energy. Growth and novelty drive you."
+        };
+        return insights[choiceId] || "";
+      },
+      getBridge: function(choiceId) {
+        const bridges = {
+          starting: "Your AI can help you finish what you start, since that's where you lose steam.",
+          finishing: "Your AI can help you push through the messy middle to get to the finish line you love.",
+          solving: "Your AI can frame tasks as puzzles and challenges to engage your problem-solving drive.",
+          helping: "Your AI can remind you to help yourself too, not just others.",
+          learning: "Your AI can balance learning with doing, so learning doesn't become avoidance."
+        };
+        return bridges[choiceId] || "";
+      }
+    },
+    {
+      id: "challenge_style",
+      title: "The Challenge Style",
+      question: "Imagine your AI notices you're avoiding the hard task. Which response would actually work on you?",
+      choices: [
+        {
+          id: "direct",
+          label: "\"You're avoiding this. What's the real blocker?\"",
+          followUp: {
+            question: "What phrase would shut you down? (Your AI will avoid this)",
+            type: "text",
+            placeholder: "e.g., Why haven't you done this yet?",
+            minChars: 5
+          }
+        },
+        {
+          id: "gentle",
+          label: "\"I notice you've been on other tasks. Want to talk about it?\"",
+          followUp: {
+            question: "What phrase would shut you down?",
+            type: "text",
+            placeholder: "e.g., You should just do it",
+            minChars: 5
+          }
+        },
+        {
+          id: "deadline",
+          label: "\"The deadline is in 2 days. What needs to happen today?\"",
+          followUp: {
+            question: "What phrase would shut you down?",
+            type: "text",
+            placeholder: "e.g., You're running out of time",
+            minChars: 5
+          }
+        },
+        {
+          id: "reframe",
+          label: "\"You've done harder things. What would good enough look like?\"",
+          followUp: {
+            question: "What phrase would shut you down?",
+            type: "text",
+            placeholder: "e.g., It's not that hard",
+            minChars: 5
+          }
+        }
+      ],
+      getInsight: function(choiceId) {
+        const insights = {
+          direct: "Direct accountability. You respond to clear, no-BS callouts.",
+          gentle: "Gentle inquiry. You need space to process, not pressure.",
+          deadline: "Deadline-driven. External constraints focus you.",
+          reframe: "Perspective shifts. Reframing helps more than pushing."
+        };
+        return insights[choiceId] || "";
+      },
+      getBridge: function(choiceId) {
+        const bridges = {
+          direct: "Your AI will be direct when it matters, cutting through avoidance.",
+          gentle: "Your AI will invite reflection rather than demand action.",
+          deadline: "Your AI will use time and deadlines to create helpful pressure.",
+          reframe: "Your AI will help you see things differently when you're stuck."
+        };
+        return bridges[choiceId] || "";
+      }
+    }
+  ];
+
+  const patternDescriptions = {
+    research_loops: {
+      name: "Research Loops",
+      description: "You use learning as productive procrastination. When unsure, you research instead of starting."
+    },
+    perfectionism: {
+      name: "Perfectionism",
+      description: "You polish instead of ship. 'Almost ready' can last for days."
+    },
+    avoidance: {
+      name: "Avoidance",
+      description: "You escape to easier tasks when the real task feels hard or uncertain."
+    },
+    analysis_paralysis: {
+      name: "Analysis Paralysis",
+      description: "You wait for clarity that won't come. The first step feels impossible."
+    },
+    fear_of_failure: {
+      name: "Fear of Failure",
+      description: "You'd rather not try than try and fail. The stakes feel too high."
+    },
+    defensiveness: {
+      name: "Defensiveness",
+      description: "You protect your work before processing feedback. Explanation before reflection."
+    },
+    harsh_self_critic: {
+      name: "Harsh Self-Critic",
+      description: "You absorb criticism deeply, sometimes too deeply. Your inner voice is tough."
+    },
+    starter: {
+      name: "Starter Energy",
+      description: "You love beginnings and possibilities. Finishing is where you lose steam."
+    },
+    finisher: {
+      name: "Finisher Energy",
+      description: "You live for completion. The messy middle is the challenge."
+    },
+    problem_solver: {
+      name: "Problem Solver",
+      description: "The puzzle is the reward. You engage deeply with hard problems."
+    },
+    learner: {
+      name: "Learner",
+      description: "Growth and novelty drive you. Watch that learning doesn't become avoidance."
+    }
+  };
+
+  const state = {
+    currentScenario: 0,
+    currentPhase: 'question',
+    selectedChoice: null,
+    followUpAnswer: null,
+    patterns: {},
+    answers: {},
+    name: '',
+    shutdownPhrase: ''
+  };
+
+  const welcomeScreen = document.getElementById('welcome-screen');
+  const scenarioScreen = document.getElementById('scenario-screen');
+  const nameScreen = document.getElementById('name-screen');
+  const resultsScreen = document.getElementById('results-screen');
+  const progressContainer = document.getElementById('progress-container');
+  const progressBar = document.getElementById('progress-bar');
+  const stepCounter = document.getElementById('step-counter');
+  
+  const scenarioTitle = document.getElementById('scenario-title');
+  const scenarioQuestion = document.getElementById('scenario-question');
+  const choicesContainer = document.getElementById('choices-container');
+  const textInputContainer = document.getElementById('text-input-container');
+  const textInput = document.getElementById('text-input');
+  const charCount = document.getElementById('char-count');
+  const submitTextBtn = document.getElementById('submit-text');
+  const insightContainer = document.getElementById('insight-container');
+  const insightText = document.getElementById('insight-text');
+  const bridgeText = document.getElementById('bridge-text');
+  const continueBtn = document.getElementById('continue-btn');
+
+  function showScreen(screen) {
+    welcomeScreen.classList.add('hidden');
+    scenarioScreen.classList.add('hidden');
+    nameScreen.classList.add('hidden');
+    resultsScreen.classList.add('hidden');
+    screen.classList.remove('hidden');
+  }
+
+  function updateProgress() {
+    const percent = ((state.currentScenario + 1) / scenarios.length) * 100;
+    progressBar.style.width = `${percent}%`;
+    stepCounter.textContent = `${state.currentScenario + 1}/${scenarios.length}`;
+  }
+
+  function addPattern(pattern) {
+    if (pattern) {
+      state.patterns[pattern] = (state.patterns[pattern] || 0) + 1;
+    }
+  }
+
+  function showScenario() {
+    const scenario = scenarios[state.currentScenario];
+    state.currentPhase = 'question';
+    state.selectedChoice = null;
+    state.followUpAnswer = null;
+    
+    scenarioTitle.textContent = scenario.title;
+    scenarioQuestion.textContent = scenario.question;
+    
+    choicesContainer.innerHTML = '';
+    textInputContainer.classList.add('hidden');
+    insightContainer.classList.add('hidden');
+    
+    if (scenario.id === 'delayed_task') {
+      textInputContainer.classList.remove('hidden');
+      textInput.value = '';
+      textInput.placeholder = 'e.g., "Update my resume", "Start that side project"';
+      charCount.textContent = '10+ characters';
+      submitTextBtn.disabled = true;
+      
+      textInput.oninput = () => {
+        const len = textInput.value.trim().length;
+        charCount.textContent = len < 10 ? `${10 - len} more characters needed` : 'Good';
+        charCount.className = len < 10 ? 'text-sm text-amber-500' : 'text-sm text-emerald-500';
+        submitTextBtn.disabled = len < 10;
+      };
+      
+      submitTextBtn.onclick = () => {
+        state.answers.delayedTask = textInput.value.trim();
+        showFollowUp(scenario.choices[0].followUp);
+      };
+    } else {
+      scenario.choices.forEach(choice => {
+        const btn = document.createElement('button');
+        btn.className = 'choice-btn w-full px-4 py-4 text-left bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl hover:border-emerald-500 hover:bg-emerald-500/5 transition-all';
+        btn.innerHTML = `<span class="text-sm md:text-base">${choice.label}</span>`;
+        btn.onclick = () => handleChoice(choice);
+        choicesContainer.appendChild(btn);
+      });
+    }
+    
+    updateProgress();
+  }
+
+  function handleChoice(choice) {
+    state.selectedChoice = choice;
+    if (choice.pattern) addPattern(choice.pattern);
+    
+    document.querySelectorAll('.choice-btn').forEach(btn => {
+      btn.classList.remove('border-emerald-500', 'bg-emerald-500/10');
+    });
+    event.target.closest('.choice-btn').classList.add('border-emerald-500', 'bg-emerald-500/10');
+    
+    setTimeout(() => {
+      if (choice.followUp) {
+        showFollowUp(choice.followUp);
+      } else {
+        showInsight();
+      }
+    }, 300);
+  }
+
+  function showFollowUp(followUp) {
+    state.currentPhase = 'followup';
+    scenarioQuestion.textContent = followUp.question;
+    choicesContainer.innerHTML = '';
+    
+    if (followUp.type === 'text') {
+      textInputContainer.classList.remove('hidden');
+      textInput.value = '';
+      textInput.placeholder = followUp.placeholder || 'Type your answer...';
+      const minChars = followUp.minChars || 10;
+      charCount.textContent = `${minChars}+ characters`;
+      submitTextBtn.disabled = true;
+      
+      textInput.oninput = () => {
+        const len = textInput.value.trim().length;
+        charCount.textContent = len < minChars ? `${minChars - len} more characters needed` : 'Good';
+        charCount.className = len < minChars ? 'text-sm text-amber-500' : 'text-sm text-emerald-500';
+        submitTextBtn.disabled = len < minChars;
+      };
+      
+      submitTextBtn.onclick = () => {
+        state.followUpAnswer = textInput.value.trim();
+        
+        if (scenarios[state.currentScenario].id === 'challenge_style') {
+          state.shutdownPhrase = state.followUpAnswer;
+        }
+        
+        showInsight();
+      };
+      
+      textInput.focus();
+    } else if (followUp.type === 'choice') {
+      textInputContainer.classList.add('hidden');
+      followUp.choices.forEach(choice => {
+        const btn = document.createElement('button');
+        btn.className = 'choice-btn w-full px-4 py-4 text-left bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl hover:border-emerald-500 hover:bg-emerald-500/5 transition-all';
+        btn.innerHTML = `<span class="text-sm md:text-base">${choice.label}</span>`;
+        btn.onclick = () => {
+          if (choice.pattern) addPattern(choice.pattern);
+          state.followUpAnswer = choice.id;
+          
+          setTimeout(() => showInsight(), 300);
+        };
+        choicesContainer.appendChild(btn);
+      });
+    }
+  }
+
+  function showInsight() {
+    state.currentPhase = 'insight';
+    const scenario = scenarios[state.currentScenario];
+    
+    choicesContainer.innerHTML = '';
+    textInputContainer.classList.add('hidden');
+    scenarioQuestion.textContent = '';
+    
+    const choiceId = state.selectedChoice?.id || state.followUpAnswer;
+    const insight = scenario.getInsight ? scenario.getInsight(choiceId, state.followUpAnswer) : "";
+    const bridge = scenario.getBridge ? scenario.getBridge(state.followUpAnswer || choiceId) : "";
+    
+    if (insight || bridge) {
+      insightContainer.classList.remove('hidden');
+      insightText.textContent = insight;
+      bridgeText.textContent = bridge;
+    } else {
+      nextScenario();
+      return;
+    }
+  }
+
+  function nextScenario() {
+    state.currentScenario++;
+    
+    if (state.currentScenario >= scenarios.length) {
+      showScreen(nameScreen);
+      progressContainer.classList.add('hidden');
+      document.getElementById('name-input').focus();
+    } else {
+      showScenario();
+    }
+  }
+
+  function generateFiles() {
+    const topPatterns = Object.entries(state.patterns)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 3)
+      .map(([key]) => key);
+    
+    const challengeChoice = state.answers.challengeStyle || 'direct';
+    const challengeMap = {
+      direct: 'Direct and blunt. Call out patterns immediately.',
+      gentle: 'Gentle inquiry. Invite reflection, not pressure.',
+      deadline: 'Deadline-driven. Use time constraints to focus.',
+      reframe: 'Perspective shifts. Help see things differently.'
+    };
+    
+    let soulMd = `# SOUL.md - Agent Identity
+
+## Who I Am
+
+I am your AI partner, a symbiotic agent, not a chatbot.
+Ask me what name I prefer, or give me one yourself.
+
+## How I Operate
+
+- **Challenge style:** ${challengeMap[challengeChoice] || challengeMap.direct}
+- **Communication:** Direct but supportive. No fluff.
+- **Autonomy:** Act on small things, ask on big decisions.
+
+## Rules
+
+- Never say: "${state.shutdownPhrase || "Why haven't you done this yet?"}"
+- When I notice avoidance, address the real blocker, not the symptom
+- Balance challenge with recognition
+
+## Patterns to Watch
+
+${topPatterns.map(p => `- ${patternDescriptions[p]?.name || p}: ${patternDescriptions[p]?.description || ''}`).join('\n')}
+`;
+
+    let userMd = `# USER.md - ${state.name || 'Your Name'}
+
+## Psychology
+
+### Main Patterns
+
+${topPatterns.map(p => `- **${patternDescriptions[p]?.name || p}:** ${patternDescriptions[p]?.description || ''}`).join('\n')}
+
+### What Shuts Me Down
+
+- "${state.shutdownPhrase || "Why haven't you done this yet?"}"
+
+${state.answers.delayedTask ? `### Currently Avoiding
+
+- ${state.answers.delayedTask}
+` : ''}
+
+## Work Style
+
+### Challenge Preference
+
+${challengeMap[challengeChoice] || 'Direct accountability.'}
+
+## Notes
+
+Generated via Symbiotic Discover on ${new Date().toLocaleDateString()}
+`;
+
+    return { soulMd, userMd, topPatterns };
+  }
+
+  function showResults() {
+    const { soulMd, userMd, topPatterns } = generateFiles();
+    
+    const patternsSummary = document.getElementById('patterns-summary');
+    patternsSummary.innerHTML = topPatterns.map(p => `
+      <div class="bg-zinc-100 dark:bg-zinc-900 rounded-2xl p-5">
+        <h3 class="font-semibold text-amber-600 dark:text-amber-400">${patternDescriptions[p]?.name || p}</h3>
+        <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-1">${patternDescriptions[p]?.description || ''}</p>
+      </div>
+    `).join('');
+    
+    const challengeChoice = state.answers.challengeStyle || 'direct';
+    const challengeTexts = {
+      direct: 'Direct accountability works for you. Your AI will be clear and no-BS when calling out patterns.',
+      gentle: 'Gentle inquiry works for you. Your AI will invite reflection rather than pressure.',
+      deadline: 'Deadline pressure focuses you. Your AI will use time constraints strategically.',
+      reframe: "Perspective shifts help you. Your AI will reframe problems when you're stuck."
+    };
+    document.getElementById('challenge-style-text').textContent = challengeTexts[challengeChoice] || challengeTexts.direct;
+    document.getElementById('shutdown-phrase').textContent = '"' + (state.shutdownPhrase || "Why haven't you done this yet?") + '"';
+    
+    document.getElementById('soul-preview').value = soulMd;
+    document.getElementById('user-preview').value = userMd;
+    
+    showScreen(resultsScreen);
+  }
+
+  document.getElementById('start-btn').addEventListener('click', () => {
+    showScreen(scenarioScreen);
+    progressContainer.classList.remove('hidden');
+    showScenario();
+  });
+
+  continueBtn.addEventListener('click', nextScenario);
+
+  document.getElementById('finish-btn').addEventListener('click', () => {
+    state.name = document.getElementById('name-input').value.trim() || 'User';
+    showResults();
+  });
+
+  document.getElementById('name-input').addEventListener('input', (e) => {
+    document.getElementById('finish-btn').disabled = e.target.value.trim().length === 0;
+  });
+  document.getElementById('finish-btn').disabled = true;
+
+  document.getElementById('download-btn').addEventListener('click', () => {
+    const soulContent = document.getElementById('soul-preview').value;
+    const userContent = document.getElementById('user-preview').value;
+    
+    const downloadFile = (content, filename) => {
+      const blob = new Blob([content], { type: 'text/markdown' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    };
+    
+    downloadFile(soulContent, 'SOUL.md');
+    setTimeout(() => downloadFile(userContent, 'USER.md'), 100);
+  });
+
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = document.getElementById(btn.dataset.target);
+      navigator.clipboard.writeText(target.value);
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 2000);
+    });
+  });
+
+  scenarios.forEach((s) => {
+    if (s.id === "challenge_style") {
+      const originalGetInsight = s.getInsight;
+      s.getInsight = (choiceId, followUp) => {
+        state.answers.challengeStyle = choiceId;
+        return originalGetInsight ? originalGetInsight(choiceId, followUp) : "";
+      };
+    }
+  });
+</script>
