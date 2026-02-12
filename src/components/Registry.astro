@@ -1,92 +1,161 @@
 ---
-const categories = [
-  {
-    icon: '📄',
-    title: 'Templates',
-    description: 'AGENTS.md configs for different personas',
-    items: ['Founder', 'Developer', 'Creator', 'Student'],
-    color: 'emerald',
-    comingSoon: false
-  },
-  {
-    icon: '⚡',
-    title: 'Commands',
-    description: 'Daily rituals and workflows',
-    items: ['/start-day', '/check-day', '/end-day', '/reflect'],
-    color: 'blue',
-    comingSoon: false
-  },
-  {
-    icon: '🔌',
-    title: 'Skills',
-    description: 'Extend your agent\'s capabilities',
-    items: ['Web Search', 'Screen Tracker', 'Writing Style', 'Image Gen'],
-    color: 'purple',
-    comingSoon: true
-  },
-  {
-    icon: '🛠️',
-    title: 'Setups',
-    description: 'Complete workflows from real people',
-    items: ['Life OS', 'Memory Bank', 'File Planning', 'Claude Squad'],
-    color: 'orange',
-    comingSoon: false
-  },
-  {
-    icon: '📚',
-    title: 'Resources',
-    description: 'Tools and projects in the ecosystem',
-    items: ['Life OS Tools', 'Second Brain', 'Memory Infra', 'AI Coaches'],
-    color: 'pink',
-    comingSoon: false
+// Fetch GitHub repo data at build time
+async function fetchRepo(owner: string, repo: string) {
+  try {
+    const res = await fetch(`https://api.github.com/repos/${owner}/${repo}`, {
+      headers: {
+        'Accept': 'application/vnd.github.v3+json',
+        'User-Agent': 'personal-ai-hub'
+      }
+    });
+    if (!res.ok) return null;
+    return await res.json();
+  } catch {
+    return null;
   }
+}
+
+// Fetch commands from ai-life-assistant repo
+async function fetchCommands(owner: string, repo: string) {
+  try {
+    const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/commands`, {
+      headers: {
+        'Accept': 'application/vnd.github.v3+json',
+        'User-Agent': 'personal-ai-hub'
+      }
+    });
+    if (!res.ok) return [];
+    const files = await res.json();
+    return files
+      .filter((f: any) => f.name.endsWith('.md') && f.name !== 'README.md')
+      .map((f: any) => ({
+        name: '/' + f.name.replace('.md', ''),
+        url: f.html_url
+      }));
+  } catch {
+    return [];
+  }
+}
+
+const repos = [
+  { owner: 'lout33', repo: 'ai-life-assistant', type: 'core' },
+  { owner: 'lout33', repo: 'what-did-i-do', type: 'skill' },
+  { owner: 'lout33', repo: 'writing-style-skill', type: 'skill' },
 ];
 
-const colorMap: Record<string, string> = {
-  emerald: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400',
-  blue: 'bg-blue-500/10 text-blue-600 dark:text-blue-400',
-  purple: 'bg-purple-500/10 text-purple-600 dark:text-purple-400',
-  orange: 'bg-orange-500/10 text-orange-600 dark:text-orange-400',
-  pink: 'bg-pink-500/10 text-pink-600 dark:text-pink-400'
-};
+const repoData = await Promise.all(
+  repos.map(async ({ owner, repo, type }) => {
+    const data = await fetchRepo(owner, repo);
+    return data ? {
+      name: repo,
+      description: data.description,
+      stars: data.stargazers_count,
+      url: data.html_url,
+      type,
+      language: data.language,
+      updatedAt: data.updated_at
+    } : null;
+  })
+);
+
+const projects = repoData.filter(Boolean);
+const coreProject = projects.find(p => p?.type === 'core');
+const skills = projects.filter(p => p?.type === 'skill');
+
+const commands = await fetchCommands('lout33', 'ai-life-assistant');
+
+// Core files from the 4-file system
+const coreFiles = [
+  { name: 'AGENTS.md', desc: 'Operations & rules' },
+  { name: 'SOUL.md', desc: 'Agent personality' },
+  { name: 'USER.md', desc: 'Your profile' },
+  { name: 'NOW.md', desc: 'Current state' },
+];
 ---
 
 <section id="registry" class="py-20 px-6">
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-16">
-      <h2 class="text-3xl font-bold mb-4">The Registry</h2>
+      <h2 class="text-3xl font-bold mb-4">The Ecosystem</h2>
       <p class="text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">
-        Browse community-contributed templates, skills, commands, and setups. Fork what you need, submit your own.
+        Core system, skills, and commands. All open source.
       </p>
     </div>
     
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {categories.map(cat => (
-        <div class="group p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors relative">
-          {cat.comingSoon && (
-            <div class="absolute top-4 right-4 px-2 py-0.5 rounded text-xs font-medium bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
-              Soon
+    <!-- Core Project -->
+    {coreProject && (
+      <div class="mb-12">
+        <h3 class="text-lg font-semibold mb-4 text-zinc-500">Core</h3>
+        <a href={coreProject.url} target="_blank" rel="noopener" 
+           class="block p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:border-emerald-500 dark:hover:border-emerald-500 transition-colors">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <h4 class="text-xl font-semibold">{coreProject.name}</h4>
+              <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-1">{coreProject.description}</p>
             </div>
-          )}
-          <div class={`w-12 h-12 rounded-xl ${colorMap[cat.color]} flex items-center justify-center text-2xl mb-4`}>
-            {cat.icon}
+            <div class="flex items-center gap-1 text-sm text-zinc-500">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+              {coreProject.stars}
+            </div>
           </div>
-          <h3 class="text-lg font-semibold mb-2">{cat.title}</h3>
-          <p class="text-sm text-zinc-600 dark:text-zinc-400 mb-4">{cat.description}</p>
           <div class="flex flex-wrap gap-2">
-            {cat.items.map(item => (
-              <span class="px-2 py-1 rounded-md bg-zinc-100 dark:bg-zinc-800 text-xs text-zinc-600 dark:text-zinc-400">
-                {item}
+            {coreFiles.map(file => (
+              <span class="px-2 py-1 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs">
+                {file.name}
               </span>
             ))}
           </div>
+        </a>
+      </div>
+    )}
+
+    <!-- Commands -->
+    {commands.length > 0 && (
+      <div class="mb-12">
+        <h3 class="text-lg font-semibold mb-4 text-zinc-500">Commands</h3>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {commands.map(cmd => (
+            <a href={cmd.url} target="_blank" rel="noopener"
+               class="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:border-blue-500 dark:hover:border-blue-500 transition-colors">
+              <span class="font-mono text-blue-600 dark:text-blue-400">{cmd.name}</span>
+            </a>
+          ))}
         </div>
-      ))}
-    </div>
-    
-    <div class="text-center mt-12">
-      <a href="https://github.com/lout33/ai-life-assistant" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-emerald-600 dark:text-emerald-400 hover:underline">
-        Browse full registry on GitHub
+      </div>
+    )}
+
+    <!-- Skills -->
+    {skills.length > 0 && (
+      <div class="mb-12">
+        <h3 class="text-lg font-semibold mb-4 text-zinc-500">Skills</h3>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {skills.map(skill => skill && (
+            <a href={skill.url} target="_blank" rel="noopener"
+               class="p-5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:border-purple-500 dark:hover:border-purple-500 transition-colors">
+              <div class="flex items-start justify-between">
+                <div>
+                  <h4 class="font-semibold">{skill.name}</h4>
+                  <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-1">{skill.description}</p>
+                </div>
+                <div class="flex items-center gap-1 text-sm text-zinc-500">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                  {skill.stars}
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <div class="text-center mt-8">
+      <a href="https://github.com/lout33/ai-life-assistant" target="_blank" rel="noopener" 
+         class="inline-flex items-center gap-2 text-emerald-600 dark:text-emerald-400 hover:underline">
+        View on GitHub
         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
         </svg>

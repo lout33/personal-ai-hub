@@ -1,12 +1,29 @@
 ---
+// Fetch star count at build time
+async function getStars() {
+  try {
+    const res = await fetch('https://api.github.com/repos/lout33/ai-life-assistant', {
+      headers: {
+        'Accept': 'application/vnd.github.v3+json',
+        'User-Agent': 'personal-ai-hub'
+      }
+    });
+    if (!res.ok) return 600;
+    const data = await res.json();
+    return data.stargazers_count || 600;
+  } catch {
+    return 600;
+  }
+}
 
+const stars = await getStars();
 ---
 
 <section class="pt-32 pb-20 px-6">
   <div class="max-w-4xl mx-auto text-center">
     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-sm font-medium mb-8">
       <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-      600+ stars on GitHub
+      {stars}+ stars on GitHub
     </div>
     
     <h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-6">
