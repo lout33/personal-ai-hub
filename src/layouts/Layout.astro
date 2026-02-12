@@ -4,23 +4,126 @@ import '../styles/global.css'
 interface Props {
   title: string;
   description?: string;
+  image?: string;
+  canonicalURL?: string;
 }
 
-const { title, description = "The hub for personal AI integration. Templates, skills, and setups for symbiotic AI agents." } = Astro.props;
+const { 
+  title, 
+  description = "The hub for personal AI integration. Templates, skills, and setups for symbiotic AI agents that remember, challenge, and execute alongside you.",
+  image = "/og-image.svg",
+  canonicalURL = "https://symbiotic.dev"
+} = Astro.props;
+
+const siteName = "Symbiotic";
+const twitterHandle = "@lout33_lout332";
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={description} />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Primary Meta Tags -->
     <title>{title}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="author" content="Luis (@lout33)" />
+    <meta name="keywords" content="AI assistant, personal AI, Claude, symbiotic AI, AI life assistant, AI memory, AI templates, productivity, life management, AGENTS.md, opencode" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${canonicalURL}${image}`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${canonicalURL}${image}`} />
+    <meta name="twitter:creator" content={twitterHandle} />
+    <meta name="twitter:site" content={twitterHandle} />
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/icon-192.svg" />
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#18181b" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="color-scheme" content="light dark" />
+    
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- Generator -->
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Symbiotic",
+        "alternateName": "Personal AI Hub",
+        "url": "https://symbiotic.dev",
+        "description": "Templates, skills, and setups for symbiotic AI agents that remember, challenge, and execute alongside you.",
+        "author": {
+          "@type": "Person",
+          "name": "Luis",
+          "url": "https://x.com/lout33_lout332"
+        },
+        "publisher": {
+          "@type": "Person",
+          "name": "Luis"
+        },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://github.com/lout33/ai-life-assistant/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+    
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "AI Life Assistant",
+        "operatingSystem": "Cross-platform",
+        "applicationCategory": "DeveloperApplication",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "description": "A 4-file system for deep AI integration. AGENTS.md for operations, SOUL.md for personality, USER.md for your profile, NOW.md for current state.",
+        "url": "https://github.com/lout33/ai-life-assistant",
+        "downloadUrl": "https://github.com/lout33/ai-life-assistant",
+        "softwareVersion": "1.0",
+        "author": {
+          "@type": "Person",
+          "name": "Luis"
+        }
+      }
+    </script>
+    
+    <!-- Theme Detection Script (runs before page renders to prevent flash) -->
     <script is:inline>
       const theme = (() => {
         if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
