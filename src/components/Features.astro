@@ -1,0 +1,40 @@
+---
+const features = [
+  {
+    icon: '🧠',
+    title: 'Memory',
+    description: 'Persistent context across all sessions. The agent remembers your goals, patterns, and history.'
+  },
+  {
+    icon: '⚡',
+    title: 'Challenge',
+    description: 'Not a yes-machine. Calls out your patterns, quotes your words back, holds you accountable.'
+  },
+  {
+    icon: '🔧',
+    title: 'Acts',
+    description: 'Not just chat. Writes code, searches, creates files, executes. Operates alongside you.'
+  }
+];
+---
+
+<section id="features" class="py-20 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl font-bold mb-4">What makes it different</h2>
+      <p class="text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">
+        Not a chatbot. A symbiotic agent that lives in your filesystem, sees patterns you miss, and operates with you.
+      </p>
+    </div>
+    
+    <div class="grid md:grid-cols-3 gap-8">
+      {features.map(feature => (
+        <div class="p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+          <div class="text-4xl mb-4">{feature.icon}</div>
+          <h3 class="text-xl font-semibold mb-2">{feature.title}</h3>
+          <p class="text-zinc-600 dark:text-zinc-400">{feature.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,96 @@
+---
+const categories = [
+  {
+    icon: '📄',
+    title: 'Templates',
+    description: 'AGENTS.md configs for different personas',
+    items: ['Founder', 'Developer', 'Creator', 'Student'],
+    color: 'emerald',
+    comingSoon: false
+  },
+  {
+    icon: '⚡',
+    title: 'Commands',
+    description: 'Daily rituals and workflows',
+    items: ['/start-day', '/check-day', '/end-day', '/reflect'],
+    color: 'blue',
+    comingSoon: false
+  },
+  {
+    icon: '🔌',
+    title: 'Skills',
+    description: 'Extend your agent\'s capabilities',
+    items: ['Web Search', 'Screen Tracker', 'Writing Style', 'Image Gen'],
+    color: 'purple',
+    comingSoon: true
+  },
+  {
+    icon: '🛠️',
+    title: 'Setups',
+    description: 'Complete workflows from real people',
+    items: ['Life OS', 'Memory Bank', 'File Planning', 'Claude Squad'],
+    color: 'orange',
+    comingSoon: false
+  },
+  {
+    icon: '📚',
+    title: 'Resources',
+    description: 'Tools and projects in the ecosystem',
+    items: ['Life OS Tools', 'Second Brain', 'Memory Infra', 'AI Coaches'],
+    color: 'pink',
+    comingSoon: false
+  }
+];
+
+const colorMap: Record<string, string> = {
+  emerald: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400',
+  blue: 'bg-blue-500/10 text-blue-600 dark:text-blue-400',
+  purple: 'bg-purple-500/10 text-purple-600 dark:text-purple-400',
+  orange: 'bg-orange-500/10 text-orange-600 dark:text-orange-400',
+  pink: 'bg-pink-500/10 text-pink-600 dark:text-pink-400'
+};
+---
+
+<section id="registry" class="py-20 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl font-bold mb-4">The Registry</h2>
+      <p class="text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">
+        Browse community-contributed templates, skills, commands, and setups. Fork what you need, submit your own.
+      </p>
+    </div>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {categories.map(cat => (
+        <div class="group p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors relative">
+          {cat.comingSoon && (
+            <div class="absolute top-4 right-4 px-2 py-0.5 rounded text-xs font-medium bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
+              Soon
+            </div>
+          )}
+          <div class={`w-12 h-12 rounded-xl ${colorMap[cat.color]} flex items-center justify-center text-2xl mb-4`}>
+            {cat.icon}
+          </div>
+          <h3 class="text-lg font-semibold mb-2">{cat.title}</h3>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400 mb-4">{cat.description}</p>
+          <div class="flex flex-wrap gap-2">
+            {cat.items.map(item => (
+              <span class="px-2 py-1 rounded-md bg-zinc-100 dark:bg-zinc-800 text-xs text-zinc-600 dark:text-zinc-400">
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <div class="text-center mt-12">
+      <a href="https://github.com/lout33/claude_life_assistant" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-emerald-600 dark:text-emerald-400 hover:underline">
+        Browse full registry on GitHub
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
