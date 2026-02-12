@@ -20,13 +20,7 @@ const templates = [
 2. Hit $5K MRR before runway runs out
 3. Build in public, document the journey
 
-## Stack
-
-Next.js | Supabase | Stripe | Vercel
-
 ## Psychology
-
-**Drivers:** Fear of going back to corporate, proving I can do this alone, freedom
 
 **Bugs:**
 1. Building features instead of talking to users
@@ -37,29 +31,7 @@ Next.js | Supabase | Stripe | Vercel
 **What works:**
 - Public deadlines (tweet it, can't back out)
 - User calls before building anything
-- Ship ugly, iterate fast
-- Morning deep work, afternoon calls/admin
-
-**What doesn't work:**
-- Working in isolation for weeks
-- Waiting until it's "ready"
-- Comparing to funded startups
-
----
-
-## Decision Test
-
-- Does this get me closer to 10 paying customers?
-- Am I building or avoiding?
-- Would I mass delete this code if users don't want it?
-
-## Work Blocks
-
-| Block | Time | Best For |
-|-------|------|----------|
-| Peak | 6am-10am | Building, deep work |
-| Flow | 10am-2pm | User calls, content |
-| Recovery | 2pm-6pm | Admin, planning |`
+- Ship ugly, iterate fast`
   },
   {
     id: 'developer',
@@ -81,46 +53,18 @@ Next.js | Supabase | Stripe | Vercel
 2. Ship 2 side projects that solve my own problems
 3. Contribute to open source I actually use
 
-## Stack
-
-TypeScript | React | Node.js | PostgreSQL | Docker
-
 ## Psychology
-
-**Drivers:** Technical mastery, respect from peers, building things that work
 
 **Bugs:**
 1. Tutorial hell - learning without shipping
-2. Over-engineering side projects (enterprise patterns for todo apps)
-3. Imposter syndrome - feeling "not ready" for senior roles
+2. Over-engineering side projects
+3. Imposter syndrome - feeling "not ready"
 4. Abandoning projects at 80% done
 
 **What works:**
 - Public commits (GitHub streak accountability)
 - Ship first, refactor later
-- Pair programming / code review
-- Learning by building, not watching
-
-**What doesn't work:**
-- Endless courses without projects
-- Waiting to "know enough" before applying
-- Working alone without feedback
-
----
-
-## Decision Test
-
-- Does this project solve a real problem I have?
-- Am I learning or procrastinating?
-- Would I use this if someone else built it?
-
-## Work Blocks
-
-| Block | Time | Best For |
-|-------|------|----------|
-| Peak | 8pm-12am | Side projects, deep focus |
-| Flow | Lunch break | Learning, reading |
-| Recovery | Weekends | Open source, exploration |`
+- Learning by building, not watching`
   },
   {
     id: 'creator',
@@ -140,49 +84,19 @@ TypeScript | React | Node.js | PostgreSQL | Docker
 
 1. Post consistently - 3x/week minimum
 2. Grow to 10K followers on main platform
-3. Launch first paid product (course/ebook/community)
-
-## Stack
-
-YouTube | Twitter/X | Notion | Descript | Canva
+3. Launch first paid product
 
 ## Psychology
-
-**Drivers:** Impact, creative expression, freedom from 9-5, being seen
 
 **Bugs:**
 1. Perfectionism - spending 10 hours on a 5-minute video
 2. Comparison - paralyzed by what others are doing
 3. Inconsistency - bursts of content then silence
-4. Avoiding monetization - feels "icky" to sell
 
 **What works:**
 - Batch creation (film 4 videos in one day)
 - Publishing schedule locked in calendar
-- Engaging with community daily (15 min max)
-- "Good enough" > perfect
-
-**What doesn't work:**
-- Editing while creating
-- Checking analytics obsessively
-- Waiting for inspiration
-- Copying others' style instead of finding own voice
-
----
-
-## Decision Test
-
-- Does this serve my audience or just my ego?
-- Would I make this if no one watched?
-- Is this sustainable long-term?
-
-## Work Blocks
-
-| Block | Time | Best For |
-|-------|------|----------|
-| Peak | 9am-12pm | Creating, filming, writing |
-| Flow | 2pm-5pm | Editing, scheduling |
-| Recovery | Evening | Engaging, consuming content |`
+- "Good enough" > perfect`
   },
   {
     id: 'student',
@@ -204,58 +118,28 @@ YouTube | Twitter/X | Notion | Descript | Canva
 2. Land first developer job (junior is fine)
 3. Build network in tech community
 
-## Stack
-
-Learning: Python | JavaScript | React | SQL
-
 ## Psychology
-
-**Drivers:** Better career, proving I can change, financial stability
 
 **Bugs:**
 1. Tutorial addiction - watching instead of doing
 2. Analysis paralysis - which language/framework to learn
 3. Feeling behind - comparing to CS grads
-4. Not shipping - afraid to show imperfect work
 
 **What works:**
-- Project-based learning (build first, learn concepts as needed)
+- Project-based learning
 - Study groups / accountability partners
-- Sharing progress publicly (even if small)
-- Time-boxing study sessions (2 hours max, then build)
-
-**What doesn't work:**
-- Trying to learn everything at once
-- Waiting to "finish learning" before building
-- Isolated studying without community
-- Ignoring networking until job search
-
----
-
-## Decision Test
-
-- Does this get me closer to a portfolio project?
-- Am I studying or procrastinating?
-- Can I explain what I learned to someone else?
-
-## Work Blocks
-
-| Block | Time | Best For |
-|-------|------|----------|
-| Peak | Morning | Learning new concepts |
-| Flow | Afternoon | Building projects |
-| Recovery | Evening | Community, networking |`
+- Sharing progress publicly (even if small)`
   }
 ];
 ---
 
-<section id="templates" class="py-24 px-6 bg-zinc-900 relative overflow-hidden">
-  <div class="absolute top-12 right-12 w-16 h-1 bg-zinc-800 rounded-full transform rotate-12"></div>
+<section id="templates" class="py-24 px-6 bg-zinc-200 dark:bg-zinc-900 relative overflow-hidden">
+  <div class="absolute top-12 right-12 w-16 h-1 bg-zinc-300 dark:bg-zinc-800 rounded-full transform rotate-12"></div>
   
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-12">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">USER.md Templates</h2>
-      <p class="text-zinc-400 max-w-xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-zinc-900 dark:text-white">USER.md Templates</h2>
+      <p class="text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">
         Starting points for your profile. Pick one, customize it, make it yours.
       </p>
     </div>
@@ -264,23 +148,23 @@ Learning: Python | JavaScript | React | SQL
       {templates.map(t => (
         <button 
           data-template={t.id}
-          class="template-btn p-5 rounded-xl border-2 border-zinc-700 bg-zinc-800 hover:border-white hover:shadow-lg transition-all text-left"
+          class="template-btn p-5 rounded-xl border-2 border-zinc-300 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 hover:border-zinc-900 dark:hover:border-white hover:shadow-lg transition-all text-left"
         >
-          <h3 class="font-semibold mb-1 text-white">{t.title}</h3>
-          <p class="text-sm text-zinc-400">{t.description}</p>
+          <h3 class="font-semibold mb-1 text-zinc-900 dark:text-white">{t.title}</h3>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400">{t.description}</p>
         </button>
       ))}
     </div>
 
     <div id="template-viewer" class="hidden">
-      <div class="bg-zinc-800 rounded-2xl border border-zinc-700 overflow-hidden shadow-lg">
-        <div class="flex items-center justify-between p-4 border-b border-zinc-700 bg-zinc-900">
-          <span id="template-title" class="font-semibold text-white"></span>
-          <button id="copy-template" class="px-4 py-2 rounded-lg bg-white hover:bg-zinc-200 text-zinc-900 text-sm font-medium transition-colors">
+      <div class="bg-zinc-100 dark:bg-zinc-800 rounded-2xl border border-zinc-300 dark:border-zinc-700 overflow-hidden shadow-lg">
+        <div class="flex items-center justify-between p-4 border-b border-zinc-300 dark:border-zinc-700 bg-zinc-200 dark:bg-zinc-900">
+          <span id="template-title" class="font-semibold text-zinc-900 dark:text-white"></span>
+          <button id="copy-template" class="px-4 py-2 rounded-lg bg-zinc-900 dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-zinc-900 text-sm font-medium transition-colors">
             Copy to clipboard
           </button>
         </div>
-        <pre id="template-content" class="p-6 overflow-x-auto text-sm font-mono text-zinc-300 max-h-96 overflow-y-auto bg-zinc-900/50"></pre>
+        <pre id="template-content" class="p-6 overflow-x-auto text-sm font-mono text-zinc-700 dark:text-zinc-300 max-h-96 overflow-y-auto bg-zinc-50 dark:bg-zinc-900/50"></pre>
       </div>
     </div>
   </div>
@@ -301,8 +185,8 @@ Learning: Python | JavaScript | React | SQL
       const template = templates.find(t => t.id === id);
       if (!template) return;
 
-      buttons.forEach(b => b.classList.remove('ring-2', 'ring-white'));
-      btn.classList.add('ring-2', 'ring-white');
+      buttons.forEach(b => b.classList.remove('ring-2', 'ring-zinc-900', 'dark:ring-white'));
+      btn.classList.add('ring-2', 'ring-zinc-900', 'dark:ring-white');
 
       viewer.classList.remove('hidden');
       titleEl.textContent = template.title + ' Template';
