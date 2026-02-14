@@ -58,22 +58,42 @@ const conversation = [
     time: '4:30 PM'
   },
   {
-    type: 'system',
-    content: 'Reading screen activity... Reading NOW.md...\nDetected: 90 min deep work on MIT\nTone: Quiet encouragement'
-  },
-  {
     type: 'heartbeat',
     content: "[16:30] DOING: VS Code + Chrome - building + testing landing page\nSHOULD: Ship landing page\nDEADLINE: Feb 28 (14 days)\n90 min deep work. Don't stop now.",
     time: '4:30 PM',
     tone: 'aligned'
   },
   {
+    type: 'notification',
+    content: 'Y Combinator W26 application closes TODAY 8pm PT',
+    time: '4:47 PM',
+    urgent: true
+  },
+  {
+    type: 'agent',
+    content: "Wait. I was scanning opportunities from your GOALS.md and found something.\n\nY Combinator W26 batch application closes TODAY at 8pm PT. You mentioned wanting to apply \"someday.\"\n\nYou have 3 hours. Your landing page can wait. This can't.\n\nYour MVP is live. You have traction. Want me to help draft the application?"
+  },
+  {
+    type: 'user',
+    content: "Holy shit. Yes. Let's do it."
+  },
+  {
     type: 'system',
-    content: `Daily summary written to daily/2026-02-14.md:
+    content: `NOW.md updated:
 
-2.5h deep work (landing page)
-45m distraction (YouTube, Twitter)
-Focus score: 77%`
+# QUEUE
+- [ ] YC W26 Application - URGENT - Due 8pm PT today
+- [ ] Ship landing page (moved to tomorrow)
+
+# LOG
+### Feb 14
+- HEARTBEAT caught 45min distraction. Called out. Back on track.
+- Proactive alert: YC deadline closing today. Priorities shifted.
+- Quote: "Holy shit. Yes. Let's do it." - This is the energy.`
+  },
+  {
+    type: 'agent',
+    content: "NOW.md updated. Priorities shifted.\n\nLet's write an application that ships. Not a perfect one. A real one.\n\nFirst question: Describe what your company does in 50 characters or less."
   }
 ];
 ---
