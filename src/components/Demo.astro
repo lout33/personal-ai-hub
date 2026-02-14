@@ -2,80 +2,78 @@
 const conversation = [
   {
     type: 'notification',
-    content: '/check-day triggered',
-    time: '2:47 PM'
+    content: 'HEARTBEAT: Screen check',
+    time: '2:30 PM'
   },
   {
     type: 'system',
-    content: 'Agent reads AGENTS.md, SOUL.md, USER.md, NOW.md...'
+    content: 'Reading screen activity... Reading NOW.md...\nMIT: "Ship the landing page"\nDeadline: Feb 28 (14 days)'
   },
   {
-    type: 'agent',
-    content: "It's 2:47pm. Your MIT today was \"send the proposal to the client.\" How's that going?"
-  },
-  {
-    type: 'user',
-    content: "Yeah I'm working on it. Just fixing some formatting issues first."
-  },
-  {
-    type: 'agent',
-    content: "You've been \"fixing formatting\" for 3 hours. The proposal was done yesterday. What's actually going on?"
-  },
-  {
-    type: 'user',
-    content: "I just want it to look professional before I send it."
-  },
-  {
-    type: 'agent',
-    content: "This is the pattern. Third time this month.\n\nJan 15: Delayed the pitch deck for \"one more revision.\"\nJan 28: Rewrote the email \"to sound better.\"\nNow: Formatting a finished proposal.\n\nYou said it yourself last week: \"I hide behind polish when I'm scared of the response.\"\n\nWhat are you afraid they'll say?"
-  },
-  {
-    type: 'user',
-    content: "...that it's not good enough. That they'll say no."
-  },
-  {
-    type: 'agent',
-    content: "They might. And you'll survive. You've heard no before.\n\nBut right now you're guaranteeing a no by not sending it.\n\nThe proposal is done. Send it in the next 5 minutes, then tell me it's done."
-  },
-  {
-    type: 'user',
-    content: "Ok. Sending now."
+    type: 'heartbeat',
+    content: "[14:30] DOING: VS Code - building landing page components\nSHOULD: Ship landing page\nDEADLINE: Feb 28 (14 days)\nFlow state. Keep going.",
+    time: '2:30 PM',
+    tone: 'aligned'
   },
   {
     type: 'notification',
-    content: 'Found: Y Combinator application closes TODAY 8pm',
-    time: '2:52 PM',
-    urgent: true
+    content: 'HEARTBEAT: Screen check',
+    time: '3:00 PM'
   },
   {
-    type: 'agent',
-    content: "Wait. I was scanning opportunities from your GOALS.md and found something.\n\nY Combinator W26 batch application closes TODAY at 8pm PT. You mentioned wanting to apply \"someday.\"\n\nYou have 5 hours. Your proposal can wait. This can't.\n\nYour MVP is live. You have traction. Want me to help draft the application?"
+    type: 'heartbeat',
+    content: "[15:00] DOING: YouTube - watching programming tutorials (25 min)\nSHOULD: Ship landing page\nDEADLINE: Feb 28 (14 days)\nYou know what you should be doing.",
+    time: '3:00 PM',
+    tone: 'distraction'
+  },
+  {
+    type: 'notification',
+    content: 'HEARTBEAT: Screen check',
+    time: '3:30 PM'
+  },
+  {
+    type: 'heartbeat',
+    content: "[15:30] DOING: Twitter/X - scrolling feed (15 min)\nSHOULD: Ship landing page\nDEADLINE: Feb 28 (14 days)\n45 min off track. The landing page won't ship itself.",
+    time: '3:30 PM',
+    tone: 'escalated'
   },
   {
     type: 'user',
-    content: "Holy shit. Yes. Let's do it."
+    content: "Fine. You're right. Going back to VS Code."
   },
   {
-    type: 'agent',
-    content: "Good. I'm updating NOW.md and pulling up the YC application questions."
+    type: 'notification',
+    content: 'HEARTBEAT: Screen check',
+    time: '4:00 PM'
+  },
+  {
+    type: 'heartbeat',
+    content: "[16:00] DOING: VS Code - implementing hero section\nSHOULD: Ship landing page\nDEADLINE: Feb 28 (14 days)\nBack on track. Keep going.",
+    time: '4:00 PM',
+    tone: 'aligned'
+  },
+  {
+    type: 'notification',
+    content: 'HEARTBEAT: Screen check',
+    time: '4:30 PM'
   },
   {
     type: 'system',
-    content: `NOW.md updated:
-
-# QUEUE
-- [x] Send proposal (DONE)
-- [ ] YC W26 Application - URGENT - Due 8pm PT today
-
-# LOG
-### Feb 11
-- **Pattern triggered:** Perfectionism/delay. Called out. Proposal sent.
-- **Proactive alert:** Found YC deadline closing today. Pivoted priorities.
-- Quote: "Holy shit. Yes. Let's do it." - This is the energy.`
+    content: 'Reading screen activity... Reading NOW.md...\nDetected: 90 min deep work on MIT\nTone: Quiet encouragement'
   },
   {
-    type: 'agent',
-    content: "NOW.md updated. Priorities shifted.\n\nLet's write an application that ships. Not a perfect one. A real one.\n\nFirst question: Describe what your company does in 50 characters or less."
+    type: 'heartbeat',
+    content: "[16:30] DOING: VS Code + Chrome - building + testing landing page\nSHOULD: Ship landing page\nDEADLINE: Feb 28 (14 days)\n90 min deep work. Don't stop now.",
+    time: '4:30 PM',
+    tone: 'aligned'
+  },
+  {
+    type: 'system',
+    content: `Daily summary written to daily/2026-02-14.md:
+
+2.5h deep work (landing page)
+45m distraction (YouTube, Twitter)
+Focus score: 77%`
   }
 ];
 ---
@@ -103,9 +101,9 @@ const conversation = [
 
   <div class="max-w-4xl mx-auto">
     <div class="text-center mb-12">
-      <h2 class="text-3xl font-bold mb-4">See It In Action</h2>
+      <h2 class="text-3xl font-bold mb-4">HEARTBEAT In Action</h2>
       <p class="text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">
-        Scheduled check-ins, pattern recognition, and proactive alerts. The agent works alongside you.
+        Your AI watches your screen every 30 minutes. Quiet when you're focused. Direct when you drift.
       </p>
     </div>
 
@@ -124,7 +122,7 @@ const conversation = [
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
           </svg>
-          <span>via Telegram</span>
+          <span>HEARTBEAT via Telegram</span>
         </div>
       </div>
 
@@ -152,15 +150,19 @@ const conversation = [
     <div class="flex items-center justify-center gap-6 mt-6 text-sm text-zinc-500">
       <div class="flex items-center gap-2">
         <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
-        <span>Scheduled via cron</span>
+        <span>Screen monitoring</span>
       </div>
       <div class="flex items-center gap-2">
         <div class="w-2 h-2 rounded-full bg-blue-500"></div>
         <span>Telegram delivery</span>
       </div>
       <div class="flex items-center gap-2">
+        <div class="w-2 h-2 rounded-full bg-amber-500"></div>
+        <span>Adaptive tone</span>
+      </div>
+      <div class="flex items-center gap-2">
         <div class="w-2 h-2 rounded-full bg-purple-500"></div>
-        <span>Memory updates</span>
+        <span>Powered by OpenClaw</span>
       </div>
     </div>
   </div>
@@ -212,7 +214,32 @@ const conversation = [
 
     const div = document.createElement('div');
     
-    if (msg.type === 'system') {
+    if (msg.type === 'heartbeat') {
+      const toneColors = {
+        aligned: { border: 'border-emerald-500/30', bg: 'bg-emerald-500/10', dot: 'bg-emerald-500', label: 'Aligned' },
+        distraction: { border: 'border-amber-500/30', bg: 'bg-amber-500/10', dot: 'bg-amber-500', label: 'Off track' },
+        escalated: { border: 'border-red-500/30', bg: 'bg-red-500/10', dot: 'bg-red-500', label: 'Escalated' },
+      };
+      const tone = toneColors[msg.tone] || toneColors.aligned;
+      div.className = 'flex justify-start';
+      div.innerHTML = `
+        <div class="flex gap-3 max-w-[90%] w-full">
+          <div class="w-8 h-8 rounded-full bg-[#0088cc] flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+            </svg>
+          </div>
+          <div class="flex-1 px-4 py-3 rounded-2xl rounded-tl-none ${tone.border} ${tone.bg} border">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-2 h-2 rounded-full ${tone.dot}"></div>
+              <span class="text-xs font-medium text-zinc-400">${tone.label}</span>
+              <span class="text-xs text-zinc-500 ml-auto">${msg.time}</span>
+            </div>
+            <pre class="text-sm text-zinc-200 font-mono whitespace-pre-wrap leading-relaxed">${msg.content}</pre>
+          </div>
+        </div>
+      `;
+    } else if (msg.type === 'system') {
       div.className = 'flex justify-center';
       div.innerHTML = `
         <div class="px-4 py-2 rounded-lg bg-zinc-800/50 border border-zinc-700 max-w-md">
