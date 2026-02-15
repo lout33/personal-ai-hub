@@ -1,105 +1,118 @@
 ---
-const conversation = [
-  {
-    type: 'notification',
-    content: 'HEARTBEAT: Screen check',
-    time: '2:30 PM'
+const tabs = {
+  accountability: {
+    label: 'Accountability',
+    description: 'Watches your screen. Quiet when focused. Direct when you drift.',
+    conversation: [
+      {
+        type: 'notification',
+        content: 'HEARTBEAT: Screen check',
+        time: '2:30 PM'
+      },
+      {
+        type: 'heartbeat',
+        content: "[14:30] DOING: VS Code - building landing page components\nSHOULD: Ship landing page\nDEADLINE: Feb 28 (14 days)\nFlow state. Keep going.",
+        time: '2:30 PM',
+        tone: 'aligned'
+      },
+      {
+        type: 'notification',
+        content: 'HEARTBEAT: Screen check',
+        time: '3:00 PM'
+      },
+      {
+        type: 'heartbeat',
+        content: "[15:00] DOING: YouTube - watching programming tutorials (25 min)\nSHOULD: Ship landing page\nDEADLINE: Feb 28 (14 days)\nYou know what you should be doing.",
+        time: '3:00 PM',
+        tone: 'distraction'
+      },
+      {
+        type: 'notification',
+        content: 'HEARTBEAT: Screen check',
+        time: '3:30 PM'
+      },
+      {
+        type: 'heartbeat',
+        content: "[15:30] DOING: Twitter/X - scrolling feed (15 min)\nSHOULD: Ship landing page\nDEADLINE: Feb 28 (14 days)\n45 min off track. The landing page won't ship itself.",
+        time: '3:30 PM',
+        tone: 'escalated'
+      },
+      {
+        type: 'user',
+        content: "Fine. You're right. Going back to VS Code."
+      },
+      {
+        type: 'heartbeat',
+        content: "[16:00] DOING: VS Code - implementing hero section\nSHOULD: Ship landing page\nDEADLINE: Feb 28 (14 days)\nBack on track. Keep going.",
+        time: '4:00 PM',
+        tone: 'aligned'
+      }
+    ]
   },
-  {
-    type: 'system',
-    content: 'Reading screen activity... Reading NOW.md...\nMIT: "Ship the landing page"\nDeadline: Feb 28 (14 days)'
+  radar: {
+    label: 'Radar',
+    description: 'Scans the web. Surfaces what matters. Shifts your priorities.',
+    conversation: [
+      {
+        type: 'notification',
+        content: 'Radar: Daily scan complete',
+        time: '9:15 AM'
+      },
+      {
+        type: 'system',
+        content: 'Scanning HN, X, GitHub trending...\nCross-referencing with GOALS.md...'
+      },
+      {
+        type: 'agent',
+        content: "Found 3 things relevant to you today:\n\n1. OpenAI just released a new embedding model at half the cost. Your RAG pipeline's budget just dropped 50%.\n2. A Show HN post similar to yours hit #4 with 200+ points. Their angle: open-source personal AI. Sound familiar?\n3. YC W26 application closes TODAY at 8pm PT. You said \"someday.\" Today is someday."
+      },
+      {
+        type: 'user',
+        content: "The YC one. Let's do it."
+      },
+      {
+        type: 'system',
+        content: "NOW.md updated:\n\n# QUEUE\n- [ ] YC W26 Application - URGENT - Due 8pm PT today\n- [ ] Ship landing page (moved to tomorrow)"
+      },
+      {
+        type: 'agent',
+        content: "Priorities shifted. Let's write an application that ships. Not a perfect one. A real one.\n\nFirst question: Describe what your company does in 50 characters or less."
+      }
+    ]
   },
-  {
-    type: 'heartbeat',
-    content: "[14:30] DOING: VS Code - building landing page components\nSHOULD: Ship landing page\nDEADLINE: Feb 28 (14 days)\nFlow state. Keep going.",
-    time: '2:30 PM',
-    tone: 'aligned'
-  },
-  {
-    type: 'notification',
-    content: 'HEARTBEAT: Screen check',
-    time: '3:00 PM'
-  },
-  {
-    type: 'heartbeat',
-    content: "[15:00] DOING: YouTube - watching programming tutorials (25 min)\nSHOULD: Ship landing page\nDEADLINE: Feb 28 (14 days)\nYou know what you should be doing.",
-    time: '3:00 PM',
-    tone: 'distraction'
-  },
-  {
-    type: 'notification',
-    content: 'HEARTBEAT: Screen check',
-    time: '3:30 PM'
-  },
-  {
-    type: 'heartbeat',
-    content: "[15:30] DOING: Twitter/X - scrolling feed (15 min)\nSHOULD: Ship landing page\nDEADLINE: Feb 28 (14 days)\n45 min off track. The landing page won't ship itself.",
-    time: '3:30 PM',
-    tone: 'escalated'
-  },
-  {
-    type: 'user',
-    content: "Fine. You're right. Going back to VS Code."
-  },
-  {
-    type: 'notification',
-    content: 'HEARTBEAT: Screen check',
-    time: '4:00 PM'
-  },
-  {
-    type: 'heartbeat',
-    content: "[16:00] DOING: VS Code - implementing hero section\nSHOULD: Ship landing page\nDEADLINE: Feb 28 (14 days)\nBack on track. Keep going.",
-    time: '4:00 PM',
-    tone: 'aligned'
-  },
-  {
-    type: 'notification',
-    content: 'HEARTBEAT: Screen check',
-    time: '4:30 PM'
-  },
-  {
-    type: 'heartbeat',
-    content: "[16:30] DOING: VS Code + Chrome - building + testing landing page\nSHOULD: Ship landing page\nDEADLINE: Feb 28 (14 days)\n90 min deep work. Don't stop now.",
-    time: '4:30 PM',
-    tone: 'aligned'
-  },
-  {
-    type: 'notification',
-    content: 'Y Combinator W26 application closes TODAY 8pm PT',
-    time: '4:47 PM',
-    urgent: true
-  },
-  {
-    type: 'agent',
-    content: "Wait. I was scanning opportunities from your GOALS.md and found something.\n\nY Combinator W26 batch application closes TODAY at 8pm PT. You mentioned wanting to apply \"someday.\"\n\nYou have 3 hours. Your landing page can wait. This can't.\n\nYour MVP is live. You have traction. Want me to help draft the application?"
-  },
-  {
-    type: 'user',
-    content: "Holy shit. Yes. Let's do it."
-  },
-  {
-    type: 'system',
-    content: `NOW.md updated:
-
-# QUEUE
-- [ ] YC W26 Application - URGENT - Due 8pm PT today
-- [ ] Ship landing page (moved to tomorrow)
-
-# LOG
-### Feb 14
-- HEARTBEAT caught 45min distraction. Called out. Back on track.
-- Proactive alert: YC deadline closing today. Priorities shifted.
-- Quote: "Holy shit. Yes. Let's do it." - This is the energy.`
-  },
-  {
-    type: 'agent',
-    content: "NOW.md updated. Priorities shifted.\n\nLet's write an application that ships. Not a perfect one. A real one.\n\nFirst question: Describe what your company does in 50 characters or less."
+  memory: {
+    label: 'Memory',
+    description: 'Remembers across sessions. Catches patterns. Quotes your own words.',
+    conversation: [
+      {
+        type: 'notification',
+        content: 'Session started',
+        time: '10:00 AM'
+      },
+      {
+        type: 'user',
+        content: "Let's reorganize the file structure. I think we need a better system for--"
+      },
+      {
+        type: 'agent',
+        content: "Stop. You said this 3 times in the last 2 weeks:\n\nFeb 1: \"Let's restructure the project\"\nFeb 7: \"I think we need better organization\"\nFeb 14: Right now.\n\nNothing shipped between any of those. The structure is fine. What's the actual thing you're avoiding?"
+      },
+      {
+        type: 'user',
+        content: "...the demo video. I keep putting it off."
+      },
+      {
+        type: 'agent',
+        content: "There it is. Record one take. Ugly is fine. Ship it today.\n\nNOW.md updated: MIT = Record demo video (no editing, just ship)"
+      }
+    ]
   }
-];
+};
+
+const tabKeys = Object.keys(tabs);
 ---
 
 <section id="demo" class="py-20 px-6 relative">
-  <!-- Telegram notification popup -->
   <div id="telegram-notification" class="fixed top-4 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-500">
     <div class="bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl border border-zinc-200 dark:border-zinc-700 p-4 max-w-sm">
       <div class="flex items-start gap-3">
@@ -111,9 +124,9 @@ const conversation = [
         <div class="flex-1 min-w-0">
           <div class="flex items-center gap-2">
             <span class="font-semibold text-sm">Symbiotic Agent</span>
-            <span id="notif-time" class="text-xs text-zinc-500">2:47 PM</span>
+            <span id="notif-time" class="text-xs text-zinc-500">now</span>
           </div>
-          <p id="notif-content" class="text-sm text-zinc-600 dark:text-zinc-400 mt-0.5 truncate">/check-day triggered</p>
+          <p id="notif-content" class="text-sm text-zinc-600 dark:text-zinc-400 mt-0.5 truncate"></p>
         </div>
       </div>
     </div>
@@ -121,14 +134,13 @@ const conversation = [
 
   <div class="max-w-4xl mx-auto">
     <div class="text-center mb-12">
-      <h2 class="text-3xl font-bold mb-4">HEARTBEAT In Action</h2>
+      <h2 class="text-3xl font-bold mb-4">See It In Action</h2>
       <p class="text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">
-        Your AI watches your screen every 30 minutes. Quiet when you're focused. Direct when you drift.
+        Three capabilities. Three real scenarios. Click through each one.
       </p>
     </div>
 
     <div class="bg-zinc-950 rounded-2xl overflow-hidden border border-zinc-800">
-      <!-- Chat header -->
       <div class="flex items-center justify-between px-4 py-3 border-b border-zinc-800">
         <div class="flex items-center gap-3">
           <div class="flex gap-1.5">
@@ -142,16 +154,36 @@ const conversation = [
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
           </svg>
-          <span>HEARTBEAT via Telegram</span>
+          <span>via Telegram</span>
         </div>
       </div>
 
-      <!-- Chat messages -->
-      <div id="chat-container" class="p-4 h-[400px] overflow-y-auto space-y-4">
-        <!-- Messages will be inserted here -->
+      <div class="flex border-b border-zinc-800">
+        {tabKeys.map((key, i) => (
+          <button
+            data-tab={key}
+            class:list={[
+              'demo-tab flex-1 px-4 py-3 text-sm font-medium transition-all relative',
+              i === 0
+                ? 'text-white bg-zinc-800/50'
+                : 'text-zinc-500 hover:text-zinc-300 hover:bg-zinc-900'
+            ]}
+          >
+            <span class="block">{tabs[key].label}</span>
+            <span class="block text-xs font-normal mt-0.5 opacity-70">{tabs[key].description}</span>
+            <div
+              class:list={[
+                'absolute bottom-0 left-0 right-0 h-0.5 transition-all',
+                i === 0 ? 'bg-emerald-500' : 'bg-transparent'
+              ]}
+            />
+          </button>
+        ))}
       </div>
 
-      <!-- Controls -->
+      <div id="chat-container" class="p-4 h-[400px] overflow-y-auto space-y-4">
+      </div>
+
       <div class="px-4 py-3 border-t border-zinc-800 flex items-center justify-between">
         <div class="text-sm text-zinc-500">
           <span id="step-indicator">Click Next to start</span>
@@ -174,21 +206,17 @@ const conversation = [
       </div>
       <div class="flex items-center gap-2">
         <div class="w-2 h-2 rounded-full bg-blue-500"></div>
-        <span>Telegram delivery</span>
+        <span>Web intelligence</span>
       </div>
       <div class="flex items-center gap-2">
         <div class="w-2 h-2 rounded-full bg-amber-500"></div>
-        <span>Adaptive tone</span>
-      </div>
-      <div class="flex items-center gap-2">
-        <div class="w-2 h-2 rounded-full bg-purple-500"></div>
-        <span>Powered by OpenClaw</span>
+        <span>Cross-session memory</span>
       </div>
     </div>
   </div>
 </section>
 
-<script define:vars={{ conversation }}>
+<script define:vars={{ tabs, tabKeys }}>
   const container = document.getElementById('chat-container');
   const nextBtn = document.getElementById('next-btn');
   const restartBtn = document.getElementById('restart-btn');
@@ -196,14 +224,45 @@ const conversation = [
   const notification = document.getElementById('telegram-notification');
   const notifContent = document.getElementById('notif-content');
   const notifTime = document.getElementById('notif-time');
-  
+  const tabButtons = document.querySelectorAll('.demo-tab');
+
+  let currentTab = tabKeys[0];
   let currentStep = 0;
+
+  function getConversation() {
+    return tabs[currentTab].conversation;
+  }
+
+  function switchTab(key) {
+    currentTab = key;
+    currentStep = 0;
+
+    tabButtons.forEach(btn => {
+      const isActive = btn.dataset.tab === key;
+      btn.classList.toggle('text-white', isActive);
+      btn.classList.toggle('bg-zinc-800/50', isActive);
+      btn.classList.toggle('text-zinc-500', !isActive);
+      btn.classList.toggle('hover:text-zinc-300', !isActive);
+      btn.classList.toggle('hover:bg-zinc-900', !isActive);
+      const bar = btn.querySelector('div');
+      bar.classList.toggle('bg-emerald-500', isActive);
+      bar.classList.toggle('bg-transparent', !isActive);
+    });
+
+    container.innerHTML = '';
+    nextBtn.textContent = 'Next';
+    nextBtn.disabled = false;
+    nextBtn.className = 'px-4 py-1.5 rounded-lg text-sm bg-emerald-500 hover:bg-emerald-600 text-white font-medium transition-colors';
+    updateIndicator();
+
+    notification.classList.add('translate-x-full', 'opacity-0');
+    notification.classList.remove('translate-x-0', 'opacity-100');
+  }
 
   function showNotification(content, time, urgent = false) {
     notifContent.textContent = content;
     notifTime.textContent = time;
-    
-    // Update styling for urgent notifications
+
     const notifBox = notification.querySelector('div');
     if (urgent) {
       notifBox.classList.add('ring-2', 'ring-red-500', 'ring-offset-2');
@@ -214,11 +273,10 @@ const conversation = [
       notifContent.classList.remove('text-red-600', 'dark:text-red-400', 'font-semibold');
       notifContent.classList.add('text-zinc-600', 'dark:text-zinc-400');
     }
-    
+
     notification.classList.remove('translate-x-full', 'opacity-0');
     notification.classList.add('translate-x-0', 'opacity-100');
-    
-    // Auto-hide after 4 seconds (longer for urgent)
+
     setTimeout(() => {
       notification.classList.add('translate-x-full', 'opacity-0');
       notification.classList.remove('translate-x-0', 'opacity-100');
@@ -226,14 +284,13 @@ const conversation = [
   }
 
   function createMessage(msg) {
-    // Handle notification type
     if (msg.type === 'notification') {
       showNotification(msg.content, msg.time, msg.urgent || false);
       return;
     }
 
     const div = document.createElement('div');
-    
+
     if (msg.type === 'heartbeat') {
       const toneColors = {
         aligned: { border: 'border-emerald-500/30', bg: 'bg-emerald-500/10', dot: 'bg-emerald-500', label: 'Aligned' },
@@ -295,26 +352,25 @@ const conversation = [
     div.style.opacity = '0';
     div.style.transform = 'translateY(10px)';
     container.appendChild(div);
-    
-    // Animate in
+
     requestAnimationFrame(() => {
       div.style.transition = 'opacity 0.3s, transform 0.3s';
       div.style.opacity = '1';
       div.style.transform = 'translateY(0)';
     });
 
-    // Scroll to bottom
     container.scrollTop = container.scrollHeight;
   }
 
   function updateIndicator() {
+    const conv = getConversation();
     if (currentStep === 0) {
       stepIndicator.textContent = 'Click Next to start';
     } else {
-      stepIndicator.textContent = `Step ${currentStep} of ${conversation.length}`;
+      stepIndicator.textContent = `Step ${currentStep} of ${conv.length}`;
     }
-    
-    if (currentStep >= conversation.length) {
+
+    if (currentStep >= conv.length) {
       nextBtn.textContent = 'Done';
       nextBtn.disabled = true;
       nextBtn.className = 'px-4 py-1.5 rounded-lg text-sm bg-zinc-700 text-zinc-400 cursor-not-allowed';
@@ -322,8 +378,9 @@ const conversation = [
   }
 
   function showNext() {
-    if (currentStep < conversation.length) {
-      createMessage(conversation[currentStep]);
+    const conv = getConversation();
+    if (currentStep < conv.length) {
+      createMessage(conv[currentStep]);
       currentStep++;
       updateIndicator();
     }
@@ -336,14 +393,15 @@ const conversation = [
     nextBtn.disabled = false;
     nextBtn.className = 'px-4 py-1.5 rounded-lg text-sm bg-emerald-500 hover:bg-emerald-600 text-white font-medium transition-colors';
     updateIndicator();
-    // Hide notification if visible
     notification.classList.add('translate-x-full', 'opacity-0');
     notification.classList.remove('translate-x-0', 'opacity-100');
   }
 
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+  });
   nextBtn.addEventListener('click', showNext);
   restartBtn.addEventListener('click', restart);
 
-  // Initial state
   updateIndicator();
 </script>

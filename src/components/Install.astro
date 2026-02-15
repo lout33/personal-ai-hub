@@ -8,7 +8,7 @@
   <div class="max-w-3xl mx-auto relative">
     <div class="text-center mb-12">
       <h2 class="text-3xl md:text-4xl font-bold mb-4">Get Started</h2>
-      <p class="text-zinc-400 dark:text-zinc-500">One command. Works with OpenClaw, Claude Code, or opencode.</p>
+      <p class="text-zinc-400 dark:text-zinc-500">One command. Works with Claude Code, opencode, or any AGENTS.md-compatible tool.</p>
     </div>
     
     <div class="bg-zinc-800 dark:bg-zinc-900 rounded-2xl p-6 mb-8 border border-zinc-700 dark:border-zinc-800">
@@ -29,6 +29,32 @@
         curl -fsSL https://raw.githubusercontent.com/lout33/symbiotic-ai/main/install.sh | bash
       </code>
     </div>
+
+    <div class="bg-zinc-800/50 dark:bg-zinc-900/50 rounded-xl p-5 mb-8 border border-zinc-700/50 dark:border-zinc-800/50">
+      <p class="text-xs uppercase tracking-widest text-zinc-500 mb-4">The installer creates</p>
+      <div class="space-y-2 font-mono text-sm">
+        <div class="flex gap-3">
+          <span class="text-zinc-300">SOUL.md</span>
+          <span class="text-zinc-600">--</span>
+          <span class="text-zinc-500">Agent personality (stable, rarely changes)</span>
+        </div>
+        <div class="flex gap-3">
+          <span class="text-zinc-300">USER.md</span>
+          <span class="text-zinc-600">--</span>
+          <span class="text-zinc-500">Your psychology and patterns (stable)</span>
+        </div>
+        <div class="flex gap-3">
+          <span class="text-zinc-300">AGENTS.md</span>
+          <span class="text-zinc-600">--</span>
+          <span class="text-zinc-500">Rules, protocols, tools (stable)</span>
+        </div>
+        <div class="flex gap-3">
+          <span class="text-zinc-300">NOW.md</span>
+          <span class="text-zinc-600">--</span>
+          <span class="text-zinc-500">Tasks and memory (changes every session)</span>
+        </div>
+      </div>
+    </div>
     
     <div class="grid md:grid-cols-3 gap-4 text-center">
       <div class="p-5 rounded-xl bg-zinc-800 dark:bg-zinc-900 border border-zinc-700 dark:border-zinc-800">
@@ -45,10 +71,11 @@
       </div>
     </div>
     
-    <div class="text-center mt-8">
-      <a href="https://github.com/lout33/symbiotic-ai#installation" target="_blank" rel="noopener" class="text-sm text-zinc-500 hover:text-white transition-colors">
+    <div class="text-center mt-8 space-y-2">
+      <a href="https://github.com/lout33/symbiotic-ai#installation" target="_blank" rel="noopener" class="text-sm text-zinc-500 hover:text-white transition-colors block">
         View manual installation options
       </a>
+      <p class="text-xs text-zinc-600">Already have AGENTS.md? Just add: <code class="text-zinc-400">Read SOUL.md, USER.md, NOW.md at session start</code></p>
     </div>
   </div>
 </section>

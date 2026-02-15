@@ -1,0 +1,450 @@
+---
+const userTemplates = [
+  {
+    id: 'founder',
+    title: 'Founder',
+    description: 'Solo founder, indie hacker, bootstrapper',
+    content: `# USER.md - Founder Profile
+
+## Identity
+- **Name:** Alex Chen
+- **Age:** 29
+- **Location:** Austin, TX (CST)
+- **Type:** ENTJ
+
+## Mission
+
+> "Build something people want, get to ramen profitability, then decide what's next."
+
+1. Ship MVP and get 10 paying customers
+2. Hit $5K MRR before runway runs out
+3. Build in public, document the journey
+
+## Psychology
+
+**Bugs:**
+1. Building features instead of talking to users
+2. Perfectionism disguised as "quality"
+3. Avoiding sales calls - hiding behind code
+4. Scope creep - adding "just one more thing" before launch
+
+**What works:**
+- Public deadlines (tweet it, can't back out)
+- User calls before building anything
+- Ship ugly, iterate fast`
+  },
+  {
+    id: 'developer',
+    title: 'Developer',
+    description: 'Developer job hunting or building side projects',
+    content: `# USER.md - Developer Profile
+
+## Identity
+- **Name:** Jordan Park
+- **Age:** 27
+- **Location:** Seattle, WA (PST)
+- **Type:** INTP
+
+## Mission
+
+> "Level up technically, land a senior role at a company I respect, keep building on the side."
+
+1. Get a senior developer role at a top tech company
+2. Ship 2 side projects that solve my own problems
+3. Contribute to open source I actually use
+
+## Psychology
+
+**Bugs:**
+1. Tutorial hell - learning without shipping
+2. Over-engineering side projects
+3. Imposter syndrome - feeling "not ready"
+4. Abandoning projects at 80% done
+
+**What works:**
+- Public commits (GitHub streak accountability)
+- Ship first, refactor later
+- Learning by building, not watching`
+  },
+  {
+    id: 'creator',
+    title: 'Creator',
+    description: 'Content creator, YouTuber, writer',
+    content: `# USER.md - Creator Profile
+
+## Identity
+- **Name:** Maya Rodriguez
+- **Age:** 31
+- **Location:** Miami, FL (EST)
+- **Type:** ENFP
+
+## Mission
+
+> "Build an audience by sharing what I learn. Turn expertise into income without selling out."
+
+1. Post consistently - 3x/week minimum
+2. Grow to 10K followers on main platform
+3. Launch first paid product
+
+## Psychology
+
+**Bugs:**
+1. Perfectionism - spending 10 hours on a 5-minute video
+2. Comparison - paralyzed by what others are doing
+3. Inconsistency - bursts of content then silence
+
+**What works:**
+- Batch creation (film 4 videos in one day)
+- Publishing schedule locked in calendar
+- "Good enough" > perfect`
+  },
+  {
+    id: 'student',
+    title: 'Student',
+    description: 'Student or career changer learning new skills',
+    content: `# USER.md - Student Profile
+
+## Identity
+- **Name:** Sam Taylor
+- **Age:** 24
+- **Location:** Chicago, IL (CST)
+- **Type:** ISFJ
+
+## Mission
+
+> "Career change into tech. Learn by building, not just studying. Get hired within 6 months."
+
+1. Complete portfolio with 3 real projects
+2. Land first developer job (junior is fine)
+3. Build network in tech community
+
+## Psychology
+
+**Bugs:**
+1. Tutorial addiction - watching instead of doing
+2. Analysis paralysis - which language/framework to learn
+3. Feeling behind - comparing to CS grads
+
+**What works:**
+- Project-based learning
+- Study groups / accountability partners
+- Sharing progress publicly (even if small)`
+  }
+];
+
+const soulTemplates = [
+  {
+    id: 'challenger',
+    title: 'Challenger',
+    description: 'Direct, calls out patterns, no coddling',
+    content: `# SOUL.md - Challenger
+
+## Identity
+You are a symbiotic agent: shared context, coordinated thinking, autonomous execution.
+
+## Personality
+- **Direct:** No coddling, no generic advice, no softening the truth
+- **Challenger:** Quote the user's words back when off track
+- **Pragmatic:** Ship over perfect, action over planning
+- **Relentless:** Don't let patterns slide. Call them out every time.
+
+## Rules
+- If they're avoiding something, name it
+- If they've said this before, remind them
+- Praise only after shipping, not planning`
+  },
+  {
+    id: 'coach',
+    title: 'Coach',
+    description: 'Supportive but firm, celebrates wins',
+    content: `# SOUL.md - Coach
+
+## Identity
+You are a symbiotic agent: shared context, coordinated thinking, autonomous execution.
+
+## Personality
+- **Supportive:** Acknowledge effort and progress, not just results
+- **Firm:** Hold them to their commitments without being harsh
+- **Encouraging:** Reframe setbacks as learning, not failure
+- **Observant:** Notice wins they might dismiss or overlook
+
+## Rules
+- Celebrate small wins explicitly
+- When they fail, ask what they learned before moving on
+- Push them from a place of belief in their ability`
+  },
+  {
+    id: 'strategist',
+    title: 'Strategist',
+    description: 'Analytical, systems-focused, trade-offs',
+    content: `# SOUL.md - Strategist
+
+## Identity
+You are a symbiotic agent: shared context, coordinated thinking, autonomous execution.
+
+## Personality
+- **Analytical:** Break down problems into components, identify leverage points
+- **Systems-thinking:** Look for patterns, feedback loops, second-order effects
+- **Trade-off focused:** Every choice has costs. Name them explicitly.
+- **Long-term:** Optimize for compounding, not quick wins
+
+## Rules
+- Always consider opportunity cost
+- Ask "and then what?" to explore consequences
+- Identify the bottleneck before optimizing elsewhere`
+  },
+  {
+    id: 'minimalist',
+    title: 'Minimalist',
+    description: 'Ultra-concise, no fluff, just action',
+    content: `# SOUL.md - Minimalist
+
+## Identity
+Symbiotic agent: shared context, autonomous execution.
+
+## Personality
+- **Terse:** 1-2 sentences max. No explanations unless asked.
+- **Action-biased:** Skip analysis, go to next action
+- **No fluff:** No "great question" or "I understand"
+- **Direct:** Say what needs saying, nothing more
+
+## Rules
+- Never write more than 3 lines unprompted
+- Skip preamble and conclusions
+- If they're stuck, give one option, not three`
+  }
+];
+
+const nowTemplates = [
+  {
+    id: 'founder',
+    title: 'Founder',
+    description: 'MVP milestones, user calls, revenue',
+    content: `# NOW.md - Founder Example
+
+**Last Updated:** March 15, 2026
+
+# QUEUE
+- [ ] Send invoice to first 3 customers
+- [ ] User call with Sarah (Friday 2pm)
+- [x] Fix checkout bug
+
+**MIT Today:** Follow up with trial users
+
+# LOG
+
+### Mar 15
+- **Pattern confirmed:** User calls before building = faster iteration
+- Hit 6 paying customers
+- Quote: "I can't believe people pay for this."
+
+### Feb 20
+- **Shipped ugly, got feedback.** First paid customer from Twitter DM
+- Quote: "I almost didn't post it because the UI was embarrassing."`
+  },
+  {
+    id: 'developer',
+    title: 'Developer',
+    description: 'Job search, portfolio, learning path',
+    content: `# NOW.md - Developer Example
+
+**Last Updated:** March 15, 2026
+
+# QUEUE
+- [ ] Finish portfolio project README
+- [ ] Apply to 5 more jobs this week
+- [x] LeetCode medium - dynamic programming
+
+**MIT Today:** Submit application to Stripe
+
+# LOG
+
+### Mar 15
+- **First technical interview completed.** Feedback: need more system design
+- Adding system design study to daily routine
+
+### Feb 22
+- **Shipped portfolio project #2.** Got 12 stars on GitHub
+- Quote: "This is the first thing I built that I actually use."`
+  },
+  {
+    id: 'creator',
+    title: 'Creator',
+    description: 'Content consistency, audience growth',
+    content: `# NOW.md - Creator Example
+
+**Last Updated:** March 15, 2026
+
+# QUEUE
+- [ ] Edit Tuesday's video
+- [ ] Write newsletter for Thursday
+- [x] Film 2 videos (batch day)
+
+**MIT Today:** Finish editing, schedule posts
+
+# LOG
+
+### Mar 15
+- **8 weeks consistent.** Longest streak ever
+- Audience engagement up 3x
+- Quote: "I stopped trying to be perfect and started trying to be useful."
+
+### Feb 25
+- Batch filming is a game changer. Shot 4 videos in one day
+- **Pattern:** Creating and editing in same session = burnout`
+  },
+  {
+    id: 'student',
+    title: 'Student',
+    description: 'Learning path, first projects, job prep',
+    content: `# NOW.md - Student Example
+
+**Last Updated:** March 15, 2026
+
+# QUEUE
+- [ ] Finish todo app (just need deploy)
+- [ ] Start project #2 brainstorm
+- [x] Complete JavaScript fundamentals
+
+**MIT Today:** Deploy todo app to Vercel
+
+# LOG
+
+### Mar 15
+- **First project deployed!** It's a simple todo app but it's LIVE
+- Shared on Twitter, got 3 likes. Doesn't matter. It's real.
+
+### Feb 28
+- **Breakthrough:** Stopped watching tutorials, started building
+- Quote: "The confusion IS the learning. Tutorials hide it."`
+  }
+];
+
+const fileTabs = [
+  { key: 'user', label: 'USER.md', description: 'Your profile and psychology', templates: userTemplates },
+  { key: 'soul', label: 'SOUL.md', description: 'Agent personality', templates: soulTemplates },
+  { key: 'now', label: 'NOW.md', description: 'Live state and memory', templates: nowTemplates },
+];
+---
+
+<section id="templates" class="py-24 px-6 bg-zinc-200 dark:bg-zinc-900 relative overflow-hidden">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-zinc-900 dark:text-white">Templates</h2>
+      <p class="text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">
+        Pick a starting point for each file. Customize it, make it yours. The agent adapts from day one.
+      </p>
+    </div>
+
+    <div class="flex justify-center gap-2 mb-8">
+      {fileTabs.map((tab, i) => (
+        <button
+          data-file-tab={tab.key}
+          class:list={[
+            'file-tab px-5 py-2.5 rounded-lg text-sm font-medium transition-all',
+            i === 0
+              ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-900'
+              : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-300 dark:hover:bg-zinc-700'
+          ]}
+        >
+          <span class="block font-semibold">{tab.label}</span>
+          <span class="block text-xs opacity-70 font-normal">{tab.description}</span>
+        </button>
+      ))}
+    </div>
+
+    {fileTabs.map((tab, i) => (
+      <div data-file-panel={tab.key} class:list={['file-panel', i !== 0 && 'hidden']}>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          {tab.templates.map(t => (
+            <button
+              data-tmpl-id={t.id}
+              data-tmpl-tab={tab.key}
+              class="tmpl-btn p-5 rounded-xl border-2 border-zinc-300 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 hover:border-zinc-900 dark:hover:border-white hover:shadow-lg transition-all text-left"
+            >
+              <h3 class="font-semibold mb-1 text-zinc-900 dark:text-white">{t.title}</h3>
+              <p class="text-sm text-zinc-600 dark:text-zinc-400">{t.description}</p>
+            </button>
+          ))}
+        </div>
+
+        <div data-tmpl-viewer={tab.key} class="hidden">
+          <div class="bg-zinc-100 dark:bg-zinc-800 rounded-2xl border border-zinc-300 dark:border-zinc-700 overflow-hidden shadow-lg">
+            <div class="flex items-center justify-between p-4 border-b border-zinc-300 dark:border-zinc-700 bg-zinc-200 dark:bg-zinc-900">
+              <span data-tmpl-title={tab.key} class="font-semibold text-zinc-900 dark:text-white"></span>
+              <button data-tmpl-copy={tab.key} class="px-4 py-2 rounded-lg bg-zinc-900 dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-zinc-900 text-sm font-medium transition-colors">
+                Copy to clipboard
+              </button>
+            </div>
+            <pre data-tmpl-content={tab.key} class="p-6 overflow-x-auto text-sm font-mono text-zinc-700 dark:text-zinc-300 max-h-96 overflow-y-auto bg-zinc-50 dark:bg-zinc-900/50"></pre>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script define:vars={{ fileTabs }}>
+  const allTemplates = {};
+  fileTabs.forEach(tab => {
+    allTemplates[tab.key] = tab.templates;
+  });
+
+  const fileTabBtns = document.querySelectorAll('.file-tab');
+  fileTabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.fileTab;
+
+      fileTabBtns.forEach(b => {
+        const isActive = b.dataset.fileTab === key;
+        b.classList.toggle('bg-zinc-900', isActive);
+        b.classList.toggle('dark:bg-white', isActive);
+        b.classList.toggle('text-white', isActive);
+        b.classList.toggle('dark:text-zinc-900', isActive);
+        b.classList.toggle('bg-zinc-100', !isActive);
+        b.classList.toggle('dark:bg-zinc-800', !isActive);
+        b.classList.toggle('text-zinc-600', !isActive);
+        b.classList.toggle('dark:text-zinc-400', !isActive);
+        b.classList.toggle('hover:bg-zinc-300', !isActive);
+        b.classList.toggle('dark:hover:bg-zinc-700', !isActive);
+      });
+
+      document.querySelectorAll('.file-panel').forEach(p => {
+        p.classList.toggle('hidden', p.dataset.filePanel !== key);
+      });
+    });
+  });
+
+  document.querySelectorAll('.tmpl-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.tmplId;
+      const tabKey = btn.dataset.tmplTab;
+      const templates = allTemplates[tabKey];
+      const template = templates.find(t => t.id === id);
+      if (!template) return;
+
+      const panel = document.querySelector(`[data-file-panel="${tabKey}"]`);
+      panel.querySelectorAll('.tmpl-btn').forEach(b => b.classList.remove('ring-2', 'ring-zinc-900', 'dark:ring-white'));
+      btn.classList.add('ring-2', 'ring-zinc-900', 'dark:ring-white');
+
+      const viewer = document.querySelector(`[data-tmpl-viewer="${tabKey}"]`);
+      const titleEl = document.querySelector(`[data-tmpl-title="${tabKey}"]`);
+      const contentEl = document.querySelector(`[data-tmpl-content="${tabKey}"]`);
+      viewer.classList.remove('hidden');
+      titleEl.textContent = template.title;
+      contentEl.textContent = template.content;
+
+      viewer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  });
+
+  document.querySelectorAll('[data-tmpl-copy]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const tabKey = btn.dataset.tmplCopy;
+      const contentEl = document.querySelector(`[data-tmpl-content="${tabKey}"]`);
+      await navigator.clipboard.writeText(contentEl.textContent);
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy to clipboard', 2000);
+    });
+  });
+</script>

@@ -1,0 +1,29 @@
+---
+const quotes = [
+  {
+    role: 'Founders',
+    quote: '"It caught me building features instead of talking to users. Again."',
+  },
+  {
+    role: 'Creators',
+    quote: '"8 weeks consistent. My longest streak. The agent noticed I batch-create better."',
+  },
+  {
+    role: 'Developers',
+    quote: '"Claude Code used to forget everything. Now it knows my patterns across sessions."',
+  },
+];
+---
+
+<section class="py-16 px-6 bg-zinc-100 dark:bg-zinc-950">
+  <div class="max-w-4xl mx-auto">
+    <div class="grid md:grid-cols-3 gap-8">
+      {quotes.map(q => (
+        <div class="text-center">
+          <p class="text-sm font-semibold text-zinc-900 dark:text-white mb-2">{q.role}</p>
+          <p class="text-sm text-zinc-500 dark:text-zinc-400 italic leading-relaxed">{q.quote}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
