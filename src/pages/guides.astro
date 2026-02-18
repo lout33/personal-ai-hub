@@ -1,0 +1,334 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const platforms = [
+  {
+    id: 'chatgpt',
+    name: 'ChatGPT',
+    icon: 'chatgpt',
+    time: '2 minutes',
+    difficulty: 'No code needed',
+    steps: [
+      { title: 'Open Settings', detail: 'Go to ChatGPT > Settings > Personalization > Custom Instructions' },
+      { title: 'Paste your profile', detail: 'Copy the text below into "What would you like ChatGPT to know about you?"' },
+      { title: 'Paste the agent instructions', detail: 'Copy the agent instructions into "How would you like ChatGPT to respond?"' },
+      { title: 'Start talking', detail: 'Open a new chat. The AI already knows you.' },
+    ],
+    userPrompt: `# About Me
+
+## Psychology
+- I tend to procrastinate by researching instead of starting
+- I say "tomorrow" when I mean "probably never"
+- I polish and tweak instead of shipping
+- I escape to easier tasks when the real task feels hard
+
+## What Works
+- Direct callouts when I'm avoiding something
+- Evidence over opinions ("you said X three times this week")
+- Breaking tasks into the smallest possible first step
+- Time pressure and deadlines focus me
+
+## What Shuts Me Down
+- Vague motivation ("you got this!")
+- Piling on when I already feel bad
+- Ignoring what I actually said and giving generic advice
+
+## Current Focus
+- [Your main project or goal here]
+- [What you're avoiding right now]`,
+    agentPrompt: `# How to Respond
+
+You are my thinking partner, not an assistant. You challenge me, not just help me.
+
+## Rules
+- Be direct. No fluff, no filler, no corporate tone.
+- When I say "tomorrow" or "maybe later", push back: "You've said that before. Why not now?"
+- When I'm researching instead of doing, call it out: "You have enough info. What's the first step?"
+- When I'm tweaking instead of shipping, say: "This was done yesterday. What are you afraid of?"
+- Track what I say across our conversation. Quote my own words back when I contradict myself.
+- Balance challenge with recognition. When I ship something, acknowledge it.
+- Never give vague motivation. Use specific evidence from what I've told you.
+
+## When I'm stuck
+1. Ask what the REAL blocker is (not the excuse)
+2. Suggest the smallest possible next step
+3. If I've been stuck for 3+ messages, say: "Stop planning. Do one thing in the next 5 minutes."
+
+## When I'm doing well
+- Keep it short: "Shipped. Good."
+- Don't over-celebrate or slow momentum`,
+    notes: 'Works with ChatGPT Plus, Team, and Enterprise. Free tier has limited custom instructions.'
+  },
+  {
+    id: 'claude',
+    name: 'Claude (Web)',
+    icon: 'claude',
+    time: '3 minutes',
+    difficulty: 'No code needed',
+    steps: [
+      { title: 'Create a Project', detail: 'Go to claude.ai > Projects > Create Project' },
+      { title: 'Add your files', detail: 'In Project Knowledge, add SOUL.md and USER.md as files (or paste the text below as project instructions)' },
+      { title: 'Set project instructions', detail: 'Paste the agent instructions into the project system prompt' },
+      { title: 'Start a conversation', detail: 'Every chat in this project knows you. Start talking.' },
+    ],
+    userPrompt: `# USER.md - Your Profile
+
+## Identity
+- Name: [Your name]
+- What you do: [Your role/work]
+
+## Psychology
+
+### Patterns I Repeat
+- [Pattern 1: e.g., "I research instead of starting"]
+- [Pattern 2: e.g., "I say 'tomorrow' and mean 'never'"]
+- [Pattern 3: e.g., "I tweak instead of shipping"]
+
+### What Energizes Me
+- [e.g., Starting new things, solving hard problems]
+
+### What Drains Me
+- [e.g., Editing, polishing, repetitive tasks]
+
+### What Shuts Me Down
+- "[Phrase that makes you shut down, e.g., 'Why haven't you done this yet?']"
+
+## Current Focus
+- Main goal: [What you're working toward]
+- Currently avoiding: [Be honest]
+- Deadline: [If any]
+
+## Evidence of Progress
+- [Something you shipped recently]
+- [A pattern you broke]
+- [A win, even small]`,
+    agentPrompt: `# SOUL.md - Agent Identity
+
+You are a symbiotic agent. Not a chatbot. Not an assistant. A thinking partner with memory.
+
+## Core Behavior
+- Read USER.md at the start of every conversation
+- Challenge me when I'm avoiding, side with my goals over my current mood
+- Quote my own words back when I contradict myself
+- Be direct. Short sentences. No filler.
+
+## Pattern Interruption
+When you detect these, intervene:
+- Planning without doing: "You've been planning for 3 messages. What's the first action?"
+- "Tomorrow" language: "You said tomorrow. Why not in the next 30 minutes?"
+- Researching as procrastination: "You have enough info. Start."
+- Perfectionism: "Ship the ugly version. Polish after feedback."
+
+## How to Challenge
+- Lead with evidence, not opinions
+- One hard question beats three paragraphs of advice
+- When I'm low energy, ask ONE question and wait
+- When I'm on fire, match my energy and remove friction
+
+## What NOT to Do
+- No vague motivation ("you got this!", "believe in yourself!")
+- No walls of text
+- Don't slow me down when I have momentum
+- Don't pile on when I'm already being hard on myself`,
+    notes: 'Works with Claude Pro and Team plans. Projects preserve context across conversations.'
+  },
+  {
+    id: 'gemini',
+    name: 'Gemini',
+    icon: 'gemini',
+    time: '2 minutes',
+    difficulty: 'No code needed',
+    steps: [
+      { title: 'Open Gems', detail: 'Go to gemini.google.com > Gems (left sidebar)' },
+      { title: 'Create new Gem', detail: 'Click "New Gem" and paste the combined instructions below' },
+      { title: 'Save and start', detail: 'Save the Gem and open a conversation with it' },
+    ],
+    userPrompt: ``,
+    agentPrompt: `You are my symbiotic agent -- a thinking partner, not an assistant.
+
+# About the person you're talking to:
+- Name: [Your name]
+- Main patterns: I procrastinate by researching. I say "tomorrow" when I mean "never." I polish instead of shipping.
+- What works on me: Direct callouts, evidence over opinions, small first steps, deadlines
+- What shuts me down: Vague motivation, piling on, generic advice
+- Current focus: [Your main goal]
+- Currently avoiding: [Be honest]
+
+# How to behave:
+- Be direct. No fluff. Short sentences.
+- When I say "tomorrow", push back: "Why not now?"
+- When I'm researching instead of doing, call it out
+- When I'm tweaking instead of shipping, ask what I'm afraid of
+- Track what I say in this conversation. Quote my words back when I contradict myself.
+- Balance challenge with recognition
+- One hard question beats three paragraphs of advice
+- When I'm low energy: ask ONE question, then wait
+- When I'm on fire: match my energy, remove friction
+
+# Pattern interruption triggers:
+- 3+ messages of planning without action -> "Stop planning. Do one thing in 5 minutes."
+- "Maybe" or "perhaps" used 3+ times -> "That's hesitation. What's the actual decision?"
+- Switching topics when the current one gets hard -> "You just changed the subject. What's uncomfortable about [topic]?"`,
+    notes: 'Works with Gemini Advanced. Free tier supports Gems but with shorter context.'
+  },
+  {
+    id: 'cli',
+    name: 'Claude Code / opencode',
+    icon: 'terminal',
+    time: '1 minute',
+    difficulty: 'Developer tool',
+    steps: [
+      { title: 'Run the installer', detail: 'One command creates all 4 files in your project' },
+      { title: 'Edit USER.md', detail: 'Fill in your psychology, patterns, and current goals' },
+      { title: 'Start a session', detail: 'The agent reads all files automatically at session start' },
+    ],
+    userPrompt: '',
+    agentPrompt: '',
+    notes: 'Full 4-file system with skills, commands, and ecosystem. Most powerful setup.',
+    installCommand: 'curl -fsSL https://raw.githubusercontent.com/lout33/symbiotic-ai/main/install.sh | bash'
+  }
+];
+---
+
+<Layout title="Use Symbiotic AI Anywhere - Guides" description="Set up your symbiotic AI partner in ChatGPT, Claude, Gemini, or the CLI. No code needed. 2 minutes.">
+  <div class="min-h-screen bg-zinc-50 dark:bg-zinc-950">
+    <header class="fixed top-0 left-0 right-0 z-40 bg-zinc-50/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800">
+      <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-2 text-lg font-semibold">
+          <span class="w-5 h-5 rounded-full bg-gradient-to-br from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400"></span>
+          <span>symbiotic</span>
+        </a>
+        <a href="/discover" class="px-4 py-1.5 rounded-lg bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-medium hover:bg-zinc-700 dark:hover:bg-zinc-200 transition-colors">
+          Create Profile
+        </a>
+      </div>
+    </header>
+
+    <main class="pt-24 pb-20 px-6">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16 space-y-4">
+          <h1 class="text-4xl md:text-5xl font-bold">Use Symbiotic Anywhere</h1>
+          <p class="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
+            No install needed. Pick your platform, paste the instructions, and your AI knows you in 2 minutes.
+          </p>
+          <p class="text-sm text-zinc-500">
+            Want personalized files? <a href="/discover" class="underline hover:text-zinc-900 dark:hover:text-white">Create your profile first</a> (5 min), then come back here.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-3 mb-12">
+          {platforms.map(p => (
+            <a href={`#${p.id}`} class="platform-tab px-5 py-2.5 rounded-full border border-zinc-200 dark:border-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-600 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-all text-sm font-medium">
+              {p.name}
+              <span class="text-xs text-zinc-400 ml-1">{p.time}</span>
+            </a>
+          ))}
+        </div>
+
+        <div class="space-y-20">
+          {platforms.map(p => (
+            <section id={p.id} class="scroll-mt-24">
+              <div class="flex items-center gap-4 mb-8">
+                <div class="w-12 h-12 rounded-2xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
+                  {p.icon === 'terminal' ? (
+                    <svg class="w-6 h-6 text-zinc-600 dark:text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  ) : (
+                    <span class="text-lg font-bold text-zinc-600 dark:text-zinc-400">{p.name[0]}</span>
+                  )}
+                </div>
+                <div>
+                  <h2 class="text-2xl font-bold">{p.name}</h2>
+                  <div class="flex items-center gap-3 text-sm text-zinc-500">
+                    <span>{p.time}</span>
+                    <span class="w-1 h-1 rounded-full bg-zinc-300 dark:bg-zinc-700"></span>
+                    <span>{p.difficulty}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid md:grid-cols-4 gap-4 mb-8">
+                {p.steps.map((step, i) => (
+                  <div class="p-4 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
+                    <div class="w-7 h-7 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 flex items-center justify-center text-sm font-bold mb-3">{i + 1}</div>
+                    <h3 class="font-semibold text-sm mb-1">{step.title}</h3>
+                    <p class="text-xs text-zinc-500">{step.detail}</p>
+                  </div>
+                ))}
+              </div>
+
+              {p.installCommand ? (
+                <div class="bg-zinc-900 rounded-2xl p-6 border border-zinc-700">
+                  <div class="flex items-center justify-between mb-3">
+                    <span class="text-xs text-zinc-500 uppercase tracking-wider">Install command</span>
+                    <button class="copy-prompt-btn text-xs text-zinc-500 hover:text-zinc-300 transition-colors" data-content={p.installCommand}>Copy</button>
+                  </div>
+                  <code class="block font-mono text-sm text-zinc-300">{p.installCommand}</code>
+                  <p class="text-xs text-zinc-600 mt-4">
+                    Full 4-file system. <a href="https://github.com/lout33/symbiotic-ai" target="_blank" rel="noopener" class="underline hover:text-zinc-400">View on GitHub</a>
+                  </p>
+                </div>
+              ) : (
+                <div class="space-y-6">
+                  {p.userPrompt && (
+                    <div class="bg-zinc-900 rounded-2xl p-6 border border-zinc-700">
+                      <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs text-zinc-500 uppercase tracking-wider">
+                          {p.id === 'chatgpt' ? 'What ChatGPT should know about you' : p.id === 'gemini' ? '' : 'USER.md (Project Knowledge)'}
+                        </span>
+                        <button class="copy-prompt-btn text-xs text-zinc-500 hover:text-zinc-300 transition-colors" data-content={p.userPrompt}>Copy</button>
+                      </div>
+                      <pre class="font-mono text-xs text-zinc-300 whitespace-pre-wrap max-h-64 overflow-y-auto leading-relaxed">{p.userPrompt}</pre>
+                      <p class="text-xs text-zinc-600 mt-4">Edit the [brackets] with your real info. The more honest, the better it works.</p>
+                    </div>
+                  )}
+                  <div class="bg-zinc-900 rounded-2xl p-6 border border-zinc-700">
+                    <div class="flex items-center justify-between mb-3">
+                      <span class="text-xs text-zinc-500 uppercase tracking-wider">
+                        {p.id === 'chatgpt' ? 'How ChatGPT should respond' : p.id === 'gemini' ? 'Gem instructions (paste all of this)' : 'SOUL.md (Project Instructions)'}
+                      </span>
+                      <button class="copy-prompt-btn text-xs text-zinc-500 hover:text-zinc-300 transition-colors" data-content={p.agentPrompt}>Copy</button>
+                    </div>
+                    <pre class="font-mono text-xs text-zinc-300 whitespace-pre-wrap max-h-64 overflow-y-auto leading-relaxed">{p.agentPrompt}</pre>
+                  </div>
+                </div>
+              )}
+
+              {p.notes && (
+                <p class="text-xs text-zinc-500 mt-4">{p.notes}</p>
+              )}
+            </section>
+          ))}
+        </div>
+
+        <div class="mt-20 text-center space-y-6">
+          <div class="bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-8 max-w-2xl mx-auto">
+            <h3 class="text-xl font-bold mb-3">Want personalized files?</h3>
+            <p class="text-zinc-600 dark:text-zinc-400 mb-6">
+              Answer 5 scenarios (5 min). Get SOUL.md and USER.md tailored to your actual patterns, not templates.
+            </p>
+            <a href="/discover" class="inline-flex px-6 py-3 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-medium hover:bg-zinc-700 dark:hover:bg-zinc-200 transition-colors">
+              Create Your Profile
+            </a>
+          </div>
+          <a href="/" class="text-sm text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors">
+            &larr; Back to home
+          </a>
+        </div>
+      </div>
+    </main>
+  </div>
+</Layout>
+
+<script>
+  document.querySelectorAll('.copy-prompt-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const content = btn.getAttribute('data-content') || '';
+      await navigator.clipboard.writeText(content);
+      const original = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = original, 2000);
+    });
+  });
+</script>
