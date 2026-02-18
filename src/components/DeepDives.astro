@@ -1,0 +1,75 @@
+---
+const articles = [
+  {
+    title: '878 conversations with AI: I gave it my psychology and it predicts my behavior',
+    description: '86 days. 40,417 messages. Queried the database. Found loops, "tomorrow" patterns, and the 30% productivity tax.',
+    url: 'https://luisfernandoyt.makestudio.app/blog/878-conversations-with-ai',
+    date: 'Feb 2026',
+    tag: 'Data',
+    stats: '5.8K+ views'
+  },
+  {
+    title: 'The Symbiotic Experiment: What Happens When You Fully Integrate AI',
+    description: 'Not your data. Your mind. Goals, fears, patterns of self-sabotage. What happens when it remembers everything?',
+    url: 'https://luisfernandoyt.makestudio.app/blog/the-symbiotic-experiment',
+    date: 'Feb 2026',
+    tag: 'Philosophy',
+    stats: 'Series'
+  },
+  {
+    title: 'How I Use AI to Fix My Mental Bugs',
+    description: 'The AI compiled a list of psychological bugs from watching me repeat patterns. I didn\'t write them. It noticed.',
+    url: 'https://luisfernandoyt.makestudio.app/blog/ai-fix-mental-bugs',
+    date: '2025',
+    tag: 'Personal',
+    stats: ''
+  },
+];
+---
+
+<section id="writing" class="py-24 px-6 bg-zinc-100 dark:bg-zinc-950">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-4 text-zinc-900 dark:text-white">Deep Dives</h2>
+      <p class="text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">
+        What actually happens when you run this system for months. Real data, real patterns, no hype.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      {articles.map(article => (
+        <a href={article.url} target="_blank" rel="noopener"
+           class="group block p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:border-zinc-400 dark:hover:border-zinc-600 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-all duration-300">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="text-xs px-2.5 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 font-medium">
+              {article.tag}
+            </span>
+            <span class="text-xs text-zinc-400 dark:text-zinc-600">{article.date}</span>
+            {article.stats && (
+              <span class="text-xs text-zinc-400 dark:text-zinc-600 ml-auto">{article.stats}</span>
+            )}
+          </div>
+          <h3 class="font-bold text-lg text-zinc-900 dark:text-white mb-3 leading-tight group-hover:text-zinc-700 dark:group-hover:text-zinc-200 transition-colors">
+            {article.title}
+          </h3>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            {article.description}
+          </p>
+          <div class="mt-4 text-sm text-zinc-400 dark:text-zinc-600 group-hover:text-zinc-600 dark:group-hover:text-zinc-400 transition-colors flex items-center gap-1">
+            Read
+            <svg class="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="text-center mt-10">
+      <a href="https://luisfernandoyt.makestudio.app/#writing" target="_blank" rel="noopener"
+         class="text-sm text-zinc-500 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors">
+        All writing &rarr;
+      </a>
+    </div>
+  </div>
+</section>
