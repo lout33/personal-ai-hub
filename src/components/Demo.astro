@@ -1,5 +1,32 @@
 ---
 const tabs = {
+  memory: {
+    label: 'Challenge',
+    description: 'Catches your patterns. Quotes your own words. Won\'t let you lie to yourself.',
+    conversation: [
+      {
+        type: 'notification',
+        content: 'Session started',
+        time: '10:00 AM'
+      },
+      {
+        type: 'user',
+        content: "Let's reorganize the file structure. I think we need a better system for--"
+      },
+      {
+        type: 'agent',
+        content: "Stop. You said this 3 times in the last 2 weeks:\n\nFeb 1: \"Let's restructure the project\"\nFeb 7: \"I think we need better organization\"\nFeb 14: Right now.\n\nNothing shipped between any of those. The structure is fine. What's the actual thing you're avoiding?"
+      },
+      {
+        type: 'user',
+        content: "...the demo video. I keep putting it off."
+      },
+      {
+        type: 'agent',
+        content: "There it is. Record one take. Ugly is fine. Ship it today.\n\nNOW.md updated: MIT = Record demo video (no editing, just ship)"
+      }
+    ]
+  },
   accountability: {
     label: 'Accountability',
     description: 'Watches your screen. Quiet when focused. Direct when you drift.',
@@ -48,64 +75,6 @@ const tabs = {
         tone: 'aligned'
       }
     ]
-  },
-  radar: {
-    label: 'Radar',
-    description: 'Scans the web. Surfaces what matters. Shifts your priorities.',
-    conversation: [
-      {
-        type: 'notification',
-        content: 'Radar: Daily scan complete',
-        time: '9:15 AM'
-      },
-      {
-        type: 'system',
-        content: 'Scanning HN, X, GitHub trending...\nCross-referencing with GOALS.md...'
-      },
-      {
-        type: 'agent',
-        content: "Found 3 things relevant to you today:\n\n1. OpenAI just released a new embedding model at half the cost. Your RAG pipeline's budget just dropped 50%.\n2. A Show HN post similar to yours hit #4 with 200+ points. Their angle: open-source personal AI. Sound familiar?\n3. YC W26 application closes TODAY at 8pm PT. You said \"someday.\" Today is someday."
-      },
-      {
-        type: 'user',
-        content: "The YC one. Let's do it."
-      },
-      {
-        type: 'system',
-        content: "NOW.md updated:\n\n# QUEUE\n- [ ] YC W26 Application - URGENT - Due 8pm PT today\n- [ ] Ship landing page (moved to tomorrow)"
-      },
-      {
-        type: 'agent',
-        content: "Priorities shifted. Let's write an application that ships. Not a perfect one. A real one.\n\nFirst question: Describe what your company does in 50 characters or less."
-      }
-    ]
-  },
-  memory: {
-    label: 'Memory',
-    description: 'Remembers across sessions. Catches patterns. Quotes your own words.',
-    conversation: [
-      {
-        type: 'notification',
-        content: 'Session started',
-        time: '10:00 AM'
-      },
-      {
-        type: 'user',
-        content: "Let's reorganize the file structure. I think we need a better system for--"
-      },
-      {
-        type: 'agent',
-        content: "Stop. You said this 3 times in the last 2 weeks:\n\nFeb 1: \"Let's restructure the project\"\nFeb 7: \"I think we need better organization\"\nFeb 14: Right now.\n\nNothing shipped between any of those. The structure is fine. What's the actual thing you're avoiding?"
-      },
-      {
-        type: 'user',
-        content: "...the demo video. I keep putting it off."
-      },
-      {
-        type: 'agent',
-        content: "There it is. Record one take. Ugly is fine. Ship it today.\n\nNOW.md updated: MIT = Record demo video (no editing, just ship)"
-      }
-    ]
   }
 };
 
@@ -136,7 +105,7 @@ const tabKeys = Object.keys(tabs);
     <div class="text-center mb-12">
       <h2 class="text-3xl font-bold mb-4">See It In Action</h2>
       <p class="text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">
-        Three capabilities. Three real scenarios. Click through each one.
+        Real scenarios from real sessions. Click through each one.
       </p>
     </div>
 
@@ -201,16 +170,12 @@ const tabKeys = Object.keys(tabs);
 
     <div class="flex items-center justify-center gap-6 mt-6 text-sm text-zinc-500">
       <div class="flex items-center gap-2">
+        <div class="w-2 h-2 rounded-full bg-amber-500"></div>
+        <span>Pattern detection</span>
+      </div>
+      <div class="flex items-center gap-2">
         <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
         <span>Screen monitoring</span>
-      </div>
-      <div class="flex items-center gap-2">
-        <div class="w-2 h-2 rounded-full bg-blue-500"></div>
-        <span>Web intelligence</span>
-      </div>
-      <div class="flex items-center gap-2">
-        <div class="w-2 h-2 rounded-full bg-amber-500"></div>
-        <span>Cross-session memory</span>
       </div>
     </div>
   </div>
