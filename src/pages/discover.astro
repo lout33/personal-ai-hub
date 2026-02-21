@@ -25,7 +25,7 @@ import Layout from '../layouts/Layout.astro';
           <div class="space-y-4">
             <h1 class="text-3xl md:text-4xl font-bold">Create Your Profile</h1>
             <p class="text-lg text-zinc-600 dark:text-zinc-400 max-w-md mx-auto">
-              Answer 5 scenarios honestly. Get personalized SOUL.md and USER.md files that make any AI understand how you work.
+              Answer 8 scenarios honestly. Get all 4 symbiotic files personalized to how you think and work.
             </p>
           </div>
           
@@ -37,7 +37,7 @@ import Layout from '../layouts/Layout.astro';
                 </svg>
               </div>
               <div>
-                <p class="font-medium">5 scenarios, ~5 minutes</p>
+                <p class="font-medium">8 scenarios, ~7 minutes</p>
                 <p class="text-sm text-zinc-500">Be honest. The more real you are, the better this works.</p>
               </div>
             </div>
@@ -138,20 +138,34 @@ import Layout from '../layouts/Layout.astro';
             </div>
           </div>
           
-          <div class="grid md:grid-cols-2 gap-4">
+          <div class="space-y-4">
             <div class="space-y-2">
               <div class="flex items-center justify-between">
-                <h3 class="font-semibold">SOUL.md</h3>
+                <h3 class="font-semibold">SOUL.md <span class="text-xs text-zinc-500 font-normal">Agent personality</span></h3>
                 <button class="copy-btn text-sm text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300" data-target="soul-preview">Copy</button>
               </div>
-              <textarea id="soul-preview" class="w-full h-64 p-4 bg-zinc-900 text-zinc-100 rounded-xl font-mono text-xs resize-none focus:outline-none focus:ring-2 focus:ring-zinc-400 dark:ring-zinc-500"></textarea>
+              <textarea id="soul-preview" class="w-full h-48 p-4 bg-zinc-900 text-zinc-100 rounded-xl font-mono text-xs resize-none focus:outline-none focus:ring-2 focus:ring-zinc-400 dark:ring-zinc-500"></textarea>
             </div>
             <div class="space-y-2">
               <div class="flex items-center justify-between">
-                <h3 class="font-semibold">USER.md</h3>
+                <h3 class="font-semibold">USER.md <span class="text-xs text-zinc-500 font-normal">Your profile</span></h3>
                 <button class="copy-btn text-sm text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300" data-target="user-preview">Copy</button>
               </div>
-              <textarea id="user-preview" class="w-full h-64 p-4 bg-zinc-900 text-zinc-100 rounded-xl font-mono text-xs resize-none focus:outline-none focus:ring-2 focus:ring-zinc-400 dark:ring-zinc-500"></textarea>
+              <textarea id="user-preview" class="w-full h-48 p-4 bg-zinc-900 text-zinc-100 rounded-xl font-mono text-xs resize-none focus:outline-none focus:ring-2 focus:ring-zinc-400 dark:ring-zinc-500"></textarea>
+            </div>
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <h3 class="font-semibold">AGENTS.md <span class="text-xs text-zinc-500 font-normal">Operations</span></h3>
+                <button class="copy-btn text-sm text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300" data-target="agents-preview">Copy</button>
+              </div>
+              <textarea id="agents-preview" class="w-full h-48 p-4 bg-zinc-900 text-zinc-100 rounded-xl font-mono text-xs resize-none focus:outline-none focus:ring-2 focus:ring-zinc-400 dark:ring-zinc-500"></textarea>
+            </div>
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <h3 class="font-semibold">NOW.md <span class="text-xs text-zinc-500 font-normal">Current state</span></h3>
+                <button class="copy-btn text-sm text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300" data-target="now-preview">Copy</button>
+              </div>
+              <textarea id="now-preview" class="w-full h-48 p-4 bg-zinc-900 text-zinc-100 rounded-xl font-mono text-xs resize-none focus:outline-none focus:ring-2 focus:ring-zinc-400 dark:ring-zinc-500"></textarea>
             </div>
           </div>
           
@@ -160,7 +174,7 @@ import Layout from '../layouts/Layout.astro';
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
               </svg>
-              Download Both Files
+              Download All 4 Files
             </button>
             <a href="/" class="text-sm text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300">Back to home</a>
           </div>
@@ -553,6 +567,175 @@ import Layout from '../layouts/Layout.astro';
         };
         return bridges[choiceId] || "";
       }
+    },
+    {
+      id: "work_rhythm",
+      title: "Your Rhythm",
+      question: "When do you do your best, most focused work?",
+      choices: [
+        {
+          id: "morning",
+          label: "Morning (before noon)",
+          followUp: {
+            question: "What do you usually do in the afternoon when energy dips?",
+            type: "choice",
+            choices: [
+              { id: "lighter", label: "Lighter tasks, emails, admin" },
+              { id: "push", label: "Push through anyway" },
+              { id: "break", label: "Take a longer break, come back later" }
+            ]
+          }
+        },
+        {
+          id: "afternoon",
+          label: "Afternoon (noon to 6pm)",
+          followUp: {
+            question: "How do you use your mornings?",
+            type: "choice",
+            choices: [
+              { id: "warmup", label: "Warm up with easy tasks" },
+              { id: "planning", label: "Planning and organizing" },
+              { id: "variable", label: "Depends on the day" }
+            ]
+          }
+        },
+        {
+          id: "night",
+          label: "Night (after 6pm)",
+          followUp: {
+            question: "Do you struggle with consistent sleep?",
+            type: "choice",
+            choices: [
+              { id: "yes", label: "Yes, my schedule shifts a lot" },
+              { id: "no", label: "No, I sleep late but consistently" },
+              { id: "trying", label: "Trying to fix it" }
+            ]
+          }
+        },
+        {
+          id: "variable",
+          label: "It varies day to day",
+          followUp: {
+            question: "What determines when you're productive?",
+            type: "choice",
+            choices: [
+              { id: "deadlines", label: "Deadlines and pressure" },
+              { id: "mood", label: "My mood and energy" },
+              { id: "environment", label: "Environment and context" }
+            ]
+          }
+        }
+      ],
+      getInsight: function(choiceId) {
+        const insights = {
+          morning: "Morning peak. Your best thinking happens early.",
+          afternoon: "Afternoon peak. You need time to warm up.",
+          night: "Night owl. You come alive when others sleep.",
+          variable: "Variable rhythm. Context shapes your energy."
+        };
+        return insights[choiceId] || "";
+      },
+      getBridge: function(choiceId) {
+        const bridges = {
+          morning: "Your AI will know to front-load important work and protect your mornings.",
+          afternoon: "Your AI will help you use mornings strategically to set up afternoon focus.",
+          night: "Your AI will work with your night energy, not against it.",
+          variable: "Your AI will adapt to your current energy, not assume a fixed schedule."
+        };
+        return bridges[choiceId] || "";
+      }
+    },
+    {
+      id: "current_focus",
+      title: "Right Now",
+      question: "What's the main thing you're working on right now?",
+      choices: [
+        {
+          id: "text_input",
+          label: "_text_",
+          followUp: {
+            question: "What's blocking progress on this?",
+            type: "choice",
+            choices: [
+              { id: "time", label: "Not enough time" },
+              { id: "clarity", label: "Not sure what to do next" },
+              { id: "motivation", label: "Hard to stay motivated" },
+              { id: "nothing", label: "Nothing major, just doing it" }
+            ]
+          }
+        }
+      ],
+      getInsight: function(choiceId, followUp) {
+        const insights = {
+          time: "Time scarcity. You need help prioritizing ruthlessly.",
+          clarity: "Clarity gap. Breaking things down will help.",
+          motivation: "Motivation friction. Finding the why matters.",
+          nothing: "Clear path. You know what to do."
+        };
+        return insights[followUp || choiceId] || "";
+      },
+      getBridge: function(choiceId) {
+        const bridges = {
+          time: "Your AI will help you cut scope and focus on what matters most.",
+          clarity: "Your AI will help break down vague tasks into clear next steps.",
+          motivation: "Your AI will connect tasks to your deeper goals.",
+          nothing: "Your AI will stay out of your way and support your momentum."
+        };
+        return bridges[choiceId] || "";
+      }
+    },
+    {
+      id: "ai_autonomy",
+      title: "AI Autonomy",
+      question: "How much should your AI do without asking?",
+      choices: [
+        {
+          id: "high",
+          label: "A lot. Act first, tell me what you did.",
+          followUp: {
+            question: "What should it always ask about first?",
+            type: "text",
+            placeholder: "e.g., Anything involving money, Deleting files",
+            minChars: 5
+          }
+        },
+        {
+          id: "medium",
+          label: "Some. Small things yes, big things ask.",
+          followUp: {
+            question: "Give an example of a 'big thing' it should ask about:",
+            type: "text",
+            placeholder: "e.g., Sending emails, Making purchases",
+            minChars: 5
+          }
+        },
+        {
+          id: "low",
+          label: "Little. I want to approve most actions.",
+          followUp: {
+            question: "What can it do without asking?",
+            type: "text",
+            placeholder: "e.g., Research, Drafting text",
+            minChars: 5
+          }
+        }
+      ],
+      getInsight: function(choiceId) {
+        const insights = {
+          high: "High autonomy. You want an AI that acts, not asks.",
+          medium: "Balanced autonomy. You want judgment on what needs approval.",
+          low: "Low autonomy. You prefer control over speed."
+        };
+        return insights[choiceId] || "";
+      },
+      getBridge: function(choiceId) {
+        const bridges = {
+          high: "Your AI will act decisively and report what it did.",
+          medium: "Your AI will handle small things and escalate big decisions.",
+          low: "Your AI will propose actions and wait for your approval."
+        };
+        return bridges[choiceId] || "";
+      }
     }
   ];
 
@@ -685,6 +868,24 @@ import Layout from '../layouts/Layout.astro';
         state.answers.delayedTask = textInput.value.trim();
         showFollowUp(scenario.choices[0].followUp);
       };
+    } else if (scenario.id === 'current_focus') {
+      textInputContainer.classList.remove('hidden');
+      textInput.value = '';
+      textInput.placeholder = 'e.g., "Building my startup", "Learning a new skill", "Job search"';
+      charCount.textContent = '5+ characters';
+      submitTextBtn.disabled = true;
+      
+      textInput.oninput = () => {
+        const len = textInput.value.trim().length;
+        charCount.textContent = len < 5 ? `${5 - len} more characters needed` : 'Good';
+        charCount.className = len < 5 ? 'text-sm text-amber-500' : 'text-sm text-zinc-700 dark:text-zinc-300';
+        submitTextBtn.disabled = len < 5;
+      };
+      
+      submitTextBtn.onclick = () => {
+        state.answers.currentFocusText = textInput.value.trim();
+        showFollowUp(scenario.choices[0].followUp);
+      };
     } else {
       scenario.choices.forEach(choice => {
         const btn = document.createElement('button');
@@ -811,6 +1012,21 @@ import Layout from '../layouts/Layout.astro';
       deadline: 'Deadline-driven. Use time constraints to focus.',
       reframe: 'Perspective shifts. Help see things differently.'
     };
+
+    const autonomyChoice = state.answers.aiAutonomy || 'medium';
+    const autonomyMap = {
+      high: 'High. Act first, report what you did. Only ask about: ' + (state.answers.autonomyException || 'major decisions'),
+      medium: 'Medium. Handle small things, ask on big decisions like: ' + (state.answers.autonomyException || 'anything irreversible'),
+      low: 'Low. Propose actions, wait for approval. Can act freely on: ' + (state.answers.autonomyException || 'research and drafts')
+    };
+
+    const rhythmChoice = state.answers.workRhythm || 'variable';
+    const rhythmMap = {
+      morning: 'Peak hours: Morning (before noon). Protect this time for deep work.',
+      afternoon: 'Peak hours: Afternoon (noon-6pm). Use mornings for warm-up.',
+      night: 'Peak hours: Night (after 6pm). Respect the night owl schedule.',
+      variable: 'Variable rhythm. Adapt to current energy, not fixed schedule.'
+    };
     
     let soulMd = `# SOUL.md - Agent Identity
 
@@ -823,7 +1039,7 @@ Ask me what name I prefer, or give me one yourself.
 
 - **Challenge style:** ${challengeMap[challengeChoice] || challengeMap.direct}
 - **Communication:** Direct but supportive. No fluff.
-- **Autonomy:** Act on small things, ask on big decisions.
+- **Autonomy:** ${autonomyMap[autonomyChoice] || autonomyMap.medium}
 
 ## Rules
 
@@ -859,16 +1075,103 @@ ${state.answers.delayedTask ? `### Currently Avoiding
 
 ${challengeMap[challengeChoice] || 'Direct accountability.'}
 
+### Energy Rhythm
+
+${rhythmMap[rhythmChoice] || rhythmMap.variable}
+
 ## Notes
 
 Generated via Symbiotic Discover on ${new Date().toLocaleDateString()}
 `;
 
-    return { soulMd, userMd, topPatterns };
+    let agentsMd = `# AGENTS.md - Operations
+
+## Session Start
+
+At the start of every session:
+1. Read SOUL.md, USER.md, and NOW.md
+2. Note current date/time
+3. Check what's in progress
+
+## How We Work
+
+- **Autonomy level:** ${autonomyMap[autonomyChoice] || autonomyMap.medium}
+- **Challenge approach:** ${challengeMap[challengeChoice] || challengeMap.direct}
+
+## Anti-Patterns to Watch
+
+${topPatterns.map(p => `- **${patternDescriptions[p]?.name || p}:** ${patternDescriptions[p]?.description || ''}`).join('\n')}
+
+## Pattern Triggers
+
+When you notice these patterns emerging, call them out using the challenge style above.
+
+## Session End
+
+- Update NOW.md with progress
+- Note any patterns that appeared
+- Capture any insights worth remembering
+
+---
+
+*Generated via Symbiotic Discover on ${new Date().toLocaleDateString()}*
+`;
+
+    const currentFocus = state.answers.currentFocus || 'Not specified';
+    const currentBlocker = state.answers.currentBlocker || 'none';
+    const blockerMap = {
+      time: 'Time scarcity - need to prioritize ruthlessly',
+      clarity: 'Clarity gap - need to break this down',
+      motivation: 'Motivation friction - reconnect to the why',
+      nothing: 'Clear path - just executing'
+    };
+
+    let nowMd = `# NOW.md - Current State
+
+**Updated:** ${new Date().toLocaleDateString()} | **Mode:** BUILDER
+
+---
+
+## Current Focus
+
+${currentFocus}
+
+${currentBlocker !== 'nothing' && currentBlocker !== 'none' ? `**Blocker:** ${blockerMap[currentBlocker] || 'Unknown'}` : ''}
+
+---
+
+## Today
+
+- [ ] ${currentFocus !== 'Not specified' ? currentFocus : 'Define your main task'}
+
+---
+
+## Queue
+
+- [ ] (add your next priorities here)
+
+---
+
+## Backlog
+
+- (add longer-term items here)
+
+---
+
+## Energy
+
+${rhythmMap[rhythmChoice] || rhythmMap.variable}
+
+---
+
+*Generated via Symbiotic Discover on ${new Date().toLocaleDateString()}*
+`;
+
+    return { soulMd, userMd, agentsMd, nowMd, topPatterns };
   }
 
   function showResults() {
-    const { soulMd, userMd, topPatterns } = generateFiles();
+    const { soulMd, userMd, agentsMd, nowMd, topPatterns } = generateFiles();
     
     const patternsSummary = document.getElementById('patterns-summary');
     patternsSummary.innerHTML = topPatterns.map(p => `
@@ -890,6 +1193,8 @@ Generated via Symbiotic Discover on ${new Date().toLocaleDateString()}
     
     document.getElementById('soul-preview').value = soulMd;
     document.getElementById('user-preview').value = userMd;
+    document.getElementById('agents-preview').value = agentsMd;
+    document.getElementById('now-preview').value = nowMd;
     
     showScreen(resultsScreen);
   }
@@ -915,6 +1220,8 @@ Generated via Symbiotic Discover on ${new Date().toLocaleDateString()}
   document.getElementById('download-btn').addEventListener('click', () => {
     const soulContent = document.getElementById('soul-preview').value;
     const userContent = document.getElementById('user-preview').value;
+    const agentsContent = document.getElementById('agents-preview').value;
+    const nowContent = document.getElementById('now-preview').value;
     
     const downloadFile = (content, filename) => {
       const blob = new Blob([content], { type: 'text/markdown' });
@@ -930,6 +1237,8 @@ Generated via Symbiotic Discover on ${new Date().toLocaleDateString()}
     
     downloadFile(soulContent, 'SOUL.md');
     setTimeout(() => downloadFile(userContent, 'USER.md'), 100);
+    setTimeout(() => downloadFile(agentsContent, 'AGENTS.md'), 200);
+    setTimeout(() => downloadFile(nowContent, 'NOW.md'), 300);
   });
 
   document.querySelectorAll('.copy-btn').forEach(btn => {
@@ -946,6 +1255,29 @@ Generated via Symbiotic Discover on ${new Date().toLocaleDateString()}
       const originalGetInsight = s.getInsight;
       s.getInsight = (choiceId, followUp) => {
         state.answers.challengeStyle = choiceId;
+        return originalGetInsight ? originalGetInsight(choiceId, followUp) : "";
+      };
+    }
+    if (s.id === "work_rhythm") {
+      const originalGetInsight = s.getInsight;
+      s.getInsight = (choiceId, followUp) => {
+        state.answers.workRhythm = choiceId;
+        return originalGetInsight ? originalGetInsight(choiceId, followUp) : "";
+      };
+    }
+    if (s.id === "current_focus") {
+      const originalGetInsight = s.getInsight;
+      s.getInsight = (choiceId, followUp) => {
+        state.answers.currentFocus = state.answers.currentFocusText || 'Not specified';
+        state.answers.currentBlocker = followUp || choiceId;
+        return originalGetInsight ? originalGetInsight(choiceId, followUp) : "";
+      };
+    }
+    if (s.id === "ai_autonomy") {
+      const originalGetInsight = s.getInsight;
+      s.getInsight = (choiceId, followUp) => {
+        state.answers.aiAutonomy = choiceId;
+        state.answers.autonomyException = state.followUpAnswer || '';
         return originalGetInsight ? originalGetInsight(choiceId, followUp) : "";
       };
     }
