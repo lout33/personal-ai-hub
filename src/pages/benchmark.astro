@@ -3,8 +3,8 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout 
-  title="Find Your AI Match - Personal AI Benchmark" 
-  description="Discover which AI model fits your thinking style. Take the 2-minute quiz and get personalized results."
+  title="Find Your AI Match - Which AI Thinks Like You?" 
+  description="Claude, GPT, or Gemini? Take this 2-minute quiz to discover which AI model fits your thinking style. Based on real personality research."
   canonicalURL="https://symbiotic.makestudio.app/benchmark"
 >
   <div class="min-h-screen flex flex-col bg-zinc-50 dark:bg-zinc-950">
@@ -16,7 +16,7 @@ import Layout from '../layouts/Layout.astro';
             <div class="flex-1 h-1 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden">
               <div id="progress-bar" class="h-full bg-zinc-900 dark:bg-white transition-all duration-500" style="width: 0%"></div>
             </div>
-            <span id="step-counter" class="text-sm text-zinc-500 tabular-nums">1/8</span>
+            <span id="step-counter" class="text-sm text-zinc-500 tabular-nums">1/7</span>
           </div>
         </div>
       </div>
@@ -28,20 +28,20 @@ import Layout from '../layouts/Layout.astro';
         <!-- Welcome Screen -->
         <div id="welcome-screen" class="text-center space-y-8">
           <div class="space-y-4">
-            <h1 class="text-3xl md:text-4xl font-bold">Find Your AI Match</h1>
+            <h1 class="text-3xl md:text-4xl font-bold">Which AI Thinks Like You?</h1>
             <p class="text-lg text-zinc-600 dark:text-zinc-400 max-w-md mx-auto">
-              Answer 8 questions about how you think and work. Get a personalized AI recommendation in 2 minutes.
+              Claude, GPT, and Gemini have different personalities. Find which one matches how you actually think.
             </p>
           </div>
           
           <div class="bg-zinc-100 dark:bg-zinc-900 rounded-2xl p-6 text-left space-y-4 max-w-md mx-auto">
             <div class="flex items-start gap-3">
               <div class="w-8 h-8 rounded-full bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <span class="text-sm">🧠</span>
+                <span class="text-sm">🔬</span>
               </div>
               <div>
-                <p class="font-medium">Claude, GPT-4, or Gemini?</p>
-                <p class="text-sm text-zinc-500">Different AI models suit different thinking styles.</p>
+                <p class="font-medium">Based on real research</p>
+                <p class="text-sm text-zinc-500">Questions mapped to measured AI personality differences.</p>
               </div>
             </div>
             <div class="flex items-start gap-3">
@@ -49,72 +49,101 @@ import Layout from '../layouts/Layout.astro';
                 <span class="text-sm">⚡</span>
               </div>
               <div>
-                <p class="font-medium">2 minutes, 8 questions</p>
-                <p class="text-sm text-zinc-500">Be honest. There's no wrong answer.</p>
+                <p class="font-medium">7 questions, 2 minutes</p>
+                <p class="text-sm text-zinc-500">Pick what feels right, not what sounds good.</p>
               </div>
             </div>
           </div>
           
           <button id="start-btn" class="px-8 py-3 bg-zinc-900 dark:bg-white hover:bg-zinc-700 dark:hover:bg-zinc-200 text-white dark:text-zinc-900 font-medium rounded-xl transition-colors">
-            Start Quiz
+            Find My Match
           </button>
         </div>
 
         <!-- Question Screen -->
         <div id="question-screen" class="hidden space-y-6">
+          <div id="scenario-label" class="text-xs font-medium text-zinc-500 uppercase tracking-wider"></div>
           <h2 id="question-text" class="text-xl md:text-2xl font-semibold leading-relaxed"></h2>
           <p id="question-subtext" class="text-zinc-500 text-sm hidden"></p>
           
           <div id="options-container" class="space-y-3"></div>
         </div>
 
+        <!-- Analyzing Screen -->
+        <div id="analyzing-screen" class="hidden text-center space-y-6">
+          <div class="space-y-4">
+            <div class="w-16 h-16 mx-auto rounded-full bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center">
+              <svg class="w-8 h-8 text-zinc-400 animate-spin" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+            </div>
+            <h2 class="text-xl font-semibold">Analyzing your responses...</h2>
+            <p id="analyzing-text" class="text-zinc-500">Matching your thinking style</p>
+          </div>
+        </div>
+
         <!-- Results Screen -->
         <div id="results-screen" class="hidden space-y-8">
           
           <!-- Result Card (Screenshot-friendly) -->
-          <div id="result-card" class="bg-zinc-900 text-white rounded-2xl p-8 space-y-6">
-            <div class="text-center space-y-1">
-              <p class="text-zinc-400 text-sm uppercase tracking-wide">Your AI Match</p>
+          <div id="result-card" class="bg-gradient-to-br from-zinc-900 to-zinc-800 text-white rounded-2xl p-8 space-y-6 shadow-2xl">
+            <div class="text-center space-y-2">
+              <p class="text-zinc-400 text-xs uppercase tracking-widest">Your AI Match</p>
               <div class="flex items-center justify-center gap-3">
-                <span id="result-icon" class="text-4xl"></span>
-                <h2 id="result-name" class="text-3xl font-bold"></h2>
+                <span id="result-icon" class="text-5xl"></span>
+                <div class="text-left">
+                  <h2 id="result-name" class="text-3xl font-bold"></h2>
+                  <p id="result-archetype" class="text-zinc-400 text-sm"></p>
+                </div>
               </div>
-              <p id="result-archetype" class="text-zinc-400"></p>
             </div>
             
-            <div class="text-center">
-              <p id="result-tagline" class="text-lg"></p>
-            </div>
-            
-            <div class="flex items-center justify-center gap-2">
+            <!-- Match bar -->
+            <div class="flex items-center justify-center gap-3">
               <div class="h-2 flex-1 bg-zinc-700 rounded-full overflow-hidden max-w-xs">
-                <div id="match-bar" class="h-full bg-gradient-to-r from-amber-500 to-orange-500 transition-all duration-1000" style="width: 0%"></div>
+                <div id="match-bar" class="h-full rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
               </div>
-              <span id="match-percentage" class="text-sm font-medium tabular-nums"></span>
+              <span id="match-percentage" class="text-sm font-bold tabular-nums"></span>
             </div>
             
-            <p class="text-center text-zinc-500 text-xs">symbiotic.makestudio.app/benchmark</p>
+            <!-- Quotable line -->
+            <div class="text-center py-2">
+              <p id="result-quotable" class="text-lg italic text-zinc-300"></p>
+            </div>
+            
+            <!-- Traits -->
+            <div id="traits-container" class="flex flex-wrap justify-center gap-2"></div>
+            
+            <p class="text-center text-zinc-600 text-xs pt-2">symbiotic.makestudio.app/benchmark</p>
           </div>
           
           <!-- Detailed Results -->
-          <div class="space-y-6">
-            <div class="bg-zinc-100 dark:bg-zinc-900 rounded-2xl p-6 space-y-4">
+          <div class="space-y-4">
+            <div class="bg-zinc-100 dark:bg-zinc-900 rounded-2xl p-6 space-y-3">
               <h3 class="font-semibold">Why <span id="why-model-name"></span>?</h3>
-              <p id="result-description" class="text-zinc-600 dark:text-zinc-400"></p>
+              <p id="result-description" class="text-zinc-600 dark:text-zinc-400 leading-relaxed"></p>
             </div>
             
-            <div class="bg-zinc-100 dark:bg-zinc-900 rounded-2xl p-6 space-y-4">
-              <h3 class="font-semibold">Strengths</h3>
-              <ul id="strengths-list" class="space-y-2"></ul>
-            </div>
-            
-            <div class="bg-zinc-100 dark:bg-zinc-900 rounded-2xl p-6 space-y-4">
-              <h3 class="font-semibold">Best For</h3>
+            <div class="bg-zinc-100 dark:bg-zinc-900 rounded-2xl p-6 space-y-3">
+              <h3 class="font-semibold">Best for</h3>
               <p id="best-for-text" class="text-zinc-600 dark:text-zinc-400"></p>
             </div>
             
-            <div class="bg-zinc-100 dark:bg-zinc-900 rounded-2xl p-6 space-y-4">
-              <h3 class="font-semibold">Runner Up: <span id="runner-up-name"></span></h3>
+            <div class="bg-zinc-100 dark:bg-zinc-900 rounded-2xl p-6 space-y-3">
+              <h3 class="font-semibold">Watch out for</h3>
+              <p id="watch-out-text" class="text-zinc-600 dark:text-zinc-400"></p>
+            </div>
+            
+            <div class="bg-zinc-100 dark:bg-zinc-900 rounded-2xl p-6 space-y-3">
+              <div class="flex items-center justify-between">
+                <h3 class="font-semibold">Runner up</h3>
+                <span id="runner-up-percentage" class="text-sm text-zinc-500"></span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span id="runner-up-icon" class="text-xl"></span>
+                <span id="runner-up-name" class="font-medium"></span>
+              </div>
               <p id="runner-up-description" class="text-zinc-600 dark:text-zinc-400 text-sm"></p>
             </div>
           </div>
@@ -122,28 +151,30 @@ import Layout from '../layouts/Layout.astro';
           <!-- Actions -->
           <div class="flex flex-col items-center gap-4">
             <button id="share-btn" class="px-8 py-3 bg-zinc-900 dark:bg-white hover:bg-zinc-700 dark:hover:bg-zinc-200 text-white dark:text-zinc-900 font-medium rounded-xl transition-colors flex items-center gap-2">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
               </svg>
-              Share on X
+              Share Result
             </button>
             <button id="retake-btn" class="text-sm text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300">
               Retake Quiz
             </button>
-            <a href="/" class="text-sm text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300">
-              Learn about Symbiotic AI
-            </a>
           </div>
           
           <!-- CTA -->
-          <div class="bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-3">
-            <h3 class="font-semibold">Make any AI understand you better</h3>
+          <div class="bg-gradient-to-br from-zinc-100 to-zinc-50 dark:from-zinc-900 dark:to-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-2xl p-6 space-y-3">
+            <h3 class="font-semibold">Make any AI understand you</h3>
             <p class="text-sm text-zinc-600 dark:text-zinc-400">
-              Symbiotic AI is a 4-file system that gives any AI model your context, psychology, and working style. Works with Claude, ChatGPT, Gemini, and more.
+              Symbiotic AI gives any model your context, psychology, and working style. Your AI match is just the start.
             </p>
-            <a href="/discover" class="inline-block mt-2 px-6 py-2 bg-zinc-900 dark:bg-white hover:bg-zinc-700 dark:hover:bg-zinc-200 text-white dark:text-zinc-900 text-sm font-medium rounded-xl transition-colors">
-              Create Your Profile
-            </a>
+            <div class="flex gap-3 pt-2">
+              <a href="/discover" class="px-5 py-2 bg-zinc-900 dark:bg-white hover:bg-zinc-700 dark:hover:bg-zinc-200 text-white dark:text-zinc-900 text-sm font-medium rounded-xl transition-colors">
+                Create Profile
+              </a>
+              <a href="/" class="px-5 py-2 border border-zinc-300 dark:border-zinc-600 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-sm font-medium rounded-xl transition-colors">
+                Learn More
+              </a>
+            </div>
           </div>
         </div>
         
@@ -153,115 +184,206 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <script>
-  // Questions data (embedded for simplicity)
+  // V2 Questions - Scenario-based, mapped to real AI differences
   const questions = [
     {
-      id: "response_style",
-      question: "How do you prefer AI responses?",
-      subtext: "Think about what actually helps you, not what sounds good.",
+      id: "idea_response",
+      scenario: "The Idea Test",
+      question: "You share a business idea with your AI. What response do you want?",
       options: [
-        { id: "concise", label: "Short and direct. Get to the point.", scores: { claude: 1, gpt: 0, gemini: 3 } },
-        { id: "balanced", label: "Balanced. Enough detail without overwhelming.", scores: { claude: 3, gpt: 2, gemini: 1 } },
-        { id: "detailed", label: "Thorough and comprehensive. I want depth.", scores: { claude: 2, gpt: 3, gemini: 0 } }
+        { 
+          id: "challenge", 
+          label: "\"I see three problems with this. Let me explain...\"",
+          scores: { claude: 3, gpt: 0, gemini: 1 } 
+        },
+        { 
+          id: "enthusiastic", 
+          label: "\"Great idea! Here's how to make it even better...\"",
+          scores: { claude: 0, gpt: 3, gemini: 1 } 
+        },
+        { 
+          id: "practical", 
+          label: "\"Here's a quick implementation plan. What's first?\"",
+          scores: { claude: 1, gpt: 1, gemini: 3 } 
+        }
       ]
     },
     {
-      id: "pushback",
-      question: "When you share an idea, what do you want?",
+      id: "feedback_style",
+      scenario: "The Review",
+      question: "You ask the AI to review your work. Ideally it would...",
       options: [
-        { id: "challenge", label: "Challenge it. Poke holes. Make it stronger.", scores: { claude: 3, gpt: 1, gemini: 1 } },
-        { id: "build", label: "Build on it. Help me develop it further.", scores: { claude: 2, gpt: 3, gemini: 1 } },
-        { id: "execute", label: "Just help me execute. Less talk, more code.", scores: { claude: 1, gpt: 1, gemini: 3 } }
+        { 
+          id: "honest", 
+          label: "Point out what's not working, even if it stings",
+          scores: { claude: 3, gpt: 0, gemini: 1 } 
+        },
+        { 
+          id: "balanced", 
+          label: "Highlight strengths first, then suggest improvements",
+          scores: { claude: 1, gpt: 3, gemini: 1 } 
+        },
+        { 
+          id: "actionable", 
+          label: "Skip the commentary, just give me fixes",
+          scores: { claude: 0, gpt: 1, gemini: 3 } 
+        }
       ]
     },
     {
-      id: "thinking_style",
-      question: "How do you approach problems?",
+      id: "validation_check",
+      scenario: "The Validation Test",
+      question: "Your AI says your work is \"impressive\" and \"visionary.\" You think...",
       options: [
-        { id: "explore", label: "Explore all angles before deciding.", scores: { claude: 3, gpt: 2, gemini: 0 } },
-        { id: "structured", label: "Structured breakdown. Step by step.", scores: { claude: 1, gpt: 3, gemini: 2 } },
-        { id: "fast", label: "Move fast. Iterate based on results.", scores: { claude: 1, gpt: 1, gemini: 3 } }
+        { 
+          id: "suspicious", 
+          label: "Is it actually good, or is it just being nice?",
+          scores: { claude: 3, gpt: 0, gemini: 2 } 
+        },
+        { 
+          id: "appreciate", 
+          label: "Nice! That validation helps me keep going",
+          scores: { claude: 0, gpt: 3, gemini: 1 } 
+        },
+        { 
+          id: "irrelevant", 
+          label: "I don't care about praise. Does it work or not?",
+          scores: { claude: 1, gpt: 0, gemini: 3 } 
+        }
       ]
     },
     {
-      id: "work_type",
+      id: "uncertainty",
+      scenario: "The Unknown",
+      question: "You ask a question the AI isn't sure about. You prefer it to...",
+      options: [
+        { 
+          id: "admit", 
+          label: "Say \"I'm not certain\" and explain what it doesn't know",
+          scores: { claude: 3, gpt: 1, gemini: 1 } 
+        },
+        { 
+          id: "best_guess", 
+          label: "Give its best answer with appropriate caveats",
+          scores: { claude: 1, gpt: 3, gemini: 1 } 
+        },
+        { 
+          id: "options", 
+          label: "Present multiple possibilities and let me choose",
+          scores: { claude: 1, gpt: 1, gemini: 3 } 
+        }
+      ]
+    },
+    {
+      id: "work_style",
+      scenario: "The Task",
+      question: "How do you typically work with AI?",
+      options: [
+        { 
+          id: "conversation", 
+          label: "Long conversations, thinking things through together",
+          scores: { claude: 3, gpt: 2, gemini: 0 } 
+        },
+        { 
+          id: "varied", 
+          label: "Mix of quick questions and deeper exploration",
+          scores: { claude: 1, gpt: 3, gemini: 1 } 
+        },
+        { 
+          id: "dump", 
+          label: "Dump context, get output, iterate fast",
+          scores: { claude: 0, gpt: 1, gemini: 3 } 
+        }
+      ]
+    },
+    {
+      id: "personality_pref",
+      scenario: "The Vibe",
+      question: "What AI personality appeals to you?",
+      options: [
+        { 
+          id: "thoughtful", 
+          label: "Thoughtful and careful. Will challenge my assumptions.",
+          scores: { claude: 3, gpt: 1, gemini: 0 } 
+        },
+        { 
+          id: "helpful", 
+          label: "Warm and helpful. Always ready to assist.",
+          scores: { claude: 1, gpt: 3, gemini: 0 } 
+        },
+        { 
+          id: "efficient", 
+          label: "Efficient and fast. Personality is irrelevant.",
+          scores: { claude: 0, gpt: 0, gemini: 3 } 
+        }
+      ]
+    },
+    {
+      id: "use_case",
+      scenario: "The Primary Use",
       question: "What do you mostly use AI for?",
       options: [
-        { id: "coding", label: "Writing and debugging code.", scores: { claude: 2, gpt: 1, gemini: 3 } },
-        { id: "writing", label: "Writing, editing, and content.", scores: { claude: 3, gpt: 2, gemini: 0 } },
-        { id: "research", label: "Research and analysis.", scores: { claude: 2, gpt: 3, gemini: 2 } },
-        { id: "mixed", label: "Everything. I need a generalist.", scores: { claude: 3, gpt: 2, gemini: 1 } }
-      ]
-    },
-    {
-      id: "personality",
-      question: "What kind of AI personality do you prefer?",
-      options: [
-        { id: "warm", label: "Has personality. Feels like a collaborator.", scores: { claude: 3, gpt: 2, gemini: 0 } },
-        { id: "neutral", label: "Professional and neutral. Just the facts.", scores: { claude: 1, gpt: 3, gemini: 2 } },
-        { id: "functional", label: "Don't care. Just be fast and accurate.", scores: { claude: 0, gpt: 1, gemini: 3 } }
-      ]
-    },
-    {
-      id: "context_needs",
-      question: "How much context do you typically give?",
-      subtext: "Think about your average conversation, not the ideal.",
-      options: [
-        { id: "minimal", label: "Minimal. I expect it to figure things out.", scores: { claude: 2, gpt: 3, gemini: 1 } },
-        { id: "moderate", label: "Moderate. I give enough to be clear.", scores: { claude: 3, gpt: 2, gemini: 2 } },
-        { id: "extensive", label: "Extensive. I dump entire files and docs.", scores: { claude: 1, gpt: 0, gemini: 3 } }
-      ]
-    },
-    {
-      id: "error_handling",
-      question: "When the AI makes a mistake, you want it to:",
-      options: [
-        { id: "acknowledge", label: "Acknowledge it clearly and explain why.", scores: { claude: 3, gpt: 2, gemini: 1 } },
-        { id: "fix", label: "Just fix it quickly. No need to explain.", scores: { claude: 1, gpt: 1, gemini: 3 } },
-        { id: "prevent", label: "Be more careful in the first place.", scores: { claude: 2, gpt: 3, gemini: 1 } }
-      ]
-    },
-    {
-      id: "creative_vs_accurate",
-      question: "What matters more?",
-      options: [
-        { id: "creative", label: "Creativity and novel approaches.", scores: { claude: 3, gpt: 2, gemini: 1 } },
-        { id: "accurate", label: "Accuracy and reliability.", scores: { claude: 2, gpt: 3, gemini: 2 } },
-        { id: "speed", label: "Speed. I'll verify myself.", scores: { claude: 0, gpt: 1, gemini: 3 } }
+        { 
+          id: "writing", 
+          label: "Writing, editing, and creative work",
+          scores: { claude: 3, gpt: 2, gemini: 0 } 
+        },
+        { 
+          id: "research", 
+          label: "Research, analysis, and learning",
+          scores: { claude: 2, gpt: 3, gemini: 1 } 
+        },
+        { 
+          id: "coding", 
+          label: "Coding and technical tasks",
+          scores: { claude: 2, gpt: 1, gemini: 3 } 
+        },
+        { 
+          id: "everything", 
+          label: "A bit of everything",
+          scores: { claude: 2, gpt: 2, gemini: 2 } 
+        }
       ]
     }
   ];
 
+  // V2 Model profiles - Evidence-based from research
   const models = {
     claude: {
       id: 'claude',
       name: 'Claude',
-      archetype: 'The Challenger',
-      tagline: 'Thinks with you, not for you',
-      description: 'You want an AI that pushes back, explores nuance, and matches your creative intensity. Claude excels at understanding context, challenging assumptions, and helping you think through complex problems.',
-      strengths: ['Pushes back on weak ideas', 'Handles nuance and ambiguity', 'Strong creative writing', 'Deep reasoning', 'Honest about limitations'],
-      bestFor: 'Creative thinkers, writers, builders who want a thought partner, not just an executor.',
-      icon: '🧠'
+      archetype: 'The Thoughtful Mentor',
+      quotable: "You'd rather hear hard truths than comforting lies.",
+      description: "You want an AI that thinks with you, not just for you. Claude is measured, honest about uncertainty, and willing to push back on weak ideas. Research shows it's the least sycophantic major model -- it won't tell you what you want to hear just to be agreeable.",
+      traits: ['Challenges ideas', 'Admits uncertainty', 'Natural writing', 'Deep reasoning'],
+      bestFor: "Writing, complex analysis, coding, and anyone who values honest feedback over validation.",
+      watchOut: "Can be cautious. Sometimes refuses reasonable requests. Usage limits on free tier.",
+      icon: '🧠',
+      color: 'from-orange-500 to-amber-500'
     },
     gpt: {
       id: 'gpt',
-      name: 'GPT-4',
-      archetype: 'The Analyst',
-      tagline: 'Structured, thorough, reliable',
-      description: 'You value comprehensive, well-organized responses. GPT-4 excels at structured analysis, detailed explanations, and methodical problem-solving.',
-      strengths: ['Comprehensive analysis', 'Well-structured outputs', 'Broad knowledge base', 'Consistent quality', 'Good at following formats'],
-      bestFor: 'Researchers, analysts, professionals who need thorough, well-organized outputs.',
-      icon: '📊'
+      name: 'ChatGPT',
+      archetype: 'The Eager Collaborator',
+      quotable: "You want a partner who's always in your corner.",
+      description: "You value enthusiasm and comprehensive support. ChatGPT is the most agreeable of the major models -- ready to help, encouraging, and thorough. It excels at making you feel supported while working through problems together.",
+      traits: ['Encouraging', 'Comprehensive', 'Versatile', 'Well-structured'],
+      bestFor: "Brainstorming, research, learning new topics, and anyone who works better with positive reinforcement.",
+      watchOut: "Can be verbose. May tell you what you want to hear. \"Great question!\" fatigue is real.",
+      icon: '💬',
+      color: 'from-emerald-500 to-green-500'
     },
     gemini: {
       id: 'gemini',
       name: 'Gemini',
-      archetype: 'The Speedrunner',
-      tagline: 'Fast, functional, gets it done',
-      description: 'You want speed and efficiency over conversation. Gemini excels at quick execution, large context handling, and getting straight to the output.',
-      strengths: ['Extremely fast responses', 'Massive context window', 'Strong at code', 'Efficient and direct', 'Great for technical tasks'],
-      bestFor: 'Developers, technical workers, anyone who values speed and can verify outputs themselves.',
-      icon: '⚡'
+      archetype: 'The Speed Demon',
+      quotable: "You need results, not conversation.",
+      description: "You value speed and efficiency over rapport. Gemini is fast, handles massive context windows, and gets straight to the output. Less personality, more execution. You probably verify outputs yourself anyway.",
+      traits: ['Ultra-fast', 'Huge context', 'Direct', 'Technical'],
+      bestFor: "Processing large documents, coding sprints, technical work, and anyone who values speed over conversation.",
+      watchOut: "Less conversational warmth. Can feel corporate. Better at synthesis than dialogue.",
+      icon: '⚡',
+      color: 'from-blue-500 to-cyan-500'
     }
   };
 
@@ -272,10 +394,12 @@ import Layout from '../layouts/Layout.astro';
   // Elements
   const welcomeScreen = document.getElementById('welcome-screen')!;
   const questionScreen = document.getElementById('question-screen')!;
+  const analyzingScreen = document.getElementById('analyzing-screen')!;
   const resultsScreen = document.getElementById('results-screen')!;
   const progressContainer = document.getElementById('progress-container')!;
   const progressBar = document.getElementById('progress-bar')!;
   const stepCounter = document.getElementById('step-counter')!;
+  const scenarioLabel = document.getElementById('scenario-label')!;
   const questionText = document.getElementById('question-text')!;
   const questionSubtext = document.getElementById('question-subtext')!;
   const optionsContainer = document.getElementById('options-container')!;
@@ -291,20 +415,22 @@ import Layout from '../layouts/Layout.astro';
   // Show question
   function showQuestion(index: number) {
     const q = questions[index];
+    scenarioLabel.textContent = q.scenario;
     questionText.textContent = q.question;
     
-    if (q.subtext) {
-      questionSubtext.textContent = q.subtext;
+    if ((q as any).subtext) {
+      questionSubtext.textContent = (q as any).subtext;
       questionSubtext.classList.remove('hidden');
     } else {
       questionSubtext.classList.add('hidden');
     }
 
     optionsContainer.innerHTML = '';
-    q.options.forEach(opt => {
+    q.options.forEach((opt, i) => {
       const btn = document.createElement('button');
-      btn.className = 'w-full text-left px-5 py-4 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors';
+      btn.className = 'w-full text-left px-5 py-4 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl hover:border-zinc-400 dark:hover:border-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-all duration-200';
       btn.textContent = opt.label;
+      btn.style.animationDelay = `${i * 50}ms`;
       btn.addEventListener('click', () => selectOption(q.id, opt.id));
       optionsContainer.appendChild(btn);
     });
@@ -323,8 +449,37 @@ import Layout from '../layouts/Layout.astro';
       currentQuestion++;
       showQuestion(currentQuestion);
     } else {
-      showResults();
+      showAnalyzing();
     }
+  }
+
+  // Show analyzing screen
+  function showAnalyzing() {
+    questionScreen.classList.add('hidden');
+    progressContainer.classList.add('hidden');
+    analyzingScreen.classList.remove('hidden');
+    
+    const messages = [
+      "Matching your thinking style...",
+      "Comparing with AI personalities...",
+      "Calculating compatibility..."
+    ];
+    
+    let msgIndex = 0;
+    const analyzingText = document.getElementById('analyzing-text')!;
+    
+    const interval = setInterval(() => {
+      msgIndex++;
+      if (msgIndex < messages.length) {
+        analyzingText.textContent = messages[msgIndex];
+      }
+    }, 600);
+    
+    setTimeout(() => {
+      clearInterval(interval);
+      analyzingScreen.classList.add('hidden');
+      showResults();
+    }, 1800);
   }
 
   // Calculate scores
@@ -346,81 +501,88 @@ import Layout from '../layouts/Layout.astro';
     return scores;
   }
 
-  // Get winner
-  function getWinner(scores: { claude: number; gpt: number; gemini: number }): string {
-    const entries = Object.entries(scores);
+  // Get winner and runner up
+  function getRankedModels(scores: { claude: number; gpt: number; gemini: number }) {
+    const entries = Object.entries(scores) as [string, number][];
     entries.sort((a, b) => b[1] - a[1]);
-    return entries[0][0];
-  }
-
-  // Get runner up
-  function getRunnerUp(scores: { claude: number; gpt: number; gemini: number }): string {
-    const entries = Object.entries(scores);
-    entries.sort((a, b) => b[1] - a[1]);
-    return entries[1][0];
+    return entries;
   }
 
   // Get match percentage
-  function getMatchPercentage(scores: { claude: number; gpt: number; gemini: number }, winner: string): number {
-    const total = scores.claude + scores.gpt + scores.gemini;
+  function getMatchPercentage(score: number, total: number): number {
     if (total === 0) return 0;
-    const winnerScore = scores[winner as keyof typeof scores];
-    const rawPercentage = (winnerScore / total) * 100;
-    return Math.round(60 + (rawPercentage * 0.38));
+    const rawPercentage = (score / total) * 100;
+    return Math.round(55 + (rawPercentage * 0.44)); // Scale to 55-99% range
   }
 
   // Show results
   function showResults() {
     const scores = calculateScores();
-    const winner = getWinner(scores);
-    const runnerUp = getRunnerUp(scores);
-    const percentage = getMatchPercentage(scores, winner);
-    const model = models[winner as keyof typeof models];
-    const runnerUpModel = models[runnerUp as keyof typeof models];
+    const ranked = getRankedModels(scores);
+    const total = scores.claude + scores.gpt + scores.gemini;
+    
+    const winnerId = ranked[0][0];
+    const winnerScore = ranked[0][1];
+    const runnerUpId = ranked[1][0];
+    const runnerUpScore = ranked[1][1];
+    
+    const model = models[winnerId as keyof typeof models];
+    const runnerUp = models[runnerUpId as keyof typeof models];
+    
+    const percentage = getMatchPercentage(winnerScore, total);
+    const runnerUpPercentage = getMatchPercentage(runnerUpScore, total);
 
-    questionScreen.classList.add('hidden');
-    progressContainer.classList.add('hidden');
     resultsScreen.classList.remove('hidden');
 
     // Populate result card
     document.getElementById('result-icon')!.textContent = model.icon;
     document.getElementById('result-name')!.textContent = model.name;
-    document.getElementById('result-archetype')!.textContent = `"${model.archetype}"`;
-    document.getElementById('result-tagline')!.textContent = model.tagline;
-    document.getElementById('match-percentage')!.textContent = `${percentage}% match`;
+    document.getElementById('result-archetype')!.textContent = model.archetype;
+    document.getElementById('result-quotable')!.textContent = `"${model.quotable}"`;
+    document.getElementById('match-percentage')!.textContent = `${percentage}%`;
+    
+    // Set gradient color for match bar
+    const matchBar = document.getElementById('match-bar')!;
+    matchBar.className = `h-full rounded-full transition-all duration-1000 ease-out bg-gradient-to-r ${model.color}`;
     
     // Animate match bar
     setTimeout(() => {
-      document.getElementById('match-bar')!.style.width = `${percentage}%`;
+      matchBar.style.width = `${percentage}%`;
     }, 100);
+    
+    // Traits
+    const traitsContainer = document.getElementById('traits-container')!;
+    traitsContainer.innerHTML = '';
+    model.traits.forEach(trait => {
+      const tag = document.createElement('span');
+      tag.className = 'px-3 py-1 bg-zinc-700/50 rounded-full text-sm text-zinc-300';
+      tag.textContent = trait;
+      traitsContainer.appendChild(tag);
+    });
 
     // Populate detailed results
     document.getElementById('why-model-name')!.textContent = model.name;
     document.getElementById('result-description')!.textContent = model.description;
     document.getElementById('best-for-text')!.textContent = model.bestFor;
+    document.getElementById('watch-out-text')!.textContent = model.watchOut;
     
-    const strengthsList = document.getElementById('strengths-list')!;
-    strengthsList.innerHTML = '';
-    model.strengths.forEach(s => {
-      const li = document.createElement('li');
-      li.className = 'flex items-center gap-2 text-zinc-600 dark:text-zinc-400';
-      li.innerHTML = `<span class="text-green-500">✓</span> ${s}`;
-      strengthsList.appendChild(li);
-    });
-
     // Runner up
-    document.getElementById('runner-up-name')!.textContent = `${runnerUpModel.name} (${runnerUpModel.archetype})`;
-    document.getElementById('runner-up-description')!.textContent = runnerUpModel.description;
+    document.getElementById('runner-up-icon')!.textContent = runnerUp.icon;
+    document.getElementById('runner-up-name')!.textContent = `${runnerUp.name} (${runnerUp.archetype})`;
+    document.getElementById('runner-up-percentage')!.textContent = `${runnerUpPercentage}% match`;
+    document.getElementById('runner-up-description')!.textContent = runnerUp.bestFor;
   }
 
   // Share on X
   document.getElementById('share-btn')?.addEventListener('click', () => {
     const scores = calculateScores();
-    const winner = getWinner(scores);
-    const percentage = getMatchPercentage(scores, winner);
-    const model = models[winner as keyof typeof models];
+    const ranked = getRankedModels(scores);
+    const total = scores.claude + scores.gpt + scores.gemini;
+    const winnerId = ranked[0][0];
+    const percentage = getMatchPercentage(ranked[0][1], total);
+    const model = models[winnerId as keyof typeof models];
     
-    const text = `My AI match: ${model.name} "${model.archetype}" (${percentage}% match)\n\n${model.tagline}\n\nFind your AI match:`;
+    const text = `I'm a ${model.name} person (${percentage}% match)\n\n"${model.quotable}"\n\nWhich AI thinks like you?`;
     const url = 'https://symbiotic.makestudio.app/benchmark';
     
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
