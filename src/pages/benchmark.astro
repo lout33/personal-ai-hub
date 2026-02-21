@@ -1,0 +1,436 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Find Your AI Match - Personal AI Benchmark" 
+  description="Discover which AI model fits your thinking style. Take the 2-minute quiz and get personalized results."
+  canonicalURL="https://symbiotic.makestudio.app/benchmark"
+>
+  <div class="min-h-screen flex flex-col bg-zinc-50 dark:bg-zinc-950">
+    <header class="fixed top-0 left-0 right-0 z-40 bg-zinc-50/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800">
+      <div class="max-w-2xl mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="/" class="text-lg font-semibold">Symbiotic</a>
+        <div id="progress-container" class="hidden flex-1 max-w-xs mx-8">
+          <div class="flex items-center gap-3">
+            <div class="flex-1 h-1 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden">
+              <div id="progress-bar" class="h-full bg-zinc-900 dark:bg-white transition-all duration-500" style="width: 0%"></div>
+            </div>
+            <span id="step-counter" class="text-sm text-zinc-500 tabular-nums">1/8</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1 flex items-center justify-center px-6 pt-24 pb-10">
+      <div class="w-full max-w-xl">
+        
+        <!-- Welcome Screen -->
+        <div id="welcome-screen" class="text-center space-y-8">
+          <div class="space-y-4">
+            <h1 class="text-3xl md:text-4xl font-bold">Find Your AI Match</h1>
+            <p class="text-lg text-zinc-600 dark:text-zinc-400 max-w-md mx-auto">
+              Answer 8 questions about how you think and work. Get a personalized AI recommendation in 2 minutes.
+            </p>
+          </div>
+          
+          <div class="bg-zinc-100 dark:bg-zinc-900 rounded-2xl p-6 text-left space-y-4 max-w-md mx-auto">
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-full bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span class="text-sm">🧠</span>
+              </div>
+              <div>
+                <p class="font-medium">Claude, GPT-4, or Gemini?</p>
+                <p class="text-sm text-zinc-500">Different AI models suit different thinking styles.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-full bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span class="text-sm">⚡</span>
+              </div>
+              <div>
+                <p class="font-medium">2 minutes, 8 questions</p>
+                <p class="text-sm text-zinc-500">Be honest. There's no wrong answer.</p>
+              </div>
+            </div>
+          </div>
+          
+          <button id="start-btn" class="px-8 py-3 bg-zinc-900 dark:bg-white hover:bg-zinc-700 dark:hover:bg-zinc-200 text-white dark:text-zinc-900 font-medium rounded-xl transition-colors">
+            Start Quiz
+          </button>
+        </div>
+
+        <!-- Question Screen -->
+        <div id="question-screen" class="hidden space-y-6">
+          <h2 id="question-text" class="text-xl md:text-2xl font-semibold leading-relaxed"></h2>
+          <p id="question-subtext" class="text-zinc-500 text-sm hidden"></p>
+          
+          <div id="options-container" class="space-y-3"></div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="hidden space-y-8">
+          
+          <!-- Result Card (Screenshot-friendly) -->
+          <div id="result-card" class="bg-zinc-900 text-white rounded-2xl p-8 space-y-6">
+            <div class="text-center space-y-1">
+              <p class="text-zinc-400 text-sm uppercase tracking-wide">Your AI Match</p>
+              <div class="flex items-center justify-center gap-3">
+                <span id="result-icon" class="text-4xl"></span>
+                <h2 id="result-name" class="text-3xl font-bold"></h2>
+              </div>
+              <p id="result-archetype" class="text-zinc-400"></p>
+            </div>
+            
+            <div class="text-center">
+              <p id="result-tagline" class="text-lg"></p>
+            </div>
+            
+            <div class="flex items-center justify-center gap-2">
+              <div class="h-2 flex-1 bg-zinc-700 rounded-full overflow-hidden max-w-xs">
+                <div id="match-bar" class="h-full bg-gradient-to-r from-amber-500 to-orange-500 transition-all duration-1000" style="width: 0%"></div>
+              </div>
+              <span id="match-percentage" class="text-sm font-medium tabular-nums"></span>
+            </div>
+            
+            <p class="text-center text-zinc-500 text-xs">symbiotic.makestudio.app/benchmark</p>
+          </div>
+          
+          <!-- Detailed Results -->
+          <div class="space-y-6">
+            <div class="bg-zinc-100 dark:bg-zinc-900 rounded-2xl p-6 space-y-4">
+              <h3 class="font-semibold">Why <span id="why-model-name"></span>?</h3>
+              <p id="result-description" class="text-zinc-600 dark:text-zinc-400"></p>
+            </div>
+            
+            <div class="bg-zinc-100 dark:bg-zinc-900 rounded-2xl p-6 space-y-4">
+              <h3 class="font-semibold">Strengths</h3>
+              <ul id="strengths-list" class="space-y-2"></ul>
+            </div>
+            
+            <div class="bg-zinc-100 dark:bg-zinc-900 rounded-2xl p-6 space-y-4">
+              <h3 class="font-semibold">Best For</h3>
+              <p id="best-for-text" class="text-zinc-600 dark:text-zinc-400"></p>
+            </div>
+            
+            <div class="bg-zinc-100 dark:bg-zinc-900 rounded-2xl p-6 space-y-4">
+              <h3 class="font-semibold">Runner Up: <span id="runner-up-name"></span></h3>
+              <p id="runner-up-description" class="text-zinc-600 dark:text-zinc-400 text-sm"></p>
+            </div>
+          </div>
+          
+          <!-- Actions -->
+          <div class="flex flex-col items-center gap-4">
+            <button id="share-btn" class="px-8 py-3 bg-zinc-900 dark:bg-white hover:bg-zinc-700 dark:hover:bg-zinc-200 text-white dark:text-zinc-900 font-medium rounded-xl transition-colors flex items-center gap-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+              </svg>
+              Share on X
+            </button>
+            <button id="retake-btn" class="text-sm text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300">
+              Retake Quiz
+            </button>
+            <a href="/" class="text-sm text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300">
+              Learn about Symbiotic AI
+            </a>
+          </div>
+          
+          <!-- CTA -->
+          <div class="bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-3">
+            <h3 class="font-semibold">Make any AI understand you better</h3>
+            <p class="text-sm text-zinc-600 dark:text-zinc-400">
+              Symbiotic AI is a 4-file system that gives any AI model your context, psychology, and working style. Works with Claude, ChatGPT, Gemini, and more.
+            </p>
+            <a href="/discover" class="inline-block mt-2 px-6 py-2 bg-zinc-900 dark:bg-white hover:bg-zinc-700 dark:hover:bg-zinc-200 text-white dark:text-zinc-900 text-sm font-medium rounded-xl transition-colors">
+              Create Your Profile
+            </a>
+          </div>
+        </div>
+        
+      </div>
+    </main>
+  </div>
+</Layout>
+
+<script>
+  // Questions data (embedded for simplicity)
+  const questions = [
+    {
+      id: "response_style",
+      question: "How do you prefer AI responses?",
+      subtext: "Think about what actually helps you, not what sounds good.",
+      options: [
+        { id: "concise", label: "Short and direct. Get to the point.", scores: { claude: 1, gpt: 0, gemini: 3 } },
+        { id: "balanced", label: "Balanced. Enough detail without overwhelming.", scores: { claude: 3, gpt: 2, gemini: 1 } },
+        { id: "detailed", label: "Thorough and comprehensive. I want depth.", scores: { claude: 2, gpt: 3, gemini: 0 } }
+      ]
+    },
+    {
+      id: "pushback",
+      question: "When you share an idea, what do you want?",
+      options: [
+        { id: "challenge", label: "Challenge it. Poke holes. Make it stronger.", scores: { claude: 3, gpt: 1, gemini: 1 } },
+        { id: "build", label: "Build on it. Help me develop it further.", scores: { claude: 2, gpt: 3, gemini: 1 } },
+        { id: "execute", label: "Just help me execute. Less talk, more code.", scores: { claude: 1, gpt: 1, gemini: 3 } }
+      ]
+    },
+    {
+      id: "thinking_style",
+      question: "How do you approach problems?",
+      options: [
+        { id: "explore", label: "Explore all angles before deciding.", scores: { claude: 3, gpt: 2, gemini: 0 } },
+        { id: "structured", label: "Structured breakdown. Step by step.", scores: { claude: 1, gpt: 3, gemini: 2 } },
+        { id: "fast", label: "Move fast. Iterate based on results.", scores: { claude: 1, gpt: 1, gemini: 3 } }
+      ]
+    },
+    {
+      id: "work_type",
+      question: "What do you mostly use AI for?",
+      options: [
+        { id: "coding", label: "Writing and debugging code.", scores: { claude: 2, gpt: 1, gemini: 3 } },
+        { id: "writing", label: "Writing, editing, and content.", scores: { claude: 3, gpt: 2, gemini: 0 } },
+        { id: "research", label: "Research and analysis.", scores: { claude: 2, gpt: 3, gemini: 2 } },
+        { id: "mixed", label: "Everything. I need a generalist.", scores: { claude: 3, gpt: 2, gemini: 1 } }
+      ]
+    },
+    {
+      id: "personality",
+      question: "What kind of AI personality do you prefer?",
+      options: [
+        { id: "warm", label: "Has personality. Feels like a collaborator.", scores: { claude: 3, gpt: 2, gemini: 0 } },
+        { id: "neutral", label: "Professional and neutral. Just the facts.", scores: { claude: 1, gpt: 3, gemini: 2 } },
+        { id: "functional", label: "Don't care. Just be fast and accurate.", scores: { claude: 0, gpt: 1, gemini: 3 } }
+      ]
+    },
+    {
+      id: "context_needs",
+      question: "How much context do you typically give?",
+      subtext: "Think about your average conversation, not the ideal.",
+      options: [
+        { id: "minimal", label: "Minimal. I expect it to figure things out.", scores: { claude: 2, gpt: 3, gemini: 1 } },
+        { id: "moderate", label: "Moderate. I give enough to be clear.", scores: { claude: 3, gpt: 2, gemini: 2 } },
+        { id: "extensive", label: "Extensive. I dump entire files and docs.", scores: { claude: 1, gpt: 0, gemini: 3 } }
+      ]
+    },
+    {
+      id: "error_handling",
+      question: "When the AI makes a mistake, you want it to:",
+      options: [
+        { id: "acknowledge", label: "Acknowledge it clearly and explain why.", scores: { claude: 3, gpt: 2, gemini: 1 } },
+        { id: "fix", label: "Just fix it quickly. No need to explain.", scores: { claude: 1, gpt: 1, gemini: 3 } },
+        { id: "prevent", label: "Be more careful in the first place.", scores: { claude: 2, gpt: 3, gemini: 1 } }
+      ]
+    },
+    {
+      id: "creative_vs_accurate",
+      question: "What matters more?",
+      options: [
+        { id: "creative", label: "Creativity and novel approaches.", scores: { claude: 3, gpt: 2, gemini: 1 } },
+        { id: "accurate", label: "Accuracy and reliability.", scores: { claude: 2, gpt: 3, gemini: 2 } },
+        { id: "speed", label: "Speed. I'll verify myself.", scores: { claude: 0, gpt: 1, gemini: 3 } }
+      ]
+    }
+  ];
+
+  const models = {
+    claude: {
+      id: 'claude',
+      name: 'Claude',
+      archetype: 'The Challenger',
+      tagline: 'Thinks with you, not for you',
+      description: 'You want an AI that pushes back, explores nuance, and matches your creative intensity. Claude excels at understanding context, challenging assumptions, and helping you think through complex problems.',
+      strengths: ['Pushes back on weak ideas', 'Handles nuance and ambiguity', 'Strong creative writing', 'Deep reasoning', 'Honest about limitations'],
+      bestFor: 'Creative thinkers, writers, builders who want a thought partner, not just an executor.',
+      icon: '🧠'
+    },
+    gpt: {
+      id: 'gpt',
+      name: 'GPT-4',
+      archetype: 'The Analyst',
+      tagline: 'Structured, thorough, reliable',
+      description: 'You value comprehensive, well-organized responses. GPT-4 excels at structured analysis, detailed explanations, and methodical problem-solving.',
+      strengths: ['Comprehensive analysis', 'Well-structured outputs', 'Broad knowledge base', 'Consistent quality', 'Good at following formats'],
+      bestFor: 'Researchers, analysts, professionals who need thorough, well-organized outputs.',
+      icon: '📊'
+    },
+    gemini: {
+      id: 'gemini',
+      name: 'Gemini',
+      archetype: 'The Speedrunner',
+      tagline: 'Fast, functional, gets it done',
+      description: 'You want speed and efficiency over conversation. Gemini excels at quick execution, large context handling, and getting straight to the output.',
+      strengths: ['Extremely fast responses', 'Massive context window', 'Strong at code', 'Efficient and direct', 'Great for technical tasks'],
+      bestFor: 'Developers, technical workers, anyone who values speed and can verify outputs themselves.',
+      icon: '⚡'
+    }
+  };
+
+  // State
+  let currentQuestion = 0;
+  let answers: Record<string, string> = {};
+
+  // Elements
+  const welcomeScreen = document.getElementById('welcome-screen')!;
+  const questionScreen = document.getElementById('question-screen')!;
+  const resultsScreen = document.getElementById('results-screen')!;
+  const progressContainer = document.getElementById('progress-container')!;
+  const progressBar = document.getElementById('progress-bar')!;
+  const stepCounter = document.getElementById('step-counter')!;
+  const questionText = document.getElementById('question-text')!;
+  const questionSubtext = document.getElementById('question-subtext')!;
+  const optionsContainer = document.getElementById('options-container')!;
+
+  // Start quiz
+  document.getElementById('start-btn')?.addEventListener('click', () => {
+    welcomeScreen.classList.add('hidden');
+    questionScreen.classList.remove('hidden');
+    progressContainer.classList.remove('hidden');
+    showQuestion(0);
+  });
+
+  // Show question
+  function showQuestion(index: number) {
+    const q = questions[index];
+    questionText.textContent = q.question;
+    
+    if (q.subtext) {
+      questionSubtext.textContent = q.subtext;
+      questionSubtext.classList.remove('hidden');
+    } else {
+      questionSubtext.classList.add('hidden');
+    }
+
+    optionsContainer.innerHTML = '';
+    q.options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'w-full text-left px-5 py-4 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors';
+      btn.textContent = opt.label;
+      btn.addEventListener('click', () => selectOption(q.id, opt.id));
+      optionsContainer.appendChild(btn);
+    });
+
+    // Update progress
+    const progress = ((index + 1) / questions.length) * 100;
+    progressBar.style.width = `${progress}%`;
+    stepCounter.textContent = `${index + 1}/${questions.length}`;
+  }
+
+  // Select option
+  function selectOption(questionId: string, optionId: string) {
+    answers[questionId] = optionId;
+    
+    if (currentQuestion < questions.length - 1) {
+      currentQuestion++;
+      showQuestion(currentQuestion);
+    } else {
+      showResults();
+    }
+  }
+
+  // Calculate scores
+  function calculateScores(): { claude: number; gpt: number; gemini: number } {
+    const scores = { claude: 0, gpt: 0, gemini: 0 };
+    
+    for (const q of questions) {
+      const answerId = answers[q.id];
+      if (answerId) {
+        const option = q.options.find(o => o.id === answerId);
+        if (option) {
+          scores.claude += option.scores.claude;
+          scores.gpt += option.scores.gpt;
+          scores.gemini += option.scores.gemini;
+        }
+      }
+    }
+    
+    return scores;
+  }
+
+  // Get winner
+  function getWinner(scores: { claude: number; gpt: number; gemini: number }): string {
+    const entries = Object.entries(scores);
+    entries.sort((a, b) => b[1] - a[1]);
+    return entries[0][0];
+  }
+
+  // Get runner up
+  function getRunnerUp(scores: { claude: number; gpt: number; gemini: number }): string {
+    const entries = Object.entries(scores);
+    entries.sort((a, b) => b[1] - a[1]);
+    return entries[1][0];
+  }
+
+  // Get match percentage
+  function getMatchPercentage(scores: { claude: number; gpt: number; gemini: number }, winner: string): number {
+    const total = scores.claude + scores.gpt + scores.gemini;
+    if (total === 0) return 0;
+    const winnerScore = scores[winner as keyof typeof scores];
+    const rawPercentage = (winnerScore / total) * 100;
+    return Math.round(60 + (rawPercentage * 0.38));
+  }
+
+  // Show results
+  function showResults() {
+    const scores = calculateScores();
+    const winner = getWinner(scores);
+    const runnerUp = getRunnerUp(scores);
+    const percentage = getMatchPercentage(scores, winner);
+    const model = models[winner as keyof typeof models];
+    const runnerUpModel = models[runnerUp as keyof typeof models];
+
+    questionScreen.classList.add('hidden');
+    progressContainer.classList.add('hidden');
+    resultsScreen.classList.remove('hidden');
+
+    // Populate result card
+    document.getElementById('result-icon')!.textContent = model.icon;
+    document.getElementById('result-name')!.textContent = model.name;
+    document.getElementById('result-archetype')!.textContent = `"${model.archetype}"`;
+    document.getElementById('result-tagline')!.textContent = model.tagline;
+    document.getElementById('match-percentage')!.textContent = `${percentage}% match`;
+    
+    // Animate match bar
+    setTimeout(() => {
+      document.getElementById('match-bar')!.style.width = `${percentage}%`;
+    }, 100);
+
+    // Populate detailed results
+    document.getElementById('why-model-name')!.textContent = model.name;
+    document.getElementById('result-description')!.textContent = model.description;
+    document.getElementById('best-for-text')!.textContent = model.bestFor;
+    
+    const strengthsList = document.getElementById('strengths-list')!;
+    strengthsList.innerHTML = '';
+    model.strengths.forEach(s => {
+      const li = document.createElement('li');
+      li.className = 'flex items-center gap-2 text-zinc-600 dark:text-zinc-400';
+      li.innerHTML = `<span class="text-green-500">✓</span> ${s}`;
+      strengthsList.appendChild(li);
+    });
+
+    // Runner up
+    document.getElementById('runner-up-name')!.textContent = `${runnerUpModel.name} (${runnerUpModel.archetype})`;
+    document.getElementById('runner-up-description')!.textContent = runnerUpModel.description;
+  }
+
+  // Share on X
+  document.getElementById('share-btn')?.addEventListener('click', () => {
+    const scores = calculateScores();
+    const winner = getWinner(scores);
+    const percentage = getMatchPercentage(scores, winner);
+    const model = models[winner as keyof typeof models];
+    
+    const text = `My AI match: ${model.name} "${model.archetype}" (${percentage}% match)\n\n${model.tagline}\n\nFind your AI match:`;
+    const url = 'https://symbiotic.makestudio.app/benchmark';
+    
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+  });
+
+  // Retake quiz
+  document.getElementById('retake-btn')?.addEventListener('click', () => {
+    currentQuestion = 0;
+    answers = {};
+    resultsScreen.classList.add('hidden');
+    welcomeScreen.classList.remove('hidden');
+  });
+</script>
